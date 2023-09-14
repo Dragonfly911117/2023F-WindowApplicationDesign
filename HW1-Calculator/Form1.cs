@@ -98,7 +98,7 @@ namespace _2023F_WindowApplicationDesign
 
         private void BTN_equal_Click(object sender, EventArgs e)
         {
-            textBox1.Text = _model.GetResult();
+            textBox1.Text = _model.Calculate();
         }
 
         private void BTN_C_Click(object sender, EventArgs e)
@@ -114,7 +114,7 @@ namespace _2023F_WindowApplicationDesign
 
         private void button14_Click(object sender, EventArgs e)
         {
-            textBox1.Text = _model.GetResult();
+            textBox1.Text = _model.Calculate();
         }
 
         private Model _model;

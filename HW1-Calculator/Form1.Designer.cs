@@ -52,20 +52,22 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(59, 73);
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox1.Location = new System.Drawing.Point(66, 91);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.textBox1.Size = new System.Drawing.Size(352, 106);
+            this.textBox1.Size = new System.Drawing.Size(396, 132);
             this.textBox1.TabIndex = 0;
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // BTN_CE
             // 
-            this.BTN_CE.Location = new System.Drawing.Point(226, 235);
+            this.BTN_CE.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.BTN_CE.Location = new System.Drawing.Point(255, 294);
             this.BTN_CE.Name = "BTN_CE";
-            this.BTN_CE.Size = new System.Drawing.Size(61, 57);
+            this.BTN_CE.Size = new System.Drawing.Size(69, 71);
             this.BTN_CE.TabIndex = 1;
             this.BTN_CE.Text = "CE";
             this.BTN_CE.UseVisualStyleBackColor = true;
@@ -73,9 +75,10 @@
             // 
             // BTN_C
             // 
-            this.BTN_C.Location = new System.Drawing.Point(332, 235);
+            this.BTN_C.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.BTN_C.Location = new System.Drawing.Point(374, 294);
             this.BTN_C.Name = "BTN_C";
-            this.BTN_C.Size = new System.Drawing.Size(61, 57);
+            this.BTN_C.Size = new System.Drawing.Size(69, 71);
             this.BTN_C.TabIndex = 2;
             this.BTN_C.Text = "C";
             this.BTN_C.UseVisualStyleBackColor = true;
@@ -83,9 +86,10 @@
             // 
             // BTN_plus
             // 
-            this.BTN_plus.Location = new System.Drawing.Point(332, 322);
+            this.BTN_plus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.BTN_plus.Location = new System.Drawing.Point(374, 403);
             this.BTN_plus.Name = "BTN_plus";
-            this.BTN_plus.Size = new System.Drawing.Size(61, 57);
+            this.BTN_plus.Size = new System.Drawing.Size(69, 71);
             this.BTN_plus.TabIndex = 4;
             this.BTN_plus.Text = "+";
             this.BTN_plus.UseVisualStyleBackColor = true;
@@ -93,19 +97,21 @@
             // 
             // BTN_9
             // 
-            this.BTN_9.Location = new System.Drawing.Point(226, 322);
+            this.BTN_9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.BTN_9.Location = new System.Drawing.Point(255, 403);
             this.BTN_9.Name = "BTN_9";
-            this.BTN_9.Size = new System.Drawing.Size(61, 57);
+            this.BTN_9.Size = new System.Drawing.Size(69, 71);
             this.BTN_9.TabIndex = 3;
             this.BTN_9.Text = "9";
             this.BTN_9.UseVisualStyleBackColor = true;
-             this.BTN_9.Click += new System.EventHandler(this.BTN_9_Click);
+            this.BTN_9.Click += new System.EventHandler(this.BTN_9_Click);
             // 
             // BTN_8
             // 
-            this.BTN_8.Location = new System.Drawing.Point(126, 322);
+            this.BTN_8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.BTN_8.Location = new System.Drawing.Point(141, 403);
             this.BTN_8.Name = "BTN_8";
-            this.BTN_8.Size = new System.Drawing.Size(61, 57);
+            this.BTN_8.Size = new System.Drawing.Size(69, 71);
             this.BTN_8.TabIndex = 6;
             this.BTN_8.Text = "8";
             this.BTN_8.UseVisualStyleBackColor = true;
@@ -113,9 +119,10 @@
             // 
             // BTN_7
             // 
-            this.BTN_7.Location = new System.Drawing.Point(29, 322);
+            this.BTN_7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.BTN_7.Location = new System.Drawing.Point(33, 403);
             this.BTN_7.Name = "BTN_7";
-            this.BTN_7.Size = new System.Drawing.Size(61, 57);
+            this.BTN_7.Size = new System.Drawing.Size(69, 71);
             this.BTN_7.TabIndex = 5;
             this.BTN_7.Text = "7";
             this.BTN_7.UseVisualStyleBackColor = true;
@@ -123,9 +130,10 @@
             // 
             // BTN_5
             // 
-            this.BTN_5.Location = new System.Drawing.Point(126, 417);
+            this.BTN_5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.BTN_5.Location = new System.Drawing.Point(141, 522);
             this.BTN_5.Name = "BTN_5";
-            this.BTN_5.Size = new System.Drawing.Size(61, 57);
+            this.BTN_5.Size = new System.Drawing.Size(69, 71);
             this.BTN_5.TabIndex = 10;
             this.BTN_5.Text = "5";
             this.BTN_5.UseVisualStyleBackColor = true;
@@ -133,9 +141,10 @@
             // 
             // BTN_4
             // 
-            this.BTN_4.Location = new System.Drawing.Point(29, 417);
+            this.BTN_4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.BTN_4.Location = new System.Drawing.Point(33, 522);
             this.BTN_4.Name = "BTN_4";
-            this.BTN_4.Size = new System.Drawing.Size(61, 57);
+            this.BTN_4.Size = new System.Drawing.Size(69, 71);
             this.BTN_4.TabIndex = 9;
             this.BTN_4.Text = "4";
             this.BTN_4.UseVisualStyleBackColor = true;
@@ -143,19 +152,21 @@
             // 
             // BTN_minus
             // 
-            this.BTN_minus.Location = new System.Drawing.Point(332, 417);
+            this.BTN_minus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.BTN_minus.Location = new System.Drawing.Point(374, 522);
             this.BTN_minus.Name = "BTN_minus";
-            this.BTN_minus.Size = new System.Drawing.Size(61, 57);
+            this.BTN_minus.Size = new System.Drawing.Size(69, 71);
             this.BTN_minus.TabIndex = 8;
             this.BTN_minus.Text = "-";
             this.BTN_minus.UseVisualStyleBackColor = true;
-             this.BTN_minus.Click += new System.EventHandler(this.BTN_minus_Click);
+            this.BTN_minus.Click += new System.EventHandler(this.BTN_minus_Click);
             // 
             // BTN_6
             // 
-            this.BTN_6.Location = new System.Drawing.Point(226, 417);
+            this.BTN_6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.BTN_6.Location = new System.Drawing.Point(255, 522);
             this.BTN_6.Name = "BTN_6";
-            this.BTN_6.Size = new System.Drawing.Size(61, 57);
+            this.BTN_6.Size = new System.Drawing.Size(69, 71);
             this.BTN_6.TabIndex = 7;
             this.BTN_6.Text = "6";
             this.BTN_6.UseVisualStyleBackColor = true;
@@ -163,9 +174,10 @@
             // 
             // BTN_dot
             // 
-            this.BTN_dot.Location = new System.Drawing.Point(126, 615);
+            this.BTN_dot.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.BTN_dot.Location = new System.Drawing.Point(141, 769);
             this.BTN_dot.Name = "BTN_dot";
-            this.BTN_dot.Size = new System.Drawing.Size(61, 57);
+            this.BTN_dot.Size = new System.Drawing.Size(69, 71);
             this.BTN_dot.TabIndex = 18;
             this.BTN_dot.Text = ".";
             this.BTN_dot.UseVisualStyleBackColor = true;
@@ -173,9 +185,9 @@
             // 
             // BTN_0
             // 
-            this.BTN_0.Location = new System.Drawing.Point(29, 615);
+            this.BTN_0.Location = new System.Drawing.Point(33, 769);
             this.BTN_0.Name = "BTN_0";
-            this.BTN_0.Size = new System.Drawing.Size(61, 57);
+            this.BTN_0.Size = new System.Drawing.Size(69, 71);
             this.BTN_0.TabIndex = 17;
             this.BTN_0.Text = "0";
             this.BTN_0.UseVisualStyleBackColor = true;
@@ -183,9 +195,9 @@
             // 
             // BTN_div
             // 
-            this.BTN_div.Location = new System.Drawing.Point(332, 615);
+            this.BTN_div.Location = new System.Drawing.Point(374, 769);
             this.BTN_div.Name = "BTN_div";
-            this.BTN_div.Size = new System.Drawing.Size(61, 57);
+            this.BTN_div.Size = new System.Drawing.Size(69, 71);
             this.BTN_div.TabIndex = 16;
             this.BTN_div.Text = "/";
             this.BTN_div.UseVisualStyleBackColor = true;
@@ -193,9 +205,9 @@
             // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(226, 615);
+            this.button14.Location = new System.Drawing.Point(255, 769);
             this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(61, 57);
+            this.button14.Size = new System.Drawing.Size(69, 71);
             this.button14.TabIndex = 15;
             this.button14.Text = "=";
             this.button14.UseVisualStyleBackColor = true;
@@ -203,9 +215,9 @@
             // 
             // BTN_2
             // 
-            this.BTN_2.Location = new System.Drawing.Point(126, 520);
+            this.BTN_2.Location = new System.Drawing.Point(141, 649);
             this.BTN_2.Name = "BTN_2";
-            this.BTN_2.Size = new System.Drawing.Size(61, 57);
+            this.BTN_2.Size = new System.Drawing.Size(69, 71);
             this.BTN_2.TabIndex = 14;
             this.BTN_2.Text = "2";
             this.BTN_2.UseVisualStyleBackColor = true;
@@ -213,9 +225,10 @@
             // 
             // BTN_1
             // 
-            this.BTN_1.Location = new System.Drawing.Point(29, 520);
+            this.BTN_1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.BTN_1.Location = new System.Drawing.Point(33, 649);
             this.BTN_1.Name = "BTN_1";
-            this.BTN_1.Size = new System.Drawing.Size(61, 57);
+            this.BTN_1.Size = new System.Drawing.Size(69, 71);
             this.BTN_1.TabIndex = 13;
             this.BTN_1.Text = "1";
             this.BTN_1.UseVisualStyleBackColor = true;
@@ -223,9 +236,9 @@
             // 
             // BTN_mult
             // 
-            this.BTN_mult.Location = new System.Drawing.Point(332, 520);
+            this.BTN_mult.Location = new System.Drawing.Point(374, 649);
             this.BTN_mult.Name = "BTN_mult";
-            this.BTN_mult.Size = new System.Drawing.Size(61, 57);
+            this.BTN_mult.Size = new System.Drawing.Size(69, 71);
             this.BTN_mult.TabIndex = 12;
             this.BTN_mult.Text = "X";
             this.BTN_mult.UseVisualStyleBackColor = true;
@@ -233,9 +246,9 @@
             // 
             // BTN_3
             // 
-            this.BTN_3.Location = new System.Drawing.Point(226, 520);
+            this.BTN_3.Location = new System.Drawing.Point(255, 649);
             this.BTN_3.Name = "BTN_3";
-            this.BTN_3.Size = new System.Drawing.Size(61, 57);
+            this.BTN_3.Size = new System.Drawing.Size(69, 71);
             this.BTN_3.TabIndex = 11;
             this.BTN_3.Text = "3";
             this.BTN_3.UseVisualStyleBackColor = true;
@@ -243,10 +256,10 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlText;
-            this.ClientSize = new System.Drawing.Size(454, 749);
+            this.ClientSize = new System.Drawing.Size(510, 937);
             this.Controls.Add(this.BTN_dot);
             this.Controls.Add(this.BTN_0);
             this.Controls.Add(this.BTN_div);
@@ -266,6 +279,7 @@
             this.Controls.Add(this.BTN_C);
             this.Controls.Add(this.BTN_CE);
             this.Controls.Add(this.textBox1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
