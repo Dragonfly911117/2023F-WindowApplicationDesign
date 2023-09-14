@@ -1,34 +1,28 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Globalization;
 
 namespace _2023F_WindowApplicationDesign
 {
     public class Model
     {
-        public Model()
-        {
-            _operand1 = 0f;
-            _operand2 = 0f;
-            _isOperand2 = false;
-            _operator = Operator.Undefined;
-        }
-
         public string AddOperand(string operand)
         {
+            string res;
             if (_operator == Operator.Undefined)
             {
                 _operand1 *= 10;
                 _operand1 += float.Parse(operand);
-                return _operand1.ToString();
+                res = _operand1.ToString(CultureInfo.InvariantCulture);
             }
             else
             {
                 _operand2 *= 10;
                 _operand2 += float.Parse(operand);
                 _isOperand2 = true;
-                return _operand2.ToString();
+                res = _operand2.ToString(CultureInfo.InvariantCulture);
             }
+
+            return res;
         }
 
         public string SetOperator(string op)
@@ -59,21 +53,26 @@ namespace _2023F_WindowApplicationDesign
                     throw new ArgumentException("Invalid operator");
             }
 
-            return _operand1.ToString();
+            return _operand1.ToString(CultureInfo.InvariantCulture);
         }
 
         public string Calculate()
         {
+            if (_operator == Operator.Undefined || !_isOperand2)
+            {
+                return _operand1.ToString(CultureInfo.InvariantCulture);
+            }
+
             switch (_operator)
             {
                 case Operator.Plus:
-                    return (_operand1 + _operand2).ToString();
+                    return (_operand1 + _operand2).ToString(CultureInfo.InvariantCulture);
                 case Operator.Minus:
-                    return (_operand1 - _operand2).ToString();
+                    return (_operand1 - _operand2).ToString(CultureInfo.InvariantCulture);
                 case Operator.Multiply:
-                    return (_operand1 * _operand2).ToString();
+                    return (_operand1 * _operand2).ToString(CultureInfo.InvariantCulture);
                 case Operator.Divide:
-                    return (_operand1 / _operand2).ToString();
+                    return (_operand1 / _operand2).ToString(CultureInfo.InvariantCulture);
                 default:
                     return "0";
             }
@@ -98,8 +97,9 @@ namespace _2023F_WindowApplicationDesign
             Undefined
         }
 
-        private bool _isOperand2;
-        private float _operand1, _operand2;
-        private Operator _operator;
+        private bool _isOperand2 = false;
+        private float _operand1 = 0f;
+        private float _operand2 = 0f;
+        private Operator _operator = Operator.Undefined;
     }
 }

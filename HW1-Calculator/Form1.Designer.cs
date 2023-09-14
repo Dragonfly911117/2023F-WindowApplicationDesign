@@ -280,8 +280,10 @@
             this.Controls.Add(this.BTN_CE);
             this.Controls.Add(this.textBox1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.KeyPreview = true;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
             this.ResumeLayout(false);
             this.PerformLayout();
         }
@@ -302,11 +304,9 @@
         private System.Windows.Forms.Button BTN_6;
         private System.Windows.Forms.Button BTN_dot;
         private System.Windows.Forms.Button BTN_0;
-        private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button BTN_2;
         private System.Windows.Forms.Button BTN_1;
-        private System.Windows.Forms.Button button17;
         private System.Windows.Forms.Button BTN_3;
 
         private System.Windows.Forms.TextBox textBox1;
