@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HW1-Calculator", "HW1-Calculator\HW1-Calculator.csproj", "{775A598D-A5DB-47A9-8916-C75DB267E39A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Practice01-HelloWorld", "Practice01-HelloWorld\Practice01-HelloWorld.csproj", "{0C5FAA08-B754-4453-93C9-1414761A033A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab01-HelloWorld", "Lab01-HelloWorld\Lab01-HelloWorld.csproj", "{0C5FAA08-B754-4453-93C9-1414761A033A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab02-Refactoring", "Lab02-Refactoring\Lab02-Refactoring.csproj", "{45C2D68A-C919-484F-8AA5-214DDDDA33D8}"
 EndProject
