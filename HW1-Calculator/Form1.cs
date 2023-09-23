@@ -110,69 +110,6 @@ namespace HW01_Calculator
             TextBox.Text = _model.Calculate();
         }
 
-        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            switch (e.KeyChar)
-            {
-                case (char)42:
-                    ButtonMultiplyClick(sender, e);
-                    break;
-                case (char)43:
-                    ButtonPlusClick(sender, e);
-                    break;
-                case (char)45:
-                    ButtonMinusClick(sender, e);
-                    break;
-                case (char)47:
-                    ButtonDivisionClick(sender, e);
-                    break;
-                case (char)46:
-                    ButtonDotClick(sender, e);
-                    break;
-                case (char)8:
-                    ButtonClearEntryClick(sender, e);
-                    break;
-                case (char)27:
-                    ButtonClearClick(sender, e);
-                    break;
-                case (char)48:
-                    Button0Click(sender, e);
-                    break;
-                case (char)49:
-                    Button1Click(sender, e);
-                    break;
-                case (char)50:
-                    Button2Click(sender, e);
-                    break;
-                case (char)51:
-                    Button3Click(sender, e);
-                    break;
-                case (char)52:
-                    Button4Click(sender, e);
-                    break;
-                case (char)53:
-                    Button5Click(sender, e);
-                    break;
-                case (char)54:
-                    Button6Click(sender, e);
-                    break;
-                case (char)55:
-                    Button7Click(sender, e);
-                    break;
-                case (char)56:
-                    Button8Click(sender, e);
-                    break;
-                case (char)57:
-                    Button9Click(sender, e);
-                    break;
-                case (char)13:
-                    ButtonEqualClick(sender, e);
-                    break;
-                default:
-                    break;
-            }
-        }
-
         private Model _model;
     }
 }
