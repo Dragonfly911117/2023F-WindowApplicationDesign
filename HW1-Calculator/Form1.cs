@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace _2023F_WindowApplicationDesign
+namespace HW01_Calculator
 {
     public partial class Form1 : Form
     {
@@ -18,166 +18,161 @@ namespace _2023F_WindowApplicationDesign
             _model = new Model();
         }
 
-        private void BTN_0_Click(object sender, EventArgs e)
+        private void Button0Click(object sender, EventArgs e)
         {
-            textBox1.Text = _model.AppendOperand("0");
+            TextBox.Text = _model.AppendOperand("0");
         }
 
-        private void BTN_1_Click(object sender, EventArgs e)
+        private void Button1Click(object sender, EventArgs e)
         {
-            textBox1.Text = _model.AppendOperand("1");
+            TextBox.Text = _model.AppendOperand("1");
         }
 
         // do the same for BTN_2 to BTN_9 buttons ignore havent been hooked
 
-        private void BTN_2_Click(object sender, EventArgs e)
+        private void Button2Click(object sender, EventArgs e)
         {
-            textBox1.Text = _model.AppendOperand("2");
+            TextBox.Text = _model.AppendOperand("2");
         }
 
-        private void BTN_3_Click(object sender, EventArgs e)
+        private void Button3Click(object sender, EventArgs e)
         {
-            textBox1.Text = _model.AppendOperand("3");
+            TextBox.Text = _model.AppendOperand("3");
         }
 
-        private void BTN_4_Click(object sender, EventArgs e)
+        private void Button4Click(object sender, EventArgs e)
         {
-            textBox1.Text = _model.AppendOperand("4");
+            TextBox.Text = _model.AppendOperand("4");
         }
 
-        private void BTN_5_Click(object sender, EventArgs e)
+        private void Button5Click(object sender, EventArgs e)
         {
-            textBox1.Text = _model.AppendOperand("5");
+            TextBox.Text = _model.AppendOperand("5");
         }
 
-        private void BTN_6_Click(object sender, EventArgs e)
+        private void Button6Click(object sender, EventArgs e)
         {
-            textBox1.Text = _model.AppendOperand("6");
+            TextBox.Text = _model.AppendOperand("6");
         }
 
-        private void BTN_7_Click(object sender, EventArgs e)
+        private void Button7Click(object sender, EventArgs e)
         {
-            textBox1.Text = _model.AppendOperand("7");
+            TextBox.Text = _model.AppendOperand("7");
         }
 
-        private void BTN_8_Click(object sender, EventArgs e)
+        private void Button8Click(object sender, EventArgs e)
         {
-            textBox1.Text = _model.AppendOperand("8");
+            TextBox.Text = _model.AppendOperand("8");
         }
 
-        private void BTN_9_Click(object sender, EventArgs e)
+        private void Button9Click(object sender, EventArgs e)
         {
-            textBox1.Text = _model.AppendOperand("9");
+            TextBox.Text = _model.AppendOperand("9");
         }
 
-        private void BTN_dot_Click(object sender, EventArgs e)
+        private void ButtonDotClick(object sender, EventArgs e)
         {
-            textBox1.Text = _model.AppendOperand(".");
+            TextBox.Text = _model.AppendOperand(".");
         }
 
-        private void BTN_plus_Click(object sender, EventArgs e)
+        private void ButtonPlusClick(object sender, EventArgs e)
         {
-            textBox1.Text = _model.SetOperator("+");
+            TextBox.Text = _model.SetOperator("+");
         }
 
-        private void BTN_minus_Click(object sender, EventArgs e)
+        private void ButtonMinusClick(object sender, EventArgs e)
         {
-            textBox1.Text = _model.SetOperator("-");
+            TextBox.Text = _model.SetOperator("-");
         }
 
-        private void BTN_multiply_Click(object sender, EventArgs e)
+        private void ButtonMultiplyClick(object sender, EventArgs e)
         {
-            textBox1.Text = _model.SetOperator("X");
+            TextBox.Text = _model.SetOperator("X");
         }
 
-        private void BTN_div_Click(object sender, EventArgs e)
+        private void ButtonDivisionClick(object sender, EventArgs e)
         {
-            textBox1.Text = _model.SetOperator("/");
+            TextBox.Text = _model.SetOperator("/");
         }
 
-        private void BTN_equal_Click(object sender, EventArgs e)
+        private void ButtonClearClick(object sender, EventArgs e)
         {
-            textBox1.Text = _model.Calculate();
+            TextBox.Text = _model.Clean();
         }
 
-        private void BTN_C_Click(object sender, EventArgs e)
+        private void ButtonClearEntryClick(object sender, EventArgs e)
         {
-            textBox1.Text = _model.Clean();
+            TextBox.Text = _model.CleanCurrOperand();
         }
 
-        private void BTN_CE_Click(object sender, EventArgs e)
+        private void ButtonEqualClick(object sender, EventArgs e)
         {
-            textBox1.Text = _model.CleanCurrOperand();
+            TextBox.Text = _model.Calculate();
         }
-
-        private void button14_Click(object sender, EventArgs e)
-        {
-            textBox1.Text = _model.Calculate();
-        }
-
-        private Model _model;
 
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
             switch (e.KeyChar)
             {
                 case (char)42:
-                    BTN_multiply_Click(sender, e);
+                    ButtonMultiplyClick(sender, e);
                     break;
                 case (char)43:
-                    BTN_plus_Click(sender, e);
+                    ButtonPlusClick(sender, e);
                     break;
                 case (char)45:
-                    BTN_minus_Click(sender, e);
+                    ButtonMinusClick(sender, e);
                     break;
                 case (char)47:
-                    BTN_div_Click(sender, e);
+                    ButtonDivisionClick(sender, e);
                     break;
                 case (char)46:
-                    BTN_dot_Click(sender, e);
+                    ButtonDotClick(sender, e);
                     break;
                 case (char)8:
-                    BTN_CE_Click(sender, e);
+                    ButtonClearEntryClick(sender, e);
                     break;
                 case (char)27:
-                    BTN_C_Click(sender, e);
+                    ButtonClearClick(sender, e);
                     break;
                 case (char)48:
-                    BTN_0_Click(sender, e);
+                    Button0Click(sender, e);
                     break;
                 case (char)49:
-                    BTN_1_Click(sender, e);
+                    Button1Click(sender, e);
                     break;
                 case (char)50:
-                    BTN_2_Click(sender, e);
+                    Button2Click(sender, e);
                     break;
                 case (char)51:
-                    BTN_3_Click(sender, e);
+                    Button3Click(sender, e);
                     break;
                 case (char)52:
-                    BTN_4_Click(sender, e);
+                    Button4Click(sender, e);
                     break;
                 case (char)53:
-                    BTN_5_Click(sender, e);
+                    Button5Click(sender, e);
                     break;
                 case (char)54:
-                    BTN_6_Click(sender, e);
+                    Button6Click(sender, e);
                     break;
                 case (char)55:
-                    BTN_7_Click(sender, e);
+                    Button7Click(sender, e);
                     break;
                 case (char)56:
-                    BTN_8_Click(sender, e);
+                    Button8Click(sender, e);
                     break;
                 case (char)57:
-                    BTN_9_Click(sender, e);
+                    Button9Click(sender, e);
                     break;
                 case (char)13:
-                    BTN_equal_Click(sender, e);
+                    ButtonEqualClick(sender, e);
                     break;
                 default:
                     break;
             }
         }
+
+        private Model _model;
     }
 }

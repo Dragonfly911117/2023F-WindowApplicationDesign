@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace _2023F_WindowApplicationDesign
+namespace HW01_Calculator
 {
     public class Model
     {

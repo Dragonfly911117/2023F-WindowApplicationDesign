@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace _2023F_WindowApplicationDesign.Properties
+namespace HW01_Calculator.Properties
 {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
