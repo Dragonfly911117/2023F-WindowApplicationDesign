@@ -5,7 +5,7 @@ namespace HW01_Calculator
 {
     public class Model
     {
-        public string AppendOperand(string op)
+        public string AppendOperand(char op)
         {
             if (_operator == Operator.Undefined)
             {
@@ -20,7 +20,7 @@ namespace HW01_Calculator
             }
         }
 
-        public string SetOperator(string op)
+        public string SetOperator(char op)
         {
             if (_isOperand2)
             {
@@ -31,10 +31,10 @@ namespace HW01_Calculator
 
             switch (op)
             {
-                case "+":
+                case '+':
                     _operator = Operator.Plus;
                     break;
-                case "-":
+                case '-':
                     if (_operator != Operator.Undefined && _operand2 == "")
                     {
                         return AppendOperand(op);
@@ -42,10 +42,10 @@ namespace HW01_Calculator
 
                     _operator = Operator.Minus;
                     break;
-                case "X":
+                case 'X':
                     _operator = Operator.Multiply;
                     break;
-                case "/":
+                case '/':
                     _operator = Operator.Divide;
                     break;
                 default:
