@@ -5,22 +5,22 @@ namespace HW01_Calculator
 {
     public class Model
     {
-        public string AppendOperand(char op)
+        public string AppendOperand(char operand)
         {
             if (_operator == Operator.Undefined)
             {
-                _operand1 += op;
+                _operand1 += operand;
                 return _operand1;
             }
             else
             {
-                _operand2 += op;
+                _operand2 += operand;
                 _isOperand2 = true;
                 return _operand2;
             }
         }
 
-        public string SetOperator(char op)
+        public string SetOperator(char symbo)
         {
             if (_isOperand2)
             {
@@ -29,28 +29,28 @@ namespace HW01_Calculator
                 _isOperand2 = false;
             }
 
-            switch (op)
+            switch (symbo)
             {
-                case '+':
+                case (char)EnumSuckingDrSmellsCock.Plus:
                     _operator = Operator.Plus;
                     break;
-                case '-':
+                case (char)EnumSuckingDrSmellsCock.Minus:
                     if (_operator != Operator.Undefined && _operand2 == "")
                     {
-                        return AppendOperand(op);
+                        return AppendOperand(symbo);
                     }
 
                     _operator = Operator.Minus;
                     break;
-                case 'X':
+                case (char)EnumSuckingDrSmellsCock.Multiply:
                     _operator = Operator.Multiply;
                     break;
-                case '/':
+                case (char)EnumSuckingDrSmellsCock.Divide:
                     _operator = Operator.Divide;
                     break;
                 default:
                     _operator = Operator.Undefined;
-                    throw new ArgumentException("Invalid operator");
+                    throw new ArgumentException();
             }
 
             return _operand1.ToString(CultureInfo.InvariantCulture);
@@ -63,14 +63,14 @@ namespace HW01_Calculator
                 return _operand1;
             }
 
-            if (_operand1 == "" || _operand1[0] == '.')
+            if (_operand1 == "" || _operand1[0] == (char)EnumSuckingDrSmellsCock.Dot)
             {
-                _operand1 = "0" + _operand1;
+                _operand1 = (char)EnumSuckingDrSmellsCock.Zero + _operand1;
             }
 
-            if (_operand2 == "" || _operand2[0] == '.')
+            if (_operand2 == "" || _operand2[0] == (char)EnumSuckingDrSmellsCock.Dot)
             {
-                _operand2 = "0" + _operand2;
+                _operand2 = (char)EnumSuckingDrSmellsCock.Zero + _operand2;
             }
 
             switch (_operator)
@@ -118,7 +118,7 @@ namespace HW01_Calculator
             _operand2 = "";
             _operator = Operator.Undefined;
             _isOperand2 = false;
-            return "0";
+            return ((char)EnumSuckingDrSmellsCock.Zero).ToString();
         }
 
         private enum Operator
