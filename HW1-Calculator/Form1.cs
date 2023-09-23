@@ -23,7 +23,6 @@ namespace _2023F_WindowApplicationDesign
             textBox1.Text = _model.AppendOperand("0");
         }
 
-
         private void BTN_1_Click(object sender, EventArgs e)
         {
             textBox1.Text = _model.AppendOperand("1");
@@ -106,7 +105,6 @@ namespace _2023F_WindowApplicationDesign
             textBox1.Text = _model.Clean();
         }
 
-
         private void BTN_CE_Click(object sender, EventArgs e)
         {
             textBox1.Text = _model.CleanCurrOperand();
@@ -119,80 +117,66 @@ namespace _2023F_WindowApplicationDesign
 
         private Model _model;
 
-
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == 42)
+            switch (e.KeyChar)
             {
-                BTN_multiply_Click(sender, e);
-            }
-            else if (e.KeyChar == 43)
-            {
-                BTN_plus_Click(sender, e);
-            }
-            else if (e.KeyChar == 45)
-            {
-                BTN_minus_Click(sender, e);
-            }
-            else if (e.KeyChar == 47)
-            {
-                BTN_div_Click(sender, e);
-            }
-            else if (e.KeyChar == 46)
-            {
-                BTN_dot_Click(sender, e);
-            }
-            else if (e.KeyChar == 8)
-            {
-                BTN_CE_Click(sender, e);
-            }
-            else if (e.KeyChar == 27)
-            {
-                BTN_C_Click(sender, e);
-            }
-            else if (e.KeyChar == 48)
-            {
-                BTN_0_Click(sender, e);
-            }
-            else if (e.KeyChar == 49)
-            {
-                BTN_1_Click(sender, e);
-            }
-            else if (e.KeyChar == 50)
-            {
-                BTN_2_Click(sender, e);
-            }
-            else if (e.KeyChar == 51)
-            {
-                BTN_3_Click(sender, e);
-            }
-            else if (e.KeyChar == 52)
-            {
-                BTN_4_Click(sender, e);
-            }
-            else if (e.KeyChar == 53)
-            {
-                BTN_5_Click(sender, e);
-            }
-            else if (e.KeyChar == 54)
-            {
-                BTN_6_Click(sender, e);
-            }
-            else if (e.KeyChar == 55)
-            {
-                BTN_7_Click(sender, e);
-            }
-            else if (e.KeyChar == 56)
-            {
-                BTN_8_Click(sender, e);
-            }
-            else if (e.KeyChar == 57)
-            {
-                BTN_9_Click(sender, e);
-            }
-            else if (e.KeyChar == 13)
-            {
-                BTN_equal_Click(sender, e);
+                case (char)42:
+                    BTN_multiply_Click(sender, e);
+                    break;
+                case (char)43:
+                    BTN_plus_Click(sender, e);
+                    break;
+                case (char)45:
+                    BTN_minus_Click(sender, e);
+                    break;
+                case (char)47:
+                    BTN_div_Click(sender, e);
+                    break;
+                case (char)46:
+                    BTN_dot_Click(sender, e);
+                    break;
+                case (char)8:
+                    BTN_CE_Click(sender, e);
+                    break;
+                case (char)27:
+                    BTN_C_Click(sender, e);
+                    break;
+                case (char)48:
+                    BTN_0_Click(sender, e);
+                    break;
+                case (char)49:
+                    BTN_1_Click(sender, e);
+                    break;
+                case (char)50:
+                    BTN_2_Click(sender, e);
+                    break;
+                case (char)51:
+                    BTN_3_Click(sender, e);
+                    break;
+                case (char)52:
+                    BTN_4_Click(sender, e);
+                    break;
+                case (char)53:
+                    BTN_5_Click(sender, e);
+                    break;
+                case (char)54:
+                    BTN_6_Click(sender, e);
+                    break;
+                case (char)55:
+                    BTN_7_Click(sender, e);
+                    break;
+                case (char)56:
+                    BTN_8_Click(sender, e);
+                    break;
+                case (char)57:
+                    BTN_9_Click(sender, e);
+                    break;
+                case (char)13:
+                    BTN_equal_Click(sender, e);
+                    break;
+                default:
+                    break;
             }
         }
     }
