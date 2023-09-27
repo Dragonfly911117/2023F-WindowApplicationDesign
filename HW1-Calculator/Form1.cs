@@ -20,59 +20,59 @@ namespace HomeWork01_Calculator
 
         private void Button0Click(object sender, EventArgs e)
         {
-            TextBox.Text = _model.AppendOperand((char)CharacterMap.Zero);
+            TextBox.Text = _model.AddNumber((char)CharacterMap.Zero);
         }
 
         private void Button1Click(object sender, EventArgs e)
         {
-            TextBox.Text = _model.AppendOperand((char)CharacterMap.One);
+            TextBox.Text = _model.AddNumber((char)CharacterMap.One);
         }
 
         // do the same for BTN_2 to BTN_9 buttons ignore havent been hooked
 
         private void Button2Click(object sender, EventArgs e)
         {
-            TextBox.Text = _model.AppendOperand( (char)CharacterMap.Two);
+            TextBox.Text = _model.AddNumber( (char)CharacterMap.Two);
         }
 
         private void Button3Click(object sender, EventArgs e)
         {
-            TextBox.Text = _model.AppendOperand((char)CharacterMap.Three);
+            TextBox.Text = _model.AddNumber((char)CharacterMap.Three);
         }
 
         private void Button4Click(object sender, EventArgs e)
         {
-            TextBox.Text = _model.AppendOperand((char)CharacterMap.Four);
+            TextBox.Text = _model.AddNumber((char)CharacterMap.Four);
         }
 
         private void Button5Click(object sender, EventArgs e)
         {
-            TextBox.Text = _model.AppendOperand((char)CharacterMap.Five);
+            TextBox.Text = _model.AddNumber((char)CharacterMap.Five);
         }
 
         private void Button6Click(object sender, EventArgs e)
         {
-            TextBox.Text = _model.AppendOperand((char)CharacterMap.Six);
+            TextBox.Text = _model.AddNumber((char)CharacterMap.Six);
         }
 
         private void Button7Click(object sender, EventArgs e)
         {
-            TextBox.Text = _model.AppendOperand((char)CharacterMap.Seven);
+            TextBox.Text = _model.AddNumber((char)CharacterMap.Seven);
         }
 
         private void Button8Click(object sender, EventArgs e)
         {
-            TextBox.Text = _model.AppendOperand((char)CharacterMap.Eight);
+            TextBox.Text = _model.AddNumber((char)CharacterMap.Eight);
         }
 
         private void Button9Click(object sender, EventArgs e)
         {
-            TextBox.Text = _model.AppendOperand((char)CharacterMap.Nine);
+            TextBox.Text = _model.AddNumber((char)CharacterMap.Nine);
         }
 
         private void ButtonDotClick(object sender, EventArgs e)
         {
-            TextBox.Text = _model.AppendOperand((char)CharacterMap.Dot);
+            TextBox.Text = _model.AddNumber((char)CharacterMap.Dot);
         }
 
         private void ButtonPlusClick(object sender, EventArgs e)
@@ -102,7 +102,7 @@ namespace HomeWork01_Calculator
 
         private void ButtonClearEntryClick(object sender, EventArgs e)
         {
-            TextBox.Text = _model.CleanCurrOperand();
+            TextBox.Text = _model.CleanCurrNumber();
         }
 
         private void ButtonEqualClick(object sender, EventArgs e)

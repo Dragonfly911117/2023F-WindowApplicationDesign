@@ -15,22 +15,21 @@ namespace HomeWork01_Calculator
             else
             {
                 _number2 += newNumber;
-                _isOperand2 = true;
+                _isNumber2 = true;
                 return _number2;
             }
         }
 
-
-        public string SetOperator(char symbo)
+        public string SetOperator(char symbol)
         {
-            if (_isOperand2)
+            if (_isNumber2)
             {
                 _number1 = Calculate();
                 _number2 = "";
-                _isOperand2 = false;
+                _isNumber2 = false;
             }
 
-            switch (symbo)
+            switch (symbol)
             {
                 case (char)CharacterMap.Plus:
                     _operator = Operator.Plus;
@@ -38,9 +37,8 @@ namespace HomeWork01_Calculator
                 case (char)CharacterMap.Minus:
                     if (_operator != Operator.Undefined && _number2 == "")
                     {
-                        return AddNumber(symbo);
+                        return AddNumber(symbol);
                     }
-
                     _operator = Operator.Minus;
                     break;
                 case (char)CharacterMap.Multiply:
@@ -57,9 +55,11 @@ namespace HomeWork01_Calculator
             return _number1.ToString(CultureInfo.InvariantCulture);
         }
 
+
+
         public string Calculate()
         {
-            if (_operator == Operator.Undefined || !_isOperand2)
+            if (_operator == Operator.Undefined || !_isNumber2)
             {
                 return _number1;
             }
@@ -99,11 +99,11 @@ namespace HomeWork01_Calculator
 
             _number2 = "";
             _operator = Operator.Undefined;
-            _isOperand2 = false;
+            _isNumber2 = false;
             return _number1;
         }
 
-        public string CleanCurrOperand()
+        public string CleanCurrNumber()
         {
             if (_operator == Operator.Undefined)
             {
@@ -119,7 +119,7 @@ namespace HomeWork01_Calculator
             _number1 = "";
             _number2 = "";
             _operator = Operator.Undefined;
-            _isOperand2 = false;
+            _isNumber2 = false;
             return ((char)CharacterMap.Zero).ToString();
         }
 
@@ -132,7 +132,7 @@ namespace HomeWork01_Calculator
             Undefined
         }
 
-        private bool _isOperand2 = false;
+        private bool _isNumber2 = false;
         private string _number1 = "";
         private string _number2 = "";
         private Operator _operator = Operator.Undefined;
