@@ -32,7 +32,7 @@ namespace HomeWork01_Calculator
 
         private void Button2Click(object sender, EventArgs e)
         {
-            TextBox.Text = _model.AddNumber( (char)CharacterMap.Two);
+            TextBox.Text = _model.AddNumber((char)CharacterMap.Two);
         }
 
         private void Button3Click(object sender, EventArgs e)
@@ -102,7 +102,7 @@ namespace HomeWork01_Calculator
 
         private void ButtonClearEntryClick(object sender, EventArgs e)
         {
-            TextBox.Text = _model.CleanCurrNumber();
+            TextBox.Text = _model.CleanCurrent();
         }
 
         private void ButtonEqualClick(object sender, EventArgs e)
