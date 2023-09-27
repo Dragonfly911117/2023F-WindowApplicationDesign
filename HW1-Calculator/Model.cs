@@ -5,6 +5,7 @@ namespace HomeWork01_Calculator
 {
     public class Model
     {
+        // Brief: Add a number to the current number
         public string AddNumber(char newNumber)
         {
             if (_operator == Operator.Undefine)
@@ -20,6 +21,7 @@ namespace HomeWork01_Calculator
             }
         }
 
+        // Brief: Set operator to the current operation
         public string SetOperator(char symbol)
         {
             if (_isNumber2)
@@ -53,6 +55,7 @@ namespace HomeWork01_Calculator
             return _number1.ToString(CultureInfo.InvariantCulture);
         }
 
+        // Brief: Calculate the result of the current operation
         public string Calculate()
         {
             if (_operator == Operator.Undefine || !_isNumber2)
@@ -89,6 +92,7 @@ namespace HomeWork01_Calculator
             return _number1;
         }
 
+        // Brief: Clean the current number
         public string CleanCurrent()
         {
             if (_operator == Operator.Undefine)
@@ -97,6 +101,7 @@ namespace HomeWork01_Calculator
             return _number1;
         }
 
+        // Brief: Clean all the numbers and operators
         public string Clean()
         {
             _number1 = "";
@@ -106,6 +111,7 @@ namespace HomeWork01_Calculator
             return ((char)CharacterMap.Zero).ToString();
         }
 
+        // Brief: Operator enum
         private enum Operator
         {
             Plus,
