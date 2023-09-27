@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace HW01_Calculator
+namespace HomeWork01_Calculator
 {
     public class Model
     {

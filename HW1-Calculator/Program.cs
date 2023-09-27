@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace HW01_Calculator
+namespace HomeWork01_Calculator
 {
     static class Program
     {

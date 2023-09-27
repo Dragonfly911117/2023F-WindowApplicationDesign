@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace HW01_Calculator
+namespace HomeWork01_Calculator
 {
     public partial class Form1 : Form
     {

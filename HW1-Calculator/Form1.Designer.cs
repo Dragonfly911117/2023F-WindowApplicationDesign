@@ -1,4 +1,4 @@
-﻿namespace HW01_Calculator
+﻿namespace HomeWork01_Calculator
 {
     partial class Form1
     {
