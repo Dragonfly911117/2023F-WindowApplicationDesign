@@ -8,7 +8,7 @@ namespace HomeWork01_Calculator
         // Brief: Add a number to the current number
         public string AddNumber(char newNumber)
         {
-            if (_operator == Operator.Undefine)
+            if (_operator == Operator.Undefined)
             {
                 _number1 += newNumber;
                 return _number1;
@@ -37,7 +37,7 @@ namespace HomeWork01_Calculator
                     _operator = Operator.Plus;
                     break;
                 case (char)CharacterMap.Minus:
-                    if (_operator != Operator.Undefine && _number2 == "")
+                    if (_operator != Operator.Undefined && _number2 == "")
                         return AddNumber(symbol);
                     _operator = Operator.Minus;
                     break;
@@ -48,7 +48,7 @@ namespace HomeWork01_Calculator
                     _operator = Operator.Divide;
                     break;
                 default:
-                    _operator = Operator.Undefine;
+                    _operator = Operator.Undefined;
                     throw new ArgumentException();
             }
 
@@ -58,7 +58,7 @@ namespace HomeWork01_Calculator
         // Brief: Calculate the result of the current operation
         public string Calculate()
         {
-            if (_operator == Operator.Undefine || !_isNumber2)
+            if (_operator == Operator.Undefined || !_isNumber2)
                 return _number1;
 
             if (_number1 == "" || _number1[0] == (char)CharacterMap.Dot)
@@ -87,7 +87,7 @@ namespace HomeWork01_Calculator
             }
 
             _number2 = "";
-            _operator = Operator.Undefine;
+            _operator = Operator.Undefined;
             _isNumber2 = false;
             return _number1;
         }
@@ -95,7 +95,7 @@ namespace HomeWork01_Calculator
         // Brief: Clean the current number
         public string CleanCurrent()
         {
-            if (_operator == Operator.Undefine)
+            if (_operator == Operator.Undefined)
                 _number1 = "";
             _number2 = "";
             return _number1;
@@ -106,7 +106,7 @@ namespace HomeWork01_Calculator
         {
             _number1 = "";
             _number2 = "";
-            _operator = Operator.Undefine;
+            _operator = Operator.Undefined;
             _isNumber2 = false;
             return ((char)CharacterMap.Zero).ToString();
         }
@@ -118,12 +118,12 @@ namespace HomeWork01_Calculator
             Minus,
             Multiply,
             Divide,
-            Undefine
+            Undefined
         }
 
         private bool _isNumber2 = false;
         private string _number1 = "";
         private string _number2 = "";
-        private Operator _operator = Operator.Undefine;
+        private Operator _operator = Operator.Undefined;
     }
 }
