@@ -313,7 +313,7 @@
 
         #endregion
     }
-    public enum EnumSuckingDrSmellsCock
+    public enum CharacterMap
     {
         Zero = '0',
         One = '1',

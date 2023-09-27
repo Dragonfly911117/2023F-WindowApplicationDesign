@@ -31,10 +31,10 @@ namespace HomeWork01_Calculator
 
             switch (symbo)
             {
-                case (char)EnumSuckingDrSmellsCock.Plus:
+                case (char)CharacterMap.Plus:
                     _operator = Operator.Plus;
                     break;
-                case (char)EnumSuckingDrSmellsCock.Minus:
+                case (char)CharacterMap.Minus:
                     if (_operator != Operator.Undefined && _operand2 == "")
                     {
                         return AppendOperand(symbo);
@@ -42,10 +42,10 @@ namespace HomeWork01_Calculator
 
                     _operator = Operator.Minus;
                     break;
-                case (char)EnumSuckingDrSmellsCock.Multiply:
+                case (char)CharacterMap.Multiply:
                     _operator = Operator.Multiply;
                     break;
-                case (char)EnumSuckingDrSmellsCock.Divide:
+                case (char)CharacterMap.Divide:
                     _operator = Operator.Divide;
                     break;
                 default:
@@ -63,14 +63,14 @@ namespace HomeWork01_Calculator
                 return _operand1;
             }
 
-            if (_operand1 == "" || _operand1[0] == (char)EnumSuckingDrSmellsCock.Dot)
+            if (_operand1 == "" || _operand1[0] == (char)CharacterMap.Dot)
             {
-                _operand1 = (char)EnumSuckingDrSmellsCock.Zero + _operand1;
+                _operand1 = (char)CharacterMap.Zero + _operand1;
             }
 
-            if (_operand2 == "" || _operand2[0] == (char)EnumSuckingDrSmellsCock.Dot)
+            if (_operand2 == "" || _operand2[0] == (char)CharacterMap.Dot)
             {
-                _operand2 = (char)EnumSuckingDrSmellsCock.Zero + _operand2;
+                _operand2 = (char)CharacterMap.Zero + _operand2;
             }
 
             switch (_operator)
@@ -92,7 +92,8 @@ namespace HomeWork01_Calculator
                         (double.Parse(_operand1) / double.Parse(_operand2)).ToString(CultureInfo.InvariantCulture);
                     break;
                 default:
-                    throw new ArgumentException("Invalid operation!");
+                    const string invalidOperation = "Invalid operation!";
+                    throw new ArgumentException(invalidOperation);
             }
 
             _operand2 = "";
@@ -118,7 +119,7 @@ namespace HomeWork01_Calculator
             _operand2 = "";
             _operator = Operator.Undefined;
             _isOperand2 = false;
-            return ((char)EnumSuckingDrSmellsCock.Zero).ToString();
+            return ((char)CharacterMap.Zero).ToString();
         }
 
         private enum Operator
