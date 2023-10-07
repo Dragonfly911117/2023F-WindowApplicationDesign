@@ -17,8 +17,8 @@ namespace FakePowerPoint
             // make top left and bottom right  random from x = 0~1358, y = 0~1052
             var x1 = Utilities.RandomNumber(0, 1358);
             var y1 = Utilities.RandomNumber(0, 1052);
-            var x2 = Utilities.RandomNumber(0, 1358);
-            var y2 = Utilities.RandomNumber(0, 1052);
+            var x2 = Utilities.RandomNumber(x1, 1358);
+            var y2 = Utilities.RandomNumber(y1, 1052);
 
             Coordinates.Add(new Tuple<int, int>(x1, y1));
             Coordinates.Add(new Tuple<int, int>(x2, y2));
@@ -37,7 +37,8 @@ namespace FakePowerPoint
 
         private System.Drawing.Rectangle ConvertToRectangle()
         {
-            return new System.Drawing.Rectangle(Coordinates[0].Item1, Coordinates[0].Item2, Coordinates[1].Item1 - Coordinates[0].Item1, Coordinates[1].Item2 - Coordinates[0].Item2);
+            return new System.Drawing.Rectangle(Coordinates[0].Item1, Coordinates[0].Item2,
+                Coordinates[1].Item1 - Coordinates[0].Item1, Coordinates[1].Item2 - Coordinates[0].Item2);
         }
     }
 }
