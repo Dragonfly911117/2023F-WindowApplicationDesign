@@ -1,4 +1,6 @@
-﻿namespace FakePowerPoint
+﻿using System.Drawing;
+
+namespace FakePowerPoint
 {
   partial class Form1 : IShapeDrawer
   {
@@ -28,31 +30,169 @@
     /// </summary>
     private void InitializeComponent()
     {
-      this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+      this.PaintGroup = new System.Windows.Forms.GroupBox();
+      this.miniToolStrip = new System.Windows.Forms.MenuStrip();
+      this.panel1 = new System.Windows.Forms.Panel();
+      this.InfoGroup = new System.Windows.Forms.GroupBox();
+      this.dataGridView1 = new System.Windows.Forms.DataGridView();
+      this.ButtonDeletingTheShape = new System.Windows.Forms.DataGridViewButtonColumn();
+      this.ShapeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ShapeInfo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ShapeSelect = new System.Windows.Forms.ComboBox();
+      this.AddShape = new System.Windows.Forms.Button();
+      this.SlidesGroup = new System.Windows.Forms.GroupBox();
+      this.InfoGroup.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
       this.SuspendLayout();
-      // 
-      // webBrowser1
-      // 
-      this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.webBrowser1.Location = new System.Drawing.Point(0, 0);
-      this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-      this.webBrowser1.Name = "webBrowser1";
-      this.webBrowser1.Size = new System.Drawing.Size(1827, 1134);
-      this.webBrowser1.TabIndex = 0;
-      // 
+      //
+      // PaintGroup
+      //
+      this.PaintGroup.ForeColor = System.Drawing.Color.White;
+      this.PaintGroup.Location = new System.Drawing.Point(217, 13);
+      this.PaintGroup.Name = "PaintGroup";
+      this.PaintGroup.Size = new System.Drawing.Size(1358, 1052);
+      this.PaintGroup.TabIndex = 3;
+      this.PaintGroup.TabStop = false;
+      this.PaintGroup.Text = "Paint";
+      //
+      // miniToolStrip
+      //
+      this.miniToolStrip.AutoSize = false;
+      this.miniToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+      this.miniToolStrip.Location = new System.Drawing.Point(6, 2);
+      this.miniToolStrip.Name = "miniToolStrip";
+      this.miniToolStrip.RightToLeft = System.Windows.Forms.RightToLeft.No;
+      this.miniToolStrip.Size = new System.Drawing.Size(92, 19);
+      this.miniToolStrip.TabIndex = 0;
+      this.miniToolStrip.TabStop = true;
+      this.miniToolStrip.Visible = false;
+      //
+      // panel1
+      //
+      this.panel1.Location = new System.Drawing.Point(0, 0);
+      this.panel1.Name = "panel1";
+      this.panel1.Size = new System.Drawing.Size(200, 100);
+      this.panel1.TabIndex = 0;
+      //
+      // InfoGroup
+      //
+      this.InfoGroup.Controls.Add(this.dataGridView1);
+      this.InfoGroup.Controls.Add(this.ShapeSelect);
+      this.InfoGroup.Controls.Add(this.AddShape);
+      this.InfoGroup.ForeColor = System.Drawing.Color.White;
+      this.InfoGroup.Location = new System.Drawing.Point(1593, 13);
+      this.InfoGroup.Name = "InfoGroup";
+      this.InfoGroup.Size = new System.Drawing.Size(226, 1052);
+      this.InfoGroup.TabIndex = 1;
+      this.InfoGroup.TabStop = false;
+      this.InfoGroup.Text = "Info";
+      //
+      // dataGridView1
+      //
+      this.dataGridView1.AllowUserToAddRows = false;
+      this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+      this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+      this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+      this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+      this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this.ButtonDeletingTheShape, this.ShapeName, this.ShapeInfo });
+      this.dataGridView1.Location = new System.Drawing.Point(10, 99);
+      this.dataGridView1.Name = "dataGridView1";
+      this.dataGridView1.RowHeadersVisible = false;
+      this.dataGridView1.ShowCellErrors = false;
+      this.dataGridView1.ShowCellToolTips = false;
+      this.dataGridView1.ShowEditingIcon = false;
+      this.dataGridView1.Size = new System.Drawing.Size(204, 936);
+      this.dataGridView1.TabIndex = 2;
+      this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+      this.dataGridView1.ForeColor = Color.Black;
+      //
+      // ButtonDeletingTheShape
+      //
+      this.ButtonDeletingTheShape.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+      this.ButtonDeletingTheShape.HeaderText = "Delete";
+      this.ButtonDeletingTheShape.Name = "ButtonDeletingTheShape";
+      this.ButtonDeletingTheShape.Text = "Delete";
+      //
+      // ShapeName
+      //
+      this.ShapeName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+      this.ShapeName.HeaderText = "Shape";
+      this.ShapeName.Name = "ShapeName";
+      //
+      // ShapeInfo
+      //
+      this.ShapeInfo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+      this.ShapeInfo.HeaderText = "ShapeInfo";
+      this.ShapeInfo.Name = "ShapeInfo";
+      //
+      // ShapeSelect
+      //
+      this.ShapeSelect.FormattingEnabled = true;
+      this.ShapeSelect.Location = new System.Drawing.Point(99, 51);
+      this.ShapeSelect.Name = "ShapeSelect";
+      this.ShapeSelect.Size = new System.Drawing.Size(116, 21);
+      this.ShapeSelect.TabIndex = 1;
+      //
+      // AddShape
+      //
+      this.AddShape.ForeColor = System.Drawing.Color.Black;
+      this.AddShape.Location = new System.Drawing.Point(10, 35);
+      this.AddShape.Name = "AddShape";
+      this.AddShape.Size = new System.Drawing.Size(74, 56);
+      this.AddShape.TabIndex = 0;
+      this.AddShape.Text = "Add";
+      this.AddShape.UseVisualStyleBackColor = true;
+      this.AddShape.Click += new System.EventHandler(this.AddShapeButtonClick);
+      //
+      // SlidesGroup
+      //
+      this.SlidesGroup.ForeColor = System.Drawing.Color.White;
+      this.SlidesGroup.Location = new System.Drawing.Point(20, 12);
+      this.SlidesGroup.Name = "SlidesGroup";
+      this.SlidesGroup.Size = new System.Drawing.Size(177, 1053);
+      this.SlidesGroup.TabIndex = 2;
+      this.SlidesGroup.TabStop = false;
+      this.SlidesGroup.Text = "Slides";
+      //
       // Form1
-      // 
+      //
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.Black;
       this.ClientSize = new System.Drawing.Size(1827, 1134);
-      this.Controls.Add(this.webBrowser1);
+      this.Controls.Add(this.PaintGroup);
+      this.Controls.Add(this.SlidesGroup);
+      this.Controls.Add(this.InfoGroup);
+      this.Controls.Add(this.miniToolStrip);
+      this.Location = new System.Drawing.Point(15, 15);
       this.Name = "Form1";
-      this.Text = "Form1";
+      this.InfoGroup.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
       this.ResumeLayout(false);
     }
 
-    private System.Windows.Forms.WebBrowser webBrowser1;
+    private System.Windows.Forms.DataGridViewButtonColumn ButtonDeletingTheShape;
+    private System.Windows.Forms.DataGridViewTextBoxColumn ShapeName;
+    private System.Windows.Forms.DataGridViewTextBoxColumn ShapeInfo;
+
+    private System.Windows.Forms.GroupBox PaintGroup;
+
+    private System.Windows.Forms.GroupBox SlidesGroup;
+
+    private System.Windows.Forms.DataGridView dataGridView1;
+
+    private System.Windows.Forms.GroupBox InfoGroup;
+
+    private System.Windows.Forms.ComboBox ShapeSelect;
+
+    private System.Windows.Forms.Button button3;
+
+    private System.Windows.Forms.Button AddShape;
+
+    private System.Windows.Forms.Panel panel1;
+
+    private System.Windows.Forms.MenuStrip miniToolStrip;
 
     #endregion
   }

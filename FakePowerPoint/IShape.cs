@@ -11,6 +11,8 @@ namespace FakePowerPoint
         Line
     }
 
+
+
     public interface IShape
     {
         Color Color { get; set; }
@@ -18,16 +20,17 @@ namespace FakePowerPoint
         List<Tuple<int, int>> Coordinates { get; set; }
 
         void Draw(IShapeDrawer drawer);
+        String GetCoordinates();
     }
 
-    public class ShapeFactory
+    public abstract class ShapeFactory
     {
-        public static IShape CreateShape(ShapeType shapeType)
+        public static IShape CreateShape(string shapeType)
         {
             return shapeType switch
             {
-                ShapeType.Rectangle => new Rectangle(),
-                ShapeType.Line => new Line(),
+                "Rectangle" => new Rectangle(),
+                "Line" => new Line(),
                 _ => throw new ArgumentException("Invalid shape type")
             };
         }
