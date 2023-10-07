@@ -10,23 +10,41 @@ using System.Windows.Forms;
 
 namespace FakePowerPoint
 {
-    public partial class Form1 : Form
+    public interface IShapeDrawer
     {
-        public Form1(Control control)
+        public void DrawRectangle(Color color, System.Drawing.Rectangle rectangle);
+
+        void DrawLine(Color color, List<Tuple<int, int>> coordinates);
+        // And so on for other shapes
+    }
+
+    public partial class Form1 : Form, IShapeDrawer
+    {
+        public Form1(Model model)
         {
-            _control = control;
+            _model = model;
             InitializeComponent();
         }
-        private void Form1_Load(object sender, EventArgs e)
+
+        public void DrawRectangle(Color color, System.Drawing.Rectangle rectangle)
         {
-            _graphics = CreateGraphics();
-        }
-        private void OnPaint(object sender, PaintEventArgs e)
-        {
-            _control.DrawAll(ref _graphics);
+            var myPen = new System.Drawing.Pen(color);
+            var formGraphics = this.CreateGraphics();
+            formGraphics.DrawRectangle(myPen, rectangle);
+            myPen.Dispose();
+            formGraphics.Dispose();
         }
 
-        private Graphics _graphics;
-        private Control _control;
+        public void DrawLine(Color color, List<Tuple<int, int>> coordinates)
+        {
+            var myPen = new System.Drawing.Pen(color);
+            var formGraphics = this.CreateGraphics();
+            formGraphics.DrawLine(myPen, coordinates[0].Item1, coordinates[0].Item2,
+                coordinates[1].Item1, coordinates[1].Item2);
+            myPen.Dispose();
+            formGraphics.Dispose();
+        }
+
+        private Model _model;
     }
 }

@@ -1,34 +1,39 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Security.Cryptography;
 
 namespace FakePowerPoint
 {
-    public class Rectangle : Shape
+    public class Rectangle : IShape
     {
+        public Color Color { get; set; } = Color.FromArgb(153, 132, 120, 222);
+        public ShapeType ShapeType { get; set; } = ShapeType.Rectangle;
+        public List<Tuple<int, int>> Coordinates { get; set; } = new List<Tuple<int, int>>();
+
         public Rectangle()
         {
-            Color = Color.FromArgb(153, 132, 120, 222);
-            CenterCoordinate = new Tuple<int, int>(0, 0);
+            // make top left and bottom right  random from x = 0~1920, y = 0~1080
+            var x1 = Utilities.RandomNumber(0, 1920);
+            var y1 = Utilities.RandomNumber(0, 1080);
+            var x2 = Utilities.RandomNumber(0, 1920);
+            var y2 = Utilities.RandomNumber(0, 1080);
+
+            Coordinates.Add(new Tuple<int, int>(x1, y1));
+            Coordinates.Add(new Tuple<int, int>(x2, y2));
+
         }
 
-        public Rectangle(Color color, Tuple<int, int> centerCoordinate)
+        public void Draw(IShapeDrawer drawer)
         {
-            Color = color;
-            CenterCoordinate = centerCoordinate;
+            drawer.DrawRectangle(Color, ConvertToRectangle());
         }
 
-        public Tuple<int, int> GetTopLeft()
+        private System.Drawing.Rectangle ConvertToRectangle()
         {
-            return new Tuple<int, int>(CenterCoordinate.Item1 - Width / 2, CenterCoordinate.Item2 - Height / 2);
+            return new System.Drawing.Rectangle(Coordinates[0].Item1, Coordinates[0].Item2,
+                Coordinates[1].Item1, Coordinates[1].Item2);
         }
 
-        public override void Draw(Graphics graphics)
-        {
-            var topLeft = GetTopLeft();
-            graphics.FillRectangle(new SolidBrush(Color), topLeft.Item1, topLeft.Item2, Width, Height);
-        }
-
-        public int Width { get; set; }
-        public int Height { get; set; }
     }
 }

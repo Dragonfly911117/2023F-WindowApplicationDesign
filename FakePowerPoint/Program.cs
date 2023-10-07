@@ -14,7 +14,7 @@ namespace FakePowerPoint
     [STAThread]
     static void Main()
     {
-      var control = new Control();
+      var control = new Model();
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
       Application.Run(new Form1(control));
