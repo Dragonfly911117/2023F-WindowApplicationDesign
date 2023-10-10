@@ -12,19 +12,24 @@ namespace FakePowerPoint
     }
 
 
-
     public interface IShape
     {
         Color Color { get; set; }
         ShapeType ShapeType { get; set; }
         List<Tuple<int, int>> Coordinates { get; set; }
 
+        // brief: Draw the shape
         void Draw(IShapeDrawer drawer);
-        String GetCoordinates();
+
+        // brief: Get the coordinates of the shape
+        string GetCoordinates();
+
+
     }
 
     public abstract class ShapeFactory
     {
+        // brief: Create a shape
         public static IShape CreateShape(string shapeType)
         {
             return shapeType switch

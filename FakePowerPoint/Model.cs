@@ -6,30 +6,48 @@ namespace FakePowerPoint
 {
     public class Model
     {
+        // brief: Constructor
         public Model()
         {
-            // remove the first item in the list, which is undefined
-            ShapeTypes = new List<string>(ShapeTypeDescriptions.Values);
+            Shapes = new List<Tuple<string, string, IShape>>();
+            ShapeTypes = new List<string>(_shapeTypeDescriptions.Values);
             ShapeTypes.RemoveAt(0);
+
+            _shapeTypeDescriptions = new Dictionary<ShapeType, string>();
+            _shapeTypeDescriptions.Add(ShapeType.Undefined, NOT_DEFINED);
+            _shapeTypeDescriptions.Add(ShapeType.Rectangle, RECTANGLE);
+            _shapeTypeDescriptions.Add(ShapeType.Line, LINE);
         }
 
+        // brief: Add a shape to the model
         public void AddShape(string shape)
         {
             var temp = ShapeFactory.CreateShape(shape);
-            Shapes.Add(new Tuple<string, string, IShape>(ShapeTypeDescriptions[temp.ShapeType], temp.GetCoordinates(), temp));
+            Shapes.Add(new Tuple<string, string, IShape>(_shapeTypeDescriptions[temp.ShapeType], temp.GetCoordinates(),
+                temp));
         }
 
+        // brief: Remove a shape from the model
         public void RemoveShape(int index)
         {
             Shapes.RemoveAt(index);
         }
 
-        public static readonly Dictionary<ShapeType, string> ShapeTypeDescriptions = new Dictionary<ShapeType, string>
-        {
-            { ShapeType.Undefined, "Undefined" }, { ShapeType.Rectangle, "Rectangle" }, { ShapeType.Line, "Line" }
-        };
+        // brief: Get the description of a shape type
+        private readonly Dictionary<ShapeType, string> _shapeTypeDescriptions;
 
-        public List<Tuple<String, String, IShape>> Shapes { get; } = new List<Tuple<String, String, IShape>>();
-        public List<String> ShapeTypes { get; set; }
+        public List<Tuple<string, string, IShape>> Shapes
+        {
+            get;
+        }
+
+        public List<string> ShapeTypes
+        {
+            get;
+        }
+
+        private const String NOT_DEFINED = "Undefined";
+        private const String RECTANGLE = "Rectangle";
+        private const String LINE = "Line";
     }
 }

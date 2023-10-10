@@ -12,34 +12,39 @@ namespace FakePowerPoint
 {
     public interface IShapeDrawer
     {
+        // brief: Draw a rectangle on the paint region
         public void DrawRectangle(Color color, System.Drawing.Rectangle rectangle);
 
+        // brief: Draw a line on the paint region
         void DrawLine(Color color, List<Tuple<int, int>> coordinates);
         // And so on for other shapes
     }
 
     public partial class Form1 : Form, IShapeDrawer
     {
+        // brief: Constructor
         public Form1(Model model)
         {
             _model = model;
             InitializeComponent();
-            PaintGroup.Paint += PaintGroup_Paint;
+            PaintGroup.Paint += PaintBoardOnPaint;
             ShapeSelect.DataSource = _model.ShapeTypes;
         }
 
+        // brief: Draw a rectangle on the paint region
         public void DrawRectangle(Color color, System.Drawing.Rectangle rectangle)
         {
-            var myPen = new System.Drawing.Pen(color, 5);
-            var formGraphics = this.PaintGroup.CreateGraphics();
+            var myPen = new Pen(color, PEN_WIDTH);
+            var formGraphics = PaintGroup.CreateGraphics();
             formGraphics.DrawRectangle(myPen, rectangle);
             myPen.Dispose();
             formGraphics.Dispose();
         }
 
+        // brief: Draw a line on the paint region
         public void DrawLine(Color color, List<Tuple<int, int>> coordinates)
         {
-            var myPen = new System.Drawing.Pen(color, 5);
+            var myPen = new Pen(color, PEN_WIDTH);
             var formGraphics = PaintGroup.CreateGraphics();
             formGraphics.DrawLine(myPen, coordinates[0].Item1, coordinates[0].Item2, coordinates[1].Item1,
                 coordinates[1].Item2);
@@ -47,8 +52,7 @@ namespace FakePowerPoint
             formGraphics.Dispose();
         }
 
-        private Model _model;
-
+        // brief: Draw a circle on the paint region
         private void AddShapeButtonClick(object sender, EventArgs e)
         {
             _model.AddShape(ShapeSelect.Text);
@@ -56,7 +60,8 @@ namespace FakePowerPoint
             PaintGroup.Invalidate();
         }
 
-        private void PaintGroup_Paint(object sender, PaintEventArgs e)
+        // brief: Draw a circle on the paint region
+        private void PaintBoardOnPaint(object sender, PaintEventArgs e)
         {
             foreach (var shape in _model.Shapes)
             {
@@ -64,7 +69,8 @@ namespace FakePowerPoint
             }
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        // brief: Remove a shape from the paint region
+        private void ClickOnShapeInfo(object sender, DataGridViewCellEventArgs e)
         {
             var senderGrid = (DataGridView)sender;
 
@@ -76,11 +82,14 @@ namespace FakePowerPoint
             }
         }
 
-        private void AddShapeToDataGrid(Tuple<String, String, IShape> shape)
+        // brief: Add a shape to the data grid
+        private void AddShapeToDataGrid(Tuple<string, string, IShape> shape)
         {
-            dataGridView1.Rows.Add(Remove, shape.Item1, shape.Item2);
+            dataGridView1.Rows.Add(REMOVE, shape.Item1, shape.Item2);
         }
 
-        private const string Remove = "Remove";
+        private readonly Model _model;
+        private const string REMOVE = "Remove";
+        private const int PEN_WIDTH = 5;
     }
 }

@@ -31,7 +31,7 @@ namespace FakePowerPoint
     private void InitializeComponent()
     {
       this.PaintGroup = new System.Windows.Forms.GroupBox();
-      this.miniToolStrip = new System.Windows.Forms.MenuStrip();
+      this.menuStrip = new System.Windows.Forms.MenuStrip();
       this.panel1 = new System.Windows.Forms.Panel();
       this.InfoGroup = new System.Windows.Forms.GroupBox();
       this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -60,15 +60,15 @@ namespace FakePowerPoint
       // 
       // miniToolStrip
       // 
-      this.miniToolStrip.AutoSize = false;
-      this.miniToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-      this.miniToolStrip.Location = new System.Drawing.Point(6, 2);
-      this.miniToolStrip.Name = "miniToolStrip";
-      this.miniToolStrip.RightToLeft = System.Windows.Forms.RightToLeft.No;
-      this.miniToolStrip.Size = new System.Drawing.Size(92, 19);
-      this.miniToolStrip.TabIndex = 0;
-      this.miniToolStrip.TabStop = true;
-      this.miniToolStrip.Visible = false;
+      this.menuStrip.AutoSize = false;
+      this.menuStrip.Dock = System.Windows.Forms.DockStyle.None;
+      this.menuStrip.Location = new System.Drawing.Point(6, 2);
+      this.menuStrip.Name = "menuStrip";
+      this.menuStrip.RightToLeft = System.Windows.Forms.RightToLeft.No;
+      this.menuStrip.Size = new System.Drawing.Size(92, 19);
+      this.menuStrip.TabIndex = 0;
+      this.menuStrip.TabStop = true;
+      this.menuStrip.Visible = false;
       // 
       // panel1
       // 
@@ -108,7 +108,7 @@ namespace FakePowerPoint
       this.dataGridView1.ShowEditingIcon = false;
       this.dataGridView1.Size = new System.Drawing.Size(204, 936);
       this.dataGridView1.TabIndex = 2;
-      this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+      this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ClickOnShapeInfo);
       // 
       // ButtonDeletingTheShape
       // 
@@ -190,7 +190,7 @@ namespace FakePowerPoint
       this.Controls.Add(this.PaintGroup);
       this.Controls.Add(this.SlidesGroup);
       this.Controls.Add(this.InfoGroup);
-      this.Controls.Add(this.miniToolStrip);
+      this.Controls.Add(this.menuStrip);
       this.Location = new System.Drawing.Point(15, 15);
       this.Name = "Form1";
       this.InfoGroup.ResumeLayout(false);
@@ -222,7 +222,7 @@ namespace FakePowerPoint
 
     private System.Windows.Forms.Panel panel1;
 
-    private System.Windows.Forms.MenuStrip miniToolStrip;
+    private System.Windows.Forms.MenuStrip menuStrip;
 
     #endregion
   }
