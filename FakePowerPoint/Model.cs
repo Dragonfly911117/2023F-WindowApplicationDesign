@@ -9,14 +9,14 @@ namespace FakePowerPoint
         // brief: Constructor
         public Model()
         {
-            Shapes = new List<Tuple<string, string, IShape>>();
-            ShapeTypes = new List<string>(_shapeTypeDescriptions.Values);
-            ShapeTypes.RemoveAt(0);
-
             _shapeTypeDescriptions = new Dictionary<ShapeType, string>();
             _shapeTypeDescriptions.Add(ShapeType.Undefined, NOT_DEFINED);
             _shapeTypeDescriptions.Add(ShapeType.Rectangle, RECTANGLE);
             _shapeTypeDescriptions.Add(ShapeType.Line, LINE);
+
+            Shapes = new List<Tuple<string, string, IShape>>();
+            ShapeTypes = new List<string>(_shapeTypeDescriptions.Values);
+            ShapeTypes.RemoveAt(0);
         }
 
         // brief: Add a shape to the model

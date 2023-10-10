@@ -28,17 +28,18 @@ namespace FakePowerPoint
         // brief: Generate a random number
         private int GenerateRandomNumber(int min, int max)
         {
-            var random = new Random();
-            return random.Next(min, max);
+            return _random.Next(min, max);
         }
 
         // brief: Draw the shape
+
         public void Draw(IShapeDrawer drawer)
         {
             drawer.DrawRectangle(Color, ConvertToRectangle());
         }
 
         // brief: Get the coordinates of the shape
+
         public string GetCoordinates()
         {
             return
@@ -46,10 +47,13 @@ namespace FakePowerPoint
         }
 
         // brief: Convert the coordinates to a rectangle
+
         private System.Drawing.Rectangle ConvertToRectangle()
         {
             return new System.Drawing.Rectangle(Coordinates[0].Item1, Coordinates[0].Item2,
                 Coordinates[1].Item1 - Coordinates[0].Item1, Coordinates[1].Item2 - Coordinates[0].Item2);
         }
+
+        private  readonly Random _random = new Random();
     }
 }

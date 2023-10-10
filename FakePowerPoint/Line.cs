@@ -38,8 +38,8 @@ namespace FakePowerPoint
         // brief: Generate a random number
         private int GenerateRandomNumber(int min, int max)
         {
-            var random = new Random();
-            return random.Next(min, max);
+            return _random.Next(min, max);
         }
+        private  readonly Random _random = new Random();
     }
 }
