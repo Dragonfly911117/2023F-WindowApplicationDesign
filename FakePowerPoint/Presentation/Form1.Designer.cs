@@ -1,8 +1,9 @@
 ﻿using System.Drawing;
+using System.Windows.Forms;
 
 namespace FakePowerPoint
 {
-  partial class Form1 : IShapeDrawer
+  partial class Form1 : Form
   {
     /// <summary>
     /// Required designer variable.
