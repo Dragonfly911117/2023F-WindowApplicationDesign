@@ -9,7 +9,8 @@ namespace FakePowerPoint
     {
         Undefined,
         Rectangle,
-        Line
+        Line,
+        Eclipse
     }
 
 
@@ -23,7 +24,7 @@ namespace FakePowerPoint
         Color Color { get; set; }
 
         // brief: Draw the shape
-        void Draw(IShapeDrawer drawer);
+        void Draw(ShapeDrawer drawer);
 
         // brief: Get the coordinates of the shape
         public string GetCoordinates();
@@ -42,6 +43,7 @@ namespace FakePowerPoint
             {
                 RECTANGLE => new Rectangle(x1, x2, y1, y2),
                 LINE => new Line(x1, x2, y1, y2),
+                ECLIPSE => new Eclipse(x1, x2, y1, y2),
                 _ => throw new ArgumentException("Invalid shape type")
             };
         }
@@ -55,6 +57,15 @@ namespace FakePowerPoint
         public const String NOT_DEFINED = "Undefined";
         public const String RECTANGLE = "Rectangle";
         public const String LINE = "Line";
+        public const String ECLIPSE = "Eclipse";
+
+        public static Dictionary<ShapeType, String> ShapeTypeDescriptions = new Dictionary<ShapeType, string>
+        {
+            {ShapeType.Undefined, NOT_DEFINED},
+            {ShapeType.Rectangle, RECTANGLE},
+            {ShapeType.Line, LINE},
+            {ShapeType.Eclipse, ECLIPSE}
+        };
 
         private static readonly Random _random = new Random();
     }

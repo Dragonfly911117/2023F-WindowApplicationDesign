@@ -6,19 +6,6 @@ namespace FakePowerPoint
 {
     public class Model
     {
-        // brief: Constructor
-        public Model()
-        {
-            _shapeTypeDescriptions = new Dictionary<ShapeType, string>();
-            _shapeTypeDescriptions.Add(ShapeType.Undefined, ShapeFactory.NOT_DEFINED);
-            _shapeTypeDescriptions.Add(ShapeType.Rectangle, ShapeFactory.RECTANGLE);
-            _shapeTypeDescriptions.Add(ShapeType.Line, ShapeFactory.LINE);
-
-            Shapes = new BindingList<IShape>();
-            ShapeTypes = new List<string>(_shapeTypeDescriptions.Values);
-            ShapeTypes.RemoveAt(0);
-        }
-
         // brief: Add a shape to the model
         public void AddShape(string shape)
         {
@@ -35,11 +22,6 @@ namespace FakePowerPoint
             }
         }
 
-        // brief: Get the description of a shape type
-        private readonly Dictionary<ShapeType, string> _shapeTypeDescriptions;
-
-        public BindingList<IShape> Shapes { get; }
-
-        public List<string> ShapeTypes { get; }
+        public BindingList<IShape> Shapes { get; } = new BindingList<IShape>();
     }
 }

@@ -19,11 +19,10 @@ namespace FakePowerPoint
             InitializeComponent();
             _presentationModel.SetPaintGroup(PaintGroup);
             PaintGroup.Paint += PaintBoardOnPaint;
-            ShapeSelect.DataSource = _presentationModel.ShapeTypes;
+
+            _presentationModel.BindShapeSelect(ShapeSelect);
 
             _presentationModel.BindDataGrid(dataGridView1);
-
-            // dataGridView1.CellContentClick += DeleteShape;
         }
 
         // brief: Draw a circle on the paint region

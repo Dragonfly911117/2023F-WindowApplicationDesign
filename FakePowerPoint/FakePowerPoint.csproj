@@ -47,6 +47,7 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Model\Eclipse.cs" />
         <Compile Include="Model\Model.cs" />
         <Compile Include="Model\Shapes\IShape.cs" />
         <Compile Include="Model\Shapes\Line.cs" />
@@ -58,7 +59,8 @@
         <Compile Include="Presentation\Form1.Designer.cs">
           <DependentUpon>Form1.cs</DependentUpon>
         </Compile>
-        <Compile Include="Presentation\PresentationModel.cs" />
+        <Compile Include="Presentation\PresentationModels\PresentationModel.cs" />
+        <Compile Include="Presentation\PresentationModels\ShapeDrawer.cs" />
         <Compile Include="Program.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
         <EmbeddedResource Include="Presentation\Form1.resx">
@@ -85,6 +87,9 @@
     </ItemGroup>
     <ItemGroup>
         <None Include="App.config"/>
+    </ItemGroup>
+    <ItemGroup>
+      <Content Include="README.md" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
 </Project>

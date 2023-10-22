@@ -45,7 +45,7 @@ namespace FakePowerPoint
 
         // brief: Draw the shape
 
-        public void Draw(IShapeDrawer drawer)
+        public void Draw(ShapeDrawer drawer)
         {
             drawer.DrawRectangle(Color, ConvertToRectangle());
         }
