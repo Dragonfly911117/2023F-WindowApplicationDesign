@@ -1,7 +1,0 @@
-﻿still don't see the difference
-Abstraction: By passing an interface around instead of concrete methods, you're working at a higher level of abstraction. The Controller doesn't really care how the shape gets drawn, just that whatever it passes the shape to has the ability to draw it. This provides the ability to substitute different implementations of IShapeDrawer—for testing or other reasons—without changing the Controller or the Shape classes.
-
-Separation of responsibilities: The interface approach makes it more clear that the responsibility for determining how a shape gets drawn lies with the View. In the method delegate approach, it could be interpreted that the Controller is telling the View how to draw the shape (i.e., which method to use), which is arguably not the Controller's responsibility.
-Flexibility: If in the future you add a new method to your IShapeDrawer interface (e.g., DrawCircle), you would only need to implement that method in your View and Shape that needs it. The Controller doesn't need to change.
-
-
