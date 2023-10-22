@@ -1,34 +1,71 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 
 namespace FakePowerPoint
 {
     public class Line : IShape
     {
-        public Color Color { get; set; } = Color.FromArgb(255, 123, 0, 33);
-        public ShapeType ShapeType { get; set; } = ShapeType.Line;
-        public List<Tuple<int, int>> Coordinates { get; set; } = new List<Tuple<int, int>>();
+        public ShapeType ShapeType
+        {
+            get => _shapeType;
+            set => throw new InvalidOperationException("The shape type cannot be changed");
+        }
+
+        public String Coordinates
+        {
+            get => GetCoordinates();
+            set => throw new InvalidOperationException("The coordinates cannot be changed directly");
+        }
+
+        public Color Color
+        {
+            get => this._color;
+            set
+            {
+                this._color = value;
+                OnPropertyChanged(COLOR);
+            }
+        }
 
         // brief: Constructor
         public Line(int x1 = 0, int x2 = 0, int y1 = 0, int y2 = 0)
         {
-            Coordinates.Add(new Tuple<int, int>(x1, y1));
-            Coordinates.Add(new Tuple<int, int>(x2, y2));
+            this._color = Color.FromArgb(255, 123, 0, 33);
+            this._shapeType = ShapeType.Rectangle;
+            this._coordinates = new List<Tuple<int, int>>();
+            _coordinates.Add(new Tuple<int, int>(x1, y1));
+            _coordinates.Add(new Tuple<int, int>(x2, y2));
         }
 
         // brief: Draw the shape
         public void Draw(IShapeDrawer drawer)
         {
-            drawer.DrawLine(Color, Coordinates);
+            drawer.DrawLine(Color, _coordinates);
         }
 
-        // brief: Get the coordinates of the shape
         public string GetCoordinates()
         {
             return
-                $"({Coordinates[0].Item1}, {Coordinates[0].Item2}),\n({Coordinates[1].Item1}, {Coordinates[1].Item2})";
+                $"({_coordinates[0].Item1}, {_coordinates[0].Item2}),\n({_coordinates[1].Item1}, {_coordinates[1].Item2})";
         }
-        // brief: Generate a random number
+
+        // brief: Get the coordinates of the shape
+
+        void OnPropertyChanged(String propertyName = null)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        private Color _color;
+        private ShapeType _shapeType;
+        private List<Tuple<int, int>> _coordinates;
+
+        private const String COLOR = "Color";
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

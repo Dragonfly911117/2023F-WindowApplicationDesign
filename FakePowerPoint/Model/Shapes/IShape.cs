@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 
 namespace FakePowerPoint
@@ -12,17 +13,20 @@ namespace FakePowerPoint
     }
 
 
-    public interface IShape
+    public interface IShape : INotifyPropertyChanged
     {
-        Color Color { get; set; }
         ShapeType ShapeType { get; set; }
-        List<Tuple<int, int>> Coordinates { get; set; }
+
+        // the property is string for better binding to the datagridview. There's gonna be list of tuples in the child classes
+        String Coordinates { get; set; }
+
+        Color Color { get; set; }
 
         // brief: Draw the shape
         void Draw(IShapeDrawer drawer);
 
         // brief: Get the coordinates of the shape
-        string GetCoordinates();
+        public string GetCoordinates();
     }
 
     public abstract class ShapeFactory
@@ -36,8 +40,8 @@ namespace FakePowerPoint
             var y2 = GenerateRandomNumber(y1, 1052);
             return shapeType switch
             {
-                "Rectangle" => new Rectangle(x1, x2, y1, y2),
-                "Line" => new Line(x1, x2, y1, y2),
+                RECTANGLE => new Rectangle(x1, x2, y1, y2),
+                LINE => new Line(x1, x2, y1, y2),
                 _ => throw new ArgumentException("Invalid shape type")
             };
         }
@@ -47,6 +51,10 @@ namespace FakePowerPoint
         {
             return _random.Next(min, max);
         }
+
+        public const String NOT_DEFINED = "Undefined";
+        public const String RECTANGLE = "Rectangle";
+        public const String LINE = "Line";
 
         private static readonly Random _random = new Random();
     }

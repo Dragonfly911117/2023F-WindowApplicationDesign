@@ -10,11 +10,11 @@ namespace FakePowerPoint
         public Model()
         {
             _shapeTypeDescriptions = new Dictionary<ShapeType, string>();
-            _shapeTypeDescriptions.Add(ShapeType.Undefined, NOT_DEFINED);
-            _shapeTypeDescriptions.Add(ShapeType.Rectangle, RECTANGLE);
-            _shapeTypeDescriptions.Add(ShapeType.Line, LINE);
+            _shapeTypeDescriptions.Add(ShapeType.Undefined, ShapeFactory.NOT_DEFINED);
+            _shapeTypeDescriptions.Add(ShapeType.Rectangle, ShapeFactory.RECTANGLE);
+            _shapeTypeDescriptions.Add(ShapeType.Line, ShapeFactory.LINE);
 
-            Shapes = new List<Tuple<string, string, IShape>>();
+            Shapes = new BindingList<IShape>();
             ShapeTypes = new List<string>(_shapeTypeDescriptions.Values);
             ShapeTypes.RemoveAt(0);
         }
@@ -23,31 +23,23 @@ namespace FakePowerPoint
         public void AddShape(string shape)
         {
             var temp = ShapeFactory.CreateShape(shape);
-            Shapes.Add(new Tuple<string, string, IShape>(_shapeTypeDescriptions[temp.ShapeType], temp.GetCoordinates(),
-                temp));
+            Shapes.Add(temp);
         }
 
         // brief: Remove a shape from the model
         public void RemoveShape(int index)
         {
-            Shapes.RemoveAt(index);
+            if (index < 0 || index >= Shapes.Count)
+            {
+                throw new IndexOutOfRangeException("Index out of range");
+            }
         }
 
         // brief: Get the description of a shape type
         private readonly Dictionary<ShapeType, string> _shapeTypeDescriptions;
 
-        public List<Tuple<string, string, IShape>> Shapes
-        {
-            get;
-        }
+        public BindingList<IShape> Shapes { get; }
 
-        public List<string> ShapeTypes
-        {
-            get;
-        }
-
-        private const String NOT_DEFINED = "Undefined";
-        private const String RECTANGLE = "Rectangle";
-        private const String LINE = "Line";
+        public List<string> ShapeTypes { get; }
     }
 }

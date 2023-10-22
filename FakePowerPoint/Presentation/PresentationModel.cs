@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace FakePowerPoint
 {
@@ -62,7 +63,7 @@ namespace FakePowerPoint
 
             foreach (var shape in _model.Shapes)
             {
-                shape.Item3.Draw(this);
+                shape.Draw(this);
             }
         }
 
@@ -89,11 +90,19 @@ namespace FakePowerPoint
         {
             get { return _model.ShapeTypes; }
         }
+        public void BindDataGrid(DataGridView dataGridView)
+        {
+            dataGridView.DataSource = _model.Shapes;
+            dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            // dataGridView.Columns[1].Visible = false; // hide the color column
+        }
 
 
         private System.Windows.Forms.GroupBox _paintGroup = null;
         private readonly Model _model;
         private const string REMOVE = "Remove";
         private const int PEN_WIDTH = 5;
+
+
     }
 }

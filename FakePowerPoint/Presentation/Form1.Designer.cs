@@ -38,9 +38,6 @@ namespace FakePowerPoint
       this.panel1 = new System.Windows.Forms.Panel();
       this.InfoGroup = new System.Windows.Forms.GroupBox();
       this.dataGridView1 = new System.Windows.Forms.DataGridView();
-      this.ButtonDeletingTheShape = new System.Windows.Forms.DataGridViewButtonColumn();
-      this.ShapeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ShapeInfo = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.ShapeSelect = new System.Windows.Forms.ComboBox();
       this.AddShape = new System.Windows.Forms.Button();
       this.SlidesGroup = new System.Windows.Forms.GroupBox();
@@ -116,7 +113,6 @@ namespace FakePowerPoint
       this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
       this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this.ButtonDeletingTheShape, this.ShapeName, this.ShapeInfo });
       this.dataGridView1.GridColor = System.Drawing.Color.Black;
       this.dataGridView1.Location = new System.Drawing.Point(10, 99);
       this.dataGridView1.Name = "dataGridView1";
@@ -127,29 +123,7 @@ namespace FakePowerPoint
       this.dataGridView1.ShowEditingIcon = false;
       this.dataGridView1.Size = new System.Drawing.Size(204, 936);
       this.dataGridView1.TabIndex = 2;
-      this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ClickOnShapeInfo);
-      //
-      // ButtonDeletingTheShape
-      //
-      this.ButtonDeletingTheShape.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-      this.ButtonDeletingTheShape.HeaderText = "Delete";
-      this.ButtonDeletingTheShape.Name = "ButtonDeletingTheShape";
-      this.ButtonDeletingTheShape.ReadOnly = true;
-      this.ButtonDeletingTheShape.Text = "Delete";
-      //
-      // ShapeName
-      //
-      this.ShapeName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-      this.ShapeName.HeaderText = "Shape";
-      this.ShapeName.Name = "ShapeName";
-      this.ShapeName.ReadOnly = true;
-      //
-      // ShapeInfo
-      //
-      this.ShapeInfo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-      this.ShapeInfo.HeaderText = "ShapeInfo";
-      this.ShapeInfo.Name = "ShapeInfo";
-      this.ShapeInfo.ReadOnly = true;
+      this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DeleteShape);
       //
       // ShapeSelect
       //
@@ -225,10 +199,6 @@ namespace FakePowerPoint
 
     private System.Windows.Forms.Button button1;
     private System.Windows.Forms.Button button2;
-
-    private System.Windows.Forms.DataGridViewButtonColumn ButtonDeletingTheShape;
-    private System.Windows.Forms.DataGridViewTextBoxColumn ShapeName;
-    private System.Windows.Forms.DataGridViewTextBoxColumn ShapeInfo;
 
     private System.Windows.Forms.GroupBox PaintGroup;
 

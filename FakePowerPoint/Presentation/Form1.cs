@@ -20,6 +20,15 @@ namespace FakePowerPoint
             _presentationModel.SetPaintGroup(PaintGroup);
             PaintGroup.Paint += PaintBoardOnPaint;
             ShapeSelect.DataSource = _presentationModel.ShapeTypes;
+            DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
+            buttonColumn.HeaderText = "Delete";
+            buttonColumn.Text = "刪除";
+            buttonColumn.UseColumnTextForButtonValue = true;
+            dataGridView1.Columns.Insert(0, buttonColumn);
+            dataGridView1.CellContentClick += DeleteShape;
+            dataGridView1.ForeColor = Color.Black;
+            _presentationModel.BindDataGrid(dataGridView1);
+            // dataGridView1.Columns[1].Visible = false; // hide the color column
         }
 
         // brief: Draw a circle on the paint region
@@ -36,7 +45,7 @@ namespace FakePowerPoint
         }
 
         // brief: Remove a shape from the paint region
-        private void ClickOnShapeInfo(object sender, DataGridViewCellEventArgs e)
+        private void DeleteShape(object sender, DataGridViewCellEventArgs e)
         {
             _presentationModel.RemoveShape(e.RowIndex);
             PaintGroup.Invalidate();
