@@ -20,12 +20,7 @@ namespace FakePowerPoint
             _presentationModel.SetPaintGroup(PaintGroup);
             PaintGroup.Paint += PaintBoardOnPaint;
             ShapeSelect.DataSource = _presentationModel.ShapeTypes;
-            DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
-            buttonColumn.HeaderText = "Delete";
-            buttonColumn.Text = "刪除";
-            buttonColumn.UseColumnTextForButtonValue = true;
-            dataGridView1.Columns.Insert(0, buttonColumn);
-            dataGridView1.ForeColor = Color.Black;
+
             _presentationModel.BindDataGrid(dataGridView1);
 
             // dataGridView1.CellContentClick += DeleteShape;
@@ -53,6 +48,8 @@ namespace FakePowerPoint
                 PaintGroup.Invalidate();
             }
         }
+
+        private const String REMOVE = "Remove";
 
 
         private readonly PresentationModel _presentationModel;

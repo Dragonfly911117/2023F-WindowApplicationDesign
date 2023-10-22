@@ -123,6 +123,12 @@ namespace FakePowerPoint
       this.dataGridView1.ShowEditingIcon = false;
       this.dataGridView1.Size = new System.Drawing.Size(204, 936);
       this.dataGridView1.TabIndex = 2;
+      DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
+      buttonColumn.HeaderText = REMOVE;
+      buttonColumn.Text = REMOVE;
+      buttonColumn.UseColumnTextForButtonValue = true;
+      dataGridView1.Columns.Insert(0, buttonColumn);
+      dataGridView1.ForeColor = Color.Black;
       this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DeleteShape);
       //
       // ShapeSelect
