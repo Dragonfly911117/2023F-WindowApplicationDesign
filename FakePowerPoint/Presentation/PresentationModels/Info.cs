@@ -10,17 +10,12 @@ using System.Windows.Forms;
 
 namespace FakePowerPoint
 {
-
-    public class PresentationModel
+    public partial class Info
     {
-        public PresentationModel(Model model)
+        // brief: Constructor
+        public Info(Model model)
         {
             this._model = model;
-        }
-
-        public void SetPaintGroup(System.Windows.Forms.GroupBox paintGroup)
-        {
-            _drawer.SetPaintGroup(paintGroup);
         }
 
 
@@ -30,23 +25,25 @@ namespace FakePowerPoint
             _model.AddShape(shapeType);
         }
 
+
         // brief: Remove a shape from the paint region
+
         public void RemoveShape(int index)
         {
             _model.RemoveShape(index);
         }
 
-        public void BindDataGrid(DataGridView dataGridView)
+
+        // brief: Bind the data grid to the model's shapes
+
+        public void BindDataGrid(System.Windows.Forms.DataGridView dataGridView)
         {
             dataGridView.DataSource = _model.Shapes;
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
 
-        private readonly Model _model;
-
-        private readonly ShapeDrawer _drawer = new ShapeDrawer();
-
+        // brief: Bind the shape select to the model's shapesInfo
 
         public void BindShapeSelect(ComboBox shapeSelect)
         {
@@ -55,9 +52,7 @@ namespace FakePowerPoint
             shapeSelect.DataSource = temp;
         }
 
-        public void DrawEverything()
-        {
-            _drawer.DrawEverything(_model.Shapes);
-        }
+
+        private readonly Model _model;
     }
 }

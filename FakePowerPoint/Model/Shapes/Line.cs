@@ -40,7 +40,7 @@ namespace FakePowerPoint
         }
 
         // brief: Draw the shape
-        public void Draw(ShapeDrawer drawer)
+        public void Draw(Info drawer)
         {
             drawer.DrawLine(Color, _coordinates);
         }

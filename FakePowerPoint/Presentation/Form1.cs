@@ -13,7 +13,7 @@ namespace FakePowerPoint
     public partial class Form1 : Form
     {
         // brief: Constructor
-        public Form1(PresentationModel model)
+        public Form1(Info model)
         {
             _presentationModel = model;
             InitializeComponent();
@@ -22,8 +22,14 @@ namespace FakePowerPoint
 
             _presentationModel.BindShapeSelect(ShapeSelect);
 
+            DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
+            buttonColumn.HeaderText = REMOVE;
+            buttonColumn.Text = REMOVE;
+            buttonColumn.UseColumnTextForButtonValue = true;
+            dataGridView1.Columns.Insert(0, buttonColumn);
             _presentationModel.BindDataGrid(dataGridView1);
         }
+
 
         // brief: Draw a circle on the paint region
         private void AddShapeButtonClick(object sender, EventArgs e)
@@ -41,7 +47,7 @@ namespace FakePowerPoint
         // brief: Remove a shape from the paint region
         private void DeleteShape(object sender, DataGridViewCellEventArgs e)
         {
-            if (sender is DataGridView dataGridView && e.ColumnIndex == 0)
+            if (sender is Info dataGridView && e.ColumnIndex == 0)
             {
                 _presentationModel.RemoveShape(e.RowIndex);
                 PaintGroup.Invalidate();
@@ -51,6 +57,21 @@ namespace FakePowerPoint
         private const String REMOVE = "Remove";
 
 
-        private readonly PresentationModel _presentationModel;
+        private readonly Info _presentationModel;
+
+        private void DrawLineButtonClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            _presentationModel.DrawLineButtonClicked();
+        }
+
+        private void DrawRectButtonClicked(object sender, EventArgs e)
+        {
+            _presentationModel.DrawRectButtonClicked();
+        }
+
+        private void DrawEclipseButtonClicked(object sender, EventArgs e)
+        {
+            _presentationModel.DrawEclipseButtonClicked();
+        }
     }
 }

@@ -5,7 +5,7 @@ using System.Drawing;
 
 namespace FakePowerPoint
 {
-    public class ShapeDrawer
+    public partial class Info
     {
         public void DrawRectangle(Color color, System.Drawing.Rectangle rectangle)
         {
@@ -27,14 +27,14 @@ namespace FakePowerPoint
             graphics.Dispose();
         }
 
-        public void DrawEverything(BindingList<IShape> shapes)
+        public void DrawEverything()
         {
             if (this._paintGroup == null)
             {
                 throw new Exception("Paint group is not set");
             }
 
-            foreach (var shape in shapes)
+            foreach (var shape in _model.Shapes)
             {
                 shape.Draw(this);
             }
@@ -54,6 +54,22 @@ namespace FakePowerPoint
             myPen.Dispose();
             graphics.Dispose();
         }
+
+        public void DrawLineButtonClicked()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DrawRectButtonClicked()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DrawEclipseButtonClicked()
+        {
+            throw new NotImplementedException();
+        }
+
 
         private System.Windows.Forms.GroupBox _paintGroup = null;
         private const string REMOVE = "Remove";

@@ -45,7 +45,7 @@ namespace FakePowerPoint
 
         // brief: Draw the shape
 
-        public void Draw(ShapeDrawer drawer)
+        public void Draw(Info drawer)
         {
             drawer.DrawRectangle(Color, ConvertToRectangle());
         }
@@ -79,7 +79,6 @@ namespace FakePowerPoint
         private List<Tuple<int, int>> _coordinates;
 
         private const String COLOR = "Color";
-        private const String COORDINATES = "Coordinates";
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }

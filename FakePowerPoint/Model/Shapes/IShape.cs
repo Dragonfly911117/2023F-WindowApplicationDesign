@@ -24,7 +24,7 @@ namespace FakePowerPoint
         Color Color { get; set; }
 
         // brief: Draw the shape
-        void Draw(ShapeDrawer drawer);
+        void Draw(Info drawer);
 
         // brief: Get the coordinates of the shape
         public string GetCoordinates();
