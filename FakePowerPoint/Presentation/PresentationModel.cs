@@ -76,8 +76,7 @@ namespace FakePowerPoint
         // brief: Add a shape to the data grid
         public void AddShape(string shapeType)
         {
-            var shape = ShapeFactory.CreateShape(shapeType);
-            _model.AddShape(shapeType); // TODO: make the list store the shape instead of the String type
+            _model.AddShape(shapeType);
         }
 
         // brief: Remove a shape from the paint region
@@ -94,7 +93,6 @@ namespace FakePowerPoint
         {
             dataGridView.DataSource = _model.Shapes;
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            // dataGridView.Columns[1].Visible = false; // hide the color column
         }
 
 

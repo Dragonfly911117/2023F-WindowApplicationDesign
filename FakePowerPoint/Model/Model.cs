@@ -29,9 +29,9 @@ namespace FakePowerPoint
         // brief: Remove a shape from the model
         public void RemoveShape(int index)
         {
-            if (index < 0 || index >= Shapes.Count)
+            if (index >= 0 && index < Shapes.Count)
             {
-                throw new IndexOutOfRangeException("Index out of range");
+                Shapes.RemoveAt(index);
             }
         }
 

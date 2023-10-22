@@ -25,10 +25,10 @@ namespace FakePowerPoint
             buttonColumn.Text = "刪除";
             buttonColumn.UseColumnTextForButtonValue = true;
             dataGridView1.Columns.Insert(0, buttonColumn);
-            dataGridView1.CellContentClick += DeleteShape;
             dataGridView1.ForeColor = Color.Black;
             _presentationModel.BindDataGrid(dataGridView1);
-            // dataGridView1.Columns[1].Visible = false; // hide the color column
+
+            // dataGridView1.CellContentClick += DeleteShape;
         }
 
         // brief: Draw a circle on the paint region
@@ -47,8 +47,11 @@ namespace FakePowerPoint
         // brief: Remove a shape from the paint region
         private void DeleteShape(object sender, DataGridViewCellEventArgs e)
         {
-            _presentationModel.RemoveShape(e.RowIndex);
-            PaintGroup.Invalidate();
+            if (sender is DataGridView dataGridView && e.ColumnIndex == 0)
+            {
+                _presentationModel.RemoveShape(e.RowIndex);
+                PaintGroup.Invalidate();
+            }
         }
 
 
