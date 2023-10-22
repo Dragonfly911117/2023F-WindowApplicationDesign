@@ -43,6 +43,9 @@ namespace FakePowerPoint
       this.SlidesGroup = new System.Windows.Forms.GroupBox();
       this.button2 = new System.Windows.Forms.Button();
       this.button1 = new System.Windows.Forms.Button();
+      this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.menuStrip.SuspendLayout();
       this.InfoGroup.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
       this.SlidesGroup.SuspendLayout();
@@ -51,47 +54,47 @@ namespace FakePowerPoint
       // PaintGroup
       // 
       this.PaintGroup.ForeColor = System.Drawing.Color.White;
-      this.PaintGroup.Location = new System.Drawing.Point(217, 13);
+      this.PaintGroup.Location = new System.Drawing.Point(217, 29);
       this.PaintGroup.Name = "PaintGroup";
-      this.PaintGroup.Size = new System.Drawing.Size(1358, 1052);
+      this.PaintGroup.Size = new System.Drawing.Size(1358, 1036);
       this.PaintGroup.TabIndex = 3;
       this.PaintGroup.TabStop = false;
       this.PaintGroup.Text = "Paint";
-      // 
-      // miniToolStrip
-      // 
+      //
+      // menuStrip
+      //
       this.menuStrip.AutoSize = false;
-      this.menuStrip.Dock = System.Windows.Forms.DockStyle.None;
-      this.menuStrip.Location = new System.Drawing.Point(6, 2);
+      this.menuStrip.Font = new System.Drawing.Font("Segoe UI", 8F);
+      this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.infoToolStripMenuItem });
+      this.menuStrip.Location = new System.Drawing.Point(0, 0);
       this.menuStrip.Name = "menuStrip";
       this.menuStrip.RightToLeft = System.Windows.Forms.RightToLeft.No;
-      this.menuStrip.Size = new System.Drawing.Size(92, 19);
+      this.menuStrip.Size = new System.Drawing.Size(1827, 26);
       this.menuStrip.TabIndex = 0;
       this.menuStrip.TabStop = true;
-      this.menuStrip.Visible = false;
-      // 
+      //
       // panel1
-      // 
+      //
       this.panel1.Location = new System.Drawing.Point(0, 0);
       this.panel1.Name = "panel1";
       this.panel1.Size = new System.Drawing.Size(200, 100);
       this.panel1.TabIndex = 0;
-      // 
+      //
       // InfoGroup
-      // 
+      //
       this.InfoGroup.Controls.Add(this.dataGridView1);
       this.InfoGroup.Controls.Add(this.ShapeSelect);
       this.InfoGroup.Controls.Add(this.AddShape);
-      this.InfoGroup.ForeColor = System.Drawing.Color.Black;
-      this.InfoGroup.Location = new System.Drawing.Point(1593, 13);
+      this.InfoGroup.ForeColor = System.Drawing.Color.White;
+      this.InfoGroup.Location = new System.Drawing.Point(1593, 29);
       this.InfoGroup.Name = "InfoGroup";
-      this.InfoGroup.Size = new System.Drawing.Size(226, 1052);
+      this.InfoGroup.Size = new System.Drawing.Size(226, 1036);
       this.InfoGroup.TabIndex = 1;
       this.InfoGroup.TabStop = false;
       this.InfoGroup.Text = "Info";
-      // 
+      //
       // dataGridView1
-      // 
+      //
       this.dataGridView1.AllowUserToAddRows = false;
       this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
       this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
@@ -109,39 +112,39 @@ namespace FakePowerPoint
       this.dataGridView1.Size = new System.Drawing.Size(204, 936);
       this.dataGridView1.TabIndex = 2;
       this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ClickOnShapeInfo);
-      // 
+      //
       // ButtonDeletingTheShape
-      // 
+      //
       this.ButtonDeletingTheShape.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
       this.ButtonDeletingTheShape.HeaderText = "Delete";
       this.ButtonDeletingTheShape.Name = "ButtonDeletingTheShape";
       this.ButtonDeletingTheShape.ReadOnly = true;
       this.ButtonDeletingTheShape.Text = "Delete";
-      // 
+      //
       // ShapeName
-      // 
+      //
       this.ShapeName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
       this.ShapeName.HeaderText = "Shape";
       this.ShapeName.Name = "ShapeName";
       this.ShapeName.ReadOnly = true;
-      // 
+      //
       // ShapeInfo
-      // 
+      //
       this.ShapeInfo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
       this.ShapeInfo.HeaderText = "ShapeInfo";
       this.ShapeInfo.Name = "ShapeInfo";
       this.ShapeInfo.ReadOnly = true;
-      // 
+      //
       // ShapeSelect
-      // 
+      //
       this.ShapeSelect.FormattingEnabled = true;
       this.ShapeSelect.Location = new System.Drawing.Point(99, 51);
       this.ShapeSelect.Name = "ShapeSelect";
       this.ShapeSelect.Size = new System.Drawing.Size(116, 21);
       this.ShapeSelect.TabIndex = 1;
-      // 
+      //
       // AddShape
-      // 
+      //
       this.AddShape.ForeColor = System.Drawing.Color.Black;
       this.AddShape.Location = new System.Drawing.Point(10, 35);
       this.AddShape.Name = "AddShape";
@@ -150,36 +153,49 @@ namespace FakePowerPoint
       this.AddShape.Text = "Add";
       this.AddShape.UseVisualStyleBackColor = true;
       this.AddShape.Click += new System.EventHandler(this.AddShapeButtonClick);
-      // 
+      //
       // SlidesGroup
-      // 
+      //
       this.SlidesGroup.Controls.Add(this.button2);
       this.SlidesGroup.Controls.Add(this.button1);
       this.SlidesGroup.ForeColor = System.Drawing.Color.White;
-      this.SlidesGroup.Location = new System.Drawing.Point(20, 12);
+      this.SlidesGroup.Location = new System.Drawing.Point(20, 29);
       this.SlidesGroup.Name = "SlidesGroup";
-      this.SlidesGroup.Size = new System.Drawing.Size(177, 1053);
+      this.SlidesGroup.Size = new System.Drawing.Size(177, 1036);
       this.SlidesGroup.TabIndex = 2;
       this.SlidesGroup.TabStop = false;
       this.SlidesGroup.Text = "Slides";
-      // 
+      //
       // button2
-      // 
+      //
       this.button2.Location = new System.Drawing.Point(15, 199);
       this.button2.Name = "button2";
       this.button2.Size = new System.Drawing.Size(145, 102);
       this.button2.TabIndex = 1;
       this.button2.Text = "button2";
       this.button2.UseVisualStyleBackColor = true;
-      // 
+      //
       // button1
-      // 
+      //
       this.button1.Location = new System.Drawing.Point(15, 54);
       this.button1.Name = "button1";
       this.button1.Size = new System.Drawing.Size(145, 102);
       this.button1.TabIndex = 0;
       this.button1.Text = "button1";
       this.button1.UseVisualStyleBackColor = true;
+      //
+      // infoToolStripMenuItem
+      //
+      this.infoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.aboutToolStripMenuItem });
+      this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
+      this.infoToolStripMenuItem.Size = new System.Drawing.Size(40, 22);
+      this.infoToolStripMenuItem.Text = "Info";
+      // 
+      // aboutToolStripMenuItem
+      // 
+      this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+      this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.aboutToolStripMenuItem.Text = "About";
       // 
       // Form1
       // 
@@ -193,11 +209,16 @@ namespace FakePowerPoint
       this.Controls.Add(this.menuStrip);
       this.Location = new System.Drawing.Point(15, 15);
       this.Name = "Form1";
+      this.menuStrip.ResumeLayout(false);
+      this.menuStrip.PerformLayout();
       this.InfoGroup.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
       this.SlidesGroup.ResumeLayout(false);
       this.ResumeLayout(false);
     }
+
+    private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
 
     private System.Windows.Forms.Button button1;
     private System.Windows.Forms.Button button2;
