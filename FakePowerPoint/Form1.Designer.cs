@@ -32,6 +32,8 @@ namespace FakePowerPoint
     {
       this.PaintGroup = new System.Windows.Forms.GroupBox();
       this.menuStrip = new System.Windows.Forms.MenuStrip();
+      this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.panel1 = new System.Windows.Forms.Panel();
       this.InfoGroup = new System.Windows.Forms.GroupBox();
       this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -43,16 +45,14 @@ namespace FakePowerPoint
       this.SlidesGroup = new System.Windows.Forms.GroupBox();
       this.button2 = new System.Windows.Forms.Button();
       this.button1 = new System.Windows.Forms.Button();
-      this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.menuStrip.SuspendLayout();
       this.InfoGroup.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
       this.SlidesGroup.SuspendLayout();
       this.SuspendLayout();
-      // 
+      //
       // PaintGroup
-      // 
+      //
       this.PaintGroup.ForeColor = System.Drawing.Color.White;
       this.PaintGroup.Location = new System.Drawing.Point(217, 29);
       this.PaintGroup.Name = "PaintGroup";
@@ -72,6 +72,19 @@ namespace FakePowerPoint
       this.menuStrip.Size = new System.Drawing.Size(1827, 26);
       this.menuStrip.TabIndex = 0;
       this.menuStrip.TabStop = true;
+      //
+      // infoToolStripMenuItem
+      //
+      this.infoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.aboutToolStripMenuItem });
+      this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
+      this.infoToolStripMenuItem.Size = new System.Drawing.Size(40, 22);
+      this.infoToolStripMenuItem.Text = "Info";
+      //
+      // aboutToolStripMenuItem
+      //
+      this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+      this.aboutToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+      this.aboutToolStripMenuItem.Text = "About";
       //
       // panel1
       //
@@ -98,10 +111,12 @@ namespace FakePowerPoint
       this.dataGridView1.AllowUserToAddRows = false;
       this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
       this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+      this.dataGridView1.BackgroundColor = System.Drawing.Color.Black;
       this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
       this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this.ButtonDeletingTheShape, this.ShapeName, this.ShapeInfo });
+      this.dataGridView1.GridColor = System.Drawing.Color.Black;
       this.dataGridView1.Location = new System.Drawing.Point(10, 99);
       this.dataGridView1.Name = "dataGridView1";
       this.dataGridView1.ReadOnly = true;
@@ -183,19 +198,6 @@ namespace FakePowerPoint
       this.button1.TabIndex = 0;
       this.button1.Text = "button1";
       this.button1.UseVisualStyleBackColor = true;
-      //
-      // infoToolStripMenuItem
-      //
-      this.infoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.aboutToolStripMenuItem });
-      this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
-      this.infoToolStripMenuItem.Size = new System.Drawing.Size(40, 22);
-      this.infoToolStripMenuItem.Text = "Info";
-      // 
-      // aboutToolStripMenuItem
-      // 
-      this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-      this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-      this.aboutToolStripMenuItem.Text = "About";
       // 
       // Form1
       // 
