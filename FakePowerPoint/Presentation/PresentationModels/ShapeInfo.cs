@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace FakePowerPoint
 {
-    public partial class Info
+    public partial class PresentationModel 
     {
         // brief: Constructor
-        public Info(Model model)
+        public PresentationModel(Model model)
         {
-            this._model = model;
+            _model = model;
         }
 
 
@@ -36,7 +36,7 @@ namespace FakePowerPoint
 
         // brief: Bind the data grid to the model's shapes
 
-        public void BindDataGrid(System.Windows.Forms.DataGridView dataGridView)
+        public void BindDataGrid(DataGridView dataGridView)
         {
             dataGridView.DataSource = _model.Shapes;
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;

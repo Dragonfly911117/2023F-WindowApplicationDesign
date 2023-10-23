@@ -13,7 +13,7 @@ namespace FakePowerPoint
             set => throw new InvalidOperationException("The shape type cannot be changed");
         }
 
-        public String Coordinates
+        public string Coordinates
         {
             get => GetCoordinates();
             set => throw new InvalidOperationException("The coordinates cannot be changed directly");
@@ -21,10 +21,10 @@ namespace FakePowerPoint
 
         public Color Color
         {
-            get => this._color;
+            get => _color;
             set
             {
-                this._color = value;
+                _color = value;
                 OnPropertyChanged(COLOR);
             }
         }
@@ -32,15 +32,15 @@ namespace FakePowerPoint
         // brief: Constructor
         public Line(int x1 = 0, int x2 = 0, int y1 = 0, int y2 = 0)
         {
-            this._color = Color.FromArgb(255, 123, 0, 33);
-            this._shapeType = ShapeType.Line;
-            this._coordinates = new List<Tuple<int, int>>();
+            _color = Color.FromArgb(255, 123, 0, 33);
+            _shapeType = ShapeType.Line;
+            _coordinates = new List<Tuple<int, int>>();
             _coordinates.Add(new Tuple<int, int>(x1, y1));
             _coordinates.Add(new Tuple<int, int>(x2, y2));
         }
 
         // brief: Draw the shape
-        public void Draw(Info drawer)
+        public void Draw(PresentationModel drawer)
         {
             drawer.DrawLine(Color, _coordinates);
         }
@@ -53,19 +53,17 @@ namespace FakePowerPoint
 
         // brief: Get the coordinates of the shape
 
-        void OnPropertyChanged(String propertyName = null)
+        private void OnPropertyChanged(string propertyName = null)
         {
             if (PropertyChanged != null)
-            {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
         }
 
         private Color _color;
         private readonly ShapeType _shapeType;
         private readonly List<Tuple<int, int>> _coordinates;
 
-        private const String COLOR = "Color";
+        private const string COLOR = "Color";
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }

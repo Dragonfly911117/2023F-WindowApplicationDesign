@@ -13,7 +13,7 @@ namespace FakePowerPoint
             set => throw new InvalidOperationException("The shape type cannot be changed");
         }
 
-        public String Coordinates
+        public string Coordinates
         {
             get => GetCoordinates();
             set => throw new InvalidOperationException("The coordinates cannot be changed directly");
@@ -21,10 +21,10 @@ namespace FakePowerPoint
 
         public Color Color
         {
-            get => this._color;
+            get => _color;
             set
             {
-                this._color = value;
+                _color = value;
                 OnPropertyChanged(COLOR);
             }
         }
@@ -33,17 +33,14 @@ namespace FakePowerPoint
         public Eclipse(int x1 = 0, int x2 = 0, int y1 = 0, int y2 = 0)
         {
             // random color but not green-ish nor used by the other shapes
-            this._color = Color.FromArgb(255, 132, 120, 112);
-            this._shapeType = ShapeType.Eclipse;
-            this._coordinates = new List<Tuple<int, int>>
-            {
-                new Tuple<int, int>(x1, y1), new Tuple<int, int>(x2, y2)
-            };
+            _color = Color.FromArgb(255, 132, 120, 112);
+            _shapeType = ShapeType.Eclipse;
+            _coordinates = new List<Tuple<int, int>> { new Tuple<int, int>(x1, y1), new Tuple<int, int>(x2, y2) };
         }
 
         // brief: Draw the shape
 
-        public void Draw(Info drawer)
+        public void Draw(PresentationModel drawer)
         {
             drawer.DrawEclipse(Color, ConvertToRectangle());
         }
@@ -64,20 +61,18 @@ namespace FakePowerPoint
                 _coordinates[1].Item1 - _coordinates[0].Item1, _coordinates[1].Item2 - _coordinates[0].Item2);
         }
 
-        void OnPropertyChanged(String propertyName = null)
+        private void OnPropertyChanged(string propertyName = null)
         {
             if (PropertyChanged != null)
-            {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
         }
 
         private Color _color;
         private ShapeType _shapeType;
         private List<Tuple<int, int>> _coordinates;
 
-        private const String COLOR = "Color";
-        private const String COORDINATES = "Coordinates";
+        private const string COLOR = "Color";
+        private const string COORDINATES = "Coordinates";
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }

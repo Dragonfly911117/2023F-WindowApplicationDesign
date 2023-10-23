@@ -47,24 +47,25 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Model\Eclipse.cs" />
-        <Compile Include="Model\Model.cs" />
-        <Compile Include="Model\Shapes\IShape.cs" />
-        <Compile Include="Model\Shapes\Line.cs" />
-        <Compile Include="Model\Shapes\Rectangle.cs" />
-        <Compile Include="Model\Slide\Slide.cs" />
+        <Compile Include="Model\Eclipse.cs"/>
+        <Compile Include="Model\Model.cs"/>
+        <Compile Include="Model\Shapes\IShape.cs"/>
+        <Compile Include="Model\Shapes\Line.cs"/>
+        <Compile Include="Model\Shapes\Rectangle.cs"/>
+        <Compile Include="Model\Slide\Slide.cs"/>
         <Compile Include="Presentation\Form1.cs">
-          <SubType>Form</SubType>
+            <SubType>Form</SubType>
         </Compile>
         <Compile Include="Presentation\Form1.Designer.cs">
-          <DependentUpon>Form1.cs</DependentUpon>
+            <DependentUpon>Form1.cs</DependentUpon>
         </Compile>
-        <Compile Include="Presentation\PresentationModels\Info.cs" />
-        <Compile Include="Presentation\PresentationModels\Paint.cs" />
+        <Compile Include="Presentation\PresentationModels\General.cs" />
+        <Compile Include="Presentation\PresentationModels\ShapeInfo.cs" />
+        <Compile Include="Presentation\PresentationModels\Paint.cs"/>
         <Compile Include="Program.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
         <EmbeddedResource Include="Presentation\Form1.resx">
-          <DependentUpon>Form1.cs</DependentUpon>
+            <DependentUpon>Form1.cs</DependentUpon>
         </EmbeddedResource>
         <EmbeddedResource Include="Properties\Resources.resx">
             <Generator>ResXFileCodeGenerator</Generator>
@@ -89,7 +90,8 @@
         <None Include="App.config"/>
     </ItemGroup>
     <ItemGroup>
-      <Content Include="README.md" />
+        <Compile Include="Presentation\PresentationModels\DataBindingThings.cs"/>
+        <Content Include="README.md"/>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
 </Project>

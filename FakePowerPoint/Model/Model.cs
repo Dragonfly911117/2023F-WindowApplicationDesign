@@ -13,13 +13,16 @@ namespace FakePowerPoint
             Shapes.Add(temp);
         }
 
+        public void AddShape(IShape shape)
+        {
+            Shapes.Add(shape);
+        }
+
         // brief: Remove a shape from the model
         public void RemoveShape(int index)
         {
             if (index >= 0 && index < Shapes.Count)
-            {
                 Shapes.RemoveAt(index);
-            }
         }
 
         public BindingList<IShape> Shapes { get; } = new BindingList<IShape>();

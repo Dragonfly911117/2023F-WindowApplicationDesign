@@ -1,18 +1,21 @@
 ﻿# 2023F-WindowApplicationDesign
 
 ## Course Information
+
 * [Course site](https://woeikaechen.synology.me/wkc/)
-* [MS Teams](https://teams.microsoft.com/_#/school/tab::3717002657/19:UQBTqwCJ1X62pNssjICDVAG0ci71wv7JkR1ZapKLNdQ1@thread.tacv2?threadId=19:UQBTqwCJ1X62pNssjICDVAG0ci71wv7JkR1ZapKLNdQ1@thread.tacv2&messageId=classroom&ctx=channel&isTeamLevelApp=true) 
-
-
+* [MS Teams](https://teams.microsoft.com/_#/school/tab::3717002657/19:UQBTqwCJ1X62pNssjICDVAG0ci71wv7JkR1ZapKLNdQ1@thread.tacv2?threadId=19:UQBTqwCJ1X62pNssjICDVAG0ci71wv7JkR1ZapKLNdQ1@thread.tacv2&messageId=classroom&ctx=channel&isTeamLevelApp=true)
 
 ## TODO
 
 * [ ] GUI (使用者介面)<br>
-請在界面上方新增一工具列(如圖一所示)。此 Toolbar (在Windows Forms的控制項稱為ToolStrip)應包含三個按鈕：圓形(橢圓形)、矩形和線條。
+  請在界面上方新增一工具列(如圖一所示)。此 Toolbar (在Windows Forms的控制項稱為ToolStrip)應包含三個按鈕：圓形(橢圓形)
+  、矩形和線條。
 * [x] 增加圓形(橢圓形) 包含繪圖區畫圖以及圖形資料顯示區的UI變更。
 * [ ] 圖形繪製 <br>
-當使用者點擊 Toolbar 上的圖形按鈕(選擇圖形)後，即可在繪圖區使用滑鼠左鍵由左 上角拖至右下角畫出一個使用者選擇的圖形，在拖曳過程中，游標保持十字形，被 繪出的圖形會因游標位置之變更而變更大小，且在放開左鍵後，該圖形會被固定顯 示在繪圖區(如圖二所示)，而游標則恢復為正常的指標形狀、圖形按鈕的 Checked 屬 性變成 false。同時請注意，當使用者畫出一個圖形後(放開左鍵後)，該圖形的資料 應該同步被顯示到資料顯示區，也就是說，繪圖區與資料顯示區是同一個 Model 的 兩個 View。
+  當使用者點擊 Toolbar 上的圖形按鈕(選擇圖形)後，即可在繪圖區使用滑鼠左鍵由左 上角拖至右下角畫出一個使用者選擇的圖形，在拖曳過程中，游標保持十字形，被
+  繪出的圖形會因游標位置之變更而變更大小，且在放開左鍵後，該圖形會被固定顯 示在繪圖區(如圖二所示)，而游標則恢復為正常的指標形狀、圖形按鈕的
+  Checked 屬 性變成 false。同時請注意，當使用者畫出一個圖形後(放開左鍵後)，該圖形的資料 應該同步被顯示到資料顯示區，也就是說，繪圖區與資料顯示區是同一個
+  Model 的 兩個 View。
 * [x]  使用 DataGridView 新增圖形<br>
   除了使用滑鼠繪圖，使用者也能夠使用圖形資料顯示區進行圖形的繪製以及刪除，當
   使用者按下新增時，請用亂數產生的座標，建立一個新圖形，並同時顯示該圖形的資訊
