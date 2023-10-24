@@ -8,26 +8,25 @@ namespace FakePowerPoint
 {
     public partial class Form1 : Form
     {
-        // brief: Constructor
+        private const string REMOVE = "Remove";
+        private readonly PresentationModel _presentationModel;
+        private Dictionary<ToolStripButton, int> buttonIndexes = new Dictionary<ToolStripButton, int>();
+
         public Form1(PresentationModel model)
         {
             _presentationModel = model;
             InitializeComponent();
-        this.DoubleBuffered = true;
-            _presentationModel.SetPaintGroup(PaintGroup);
-            PaintGroup.Paint += PaintBoardOnPaint;
+            SetupPresentationModel();
+            SetupPaintGroup();
+            BindEventsToControls();
+            SetupDataGrid();
+            this.DataBindings.Add("Cursor", _presentationModel, "Cursor");
+            this.DoubleBuffered = true;
+        }
 
-            _presentationModel.BindShapeSelect(ShapeSelect);
-
-            var buttonColumn = new DataGridViewButtonColumn();
-            buttonColumn.HeaderText = REMOVE;
-            buttonColumn.Text = REMOVE;
-            buttonColumn.UseColumnTextForButtonValue = true;
-
-            dataGridView1.Columns.Insert(0, buttonColumn);
-            _presentationModel.BindDataGrid(dataGridView1);
-
-            foreach (Control control in this.Controls) // every control on the form's mouse event
+        private void BindEventsToControls()
+        {
+            foreach (Control control in this.Controls)
             {
                 control.MouseDown += MouseDownOnForm;
                 control.MouseMove += MouseMovingOnForm;
@@ -35,12 +34,31 @@ namespace FakePowerPoint
             }
 
             _presentationModel.Selected.ItemUpdated += List_OnItemUpdated;
-
-            this.DataBindings.Add("Cursor", _presentationModel, "Cursor");
         }
 
+        private void SetupDataGrid()
+        {
+            var buttonColumn = new DataGridViewButtonColumn()
+            {
+                HeaderText = REMOVE,
+                Text = REMOVE,
+                UseColumnTextForButtonValue = true
+            };
 
-        // brief: Draw a circle on the paint region
+            dataGridView1.Columns.Insert(0, buttonColumn);
+            _presentationModel.BindDataGrid(dataGridView1);
+        }
+
+        private void SetupPaintGroup()
+        {
+            _presentationModel.SetPaintGroup(PaintGroup);
+            PaintGroup.Paint += PaintBoardOnPaint;
+        }
+
+        private void SetupPresentationModel()
+        {
+            _presentationModel.BindShapeSelect(ShapeSelect);
+        }
 
         private void AddShapeButtonClick(object sender, EventArgs e)
         {
@@ -48,14 +66,10 @@ namespace FakePowerPoint
             PaintGroup.Invalidate();
         }
 
-        // brief: Draw a circle on the paint region
-
         private void PaintBoardOnPaint(object sender, PaintEventArgs e)
         {
             _presentationModel.DrawEverything();
         }
-
-        // brief: Remove a shape from the paint region
 
         private void DeleteShape(object sender, DataGridViewCellEventArgs e)
         {
@@ -65,11 +79,6 @@ namespace FakePowerPoint
                 PaintGroup.Invalidate();
             }
         }
-
-        private const string REMOVE = "Remove";
-
-
-        private readonly PresentationModel _presentationModel;
 
         private void DrawLineButtonClicked(object sender, EventArgs e)
         {
@@ -92,7 +101,8 @@ namespace FakePowerPoint
         }
 
         private void MouseMovingOnForm(object sender, MouseEventArgs e)
-        { Control control = sender as Control;
+        {
+            var control = sender as Control;
             var pos = new Point(e.X + control.Location.X, e.Y + control.Location.Y);
             _presentationModel.MouseMove(e, pos);
         }
@@ -102,17 +112,13 @@ namespace FakePowerPoint
             _presentationModel.MouseUp(e);
         }
 
-        private Dictionary<ToolStripButton, int> buttonIndexes = new Dictionary<ToolStripButton, int>();
-
         private void List_OnItemUpdated(int index, bool newValue)
         {
-            // Find button by its index
-            toolStrip1.Items.OfType<ToolStripButton>().ToList().ForEach(x => x.Checked = false);
-            // Update Checkbox
+            var buttonList = toolStrip1.Items.OfType<ToolStripButton>().ToList();
+            buttonList.ForEach(x => x.Checked = false);
             if (index >= 0)
             {
-                var button = toolStrip1.Items.OfType<ToolStripButton>().ToList()[index];
-                button.Checked = newValue;
+                buttonList[index].Checked = newValue;
             }
         }
     }
