@@ -19,10 +19,10 @@ namespace FakePowerPoint
             _presentationModel = model;
             InitializeComponent();
             // Set up the software components
-            SetupPresentationModel();
-            SetupPaintGroup();
+            BindShapeSelectToPresentationModel();
+            ConfigurePaintGroupForPainting();
             BindEventsToControls();
-            SetupDataGrid();
+            ConfigureDataGridView();
             this.DoubleBuffered = true;
         }
 
@@ -41,7 +41,7 @@ namespace FakePowerPoint
         }
 
         // Setup the DataGrid with remove button and bind it to the model
-        private void SetupDataGrid()
+        private void ConfigureDataGridView()
         {
             var buttonColumn = new DataGridViewButtonColumn()
             {
@@ -53,14 +53,14 @@ namespace FakePowerPoint
         }
 
         // Prepare the PaintGroup for painting operation
-        private void SetupPaintGroup()
+        private void ConfigurePaintGroupForPainting()
         {
             _presentationModel.SetPaintGroup(PaintGroup);
             PaintGroup.Paint += PaintBoardOnPaint;
         }
 
         // Set up the presentation model with ShapeSelect object
-        private void SetupPresentationModel()
+        private void BindShapeSelectToPresentationModel()
         {
             _presentationModel.BindShapeSelect(ShapeSelect);
         }
