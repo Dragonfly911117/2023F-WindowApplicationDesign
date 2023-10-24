@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace FakePowerPoint
@@ -22,8 +24,38 @@ namespace FakePowerPoint
             }
         }
 
+
         private Cursor _cursor = Cursors.Default;
 
         // brief: Constructor
+        public ObservableList<bool> Selected { get; set; } = new ObservableList<bool>();
+
+        private void UpdateSelected()
+        {
+            for (int i = 0; i < Selected.Count; i++)
+            {
+                Selected[i] = false;
+            }
+
+            // run if _shapeType is not undefined
+            var index = (int)_shapeType;
+            if (index == 0) return;
+            Selected[index-1] = true;
+        }
+
+        public class ObservableList<T> : List<T>
+        {
+            public event Action<int, T> ItemUpdated;
+
+            public new T this[int index]
+            {
+                get => base[index];
+                set
+                {
+                    base[index] = value;
+                    ItemUpdated?.Invoke(index, value);
+                }
+            }
+        }
     }
 }

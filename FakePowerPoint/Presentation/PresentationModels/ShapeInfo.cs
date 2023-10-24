@@ -13,10 +13,7 @@ namespace FakePowerPoint
     public partial class PresentationModel 
     {
         // brief: Constructor
-        public PresentationModel(Model model)
-        {
-            _model = model;
-        }
+
 
 
         // brief: Add a shape to the data grid
@@ -53,6 +50,6 @@ namespace FakePowerPoint
         }
 
 
-        private readonly Model _model;
+
     }
 }

@@ -198,7 +198,8 @@ namespace FakePowerPoint
       this.toolStrip1.Size = new System.Drawing.Size(1827, 25);
       this.toolStrip1.TabIndex = 4;
       this.toolStrip1.Text = "toolStrip1";
-      //
+      this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.DrawLineButtonClicked);
+      // 
       // drawLineButton
       // 
       this.drawLineButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -207,10 +208,9 @@ namespace FakePowerPoint
       this.drawLineButton.Name = "drawLineButton";
       this.drawLineButton.Size = new System.Drawing.Size(23, 22);
       this.drawLineButton.Text = "Line";
-      this.drawLineButton.Click += new System.EventHandler(this.DrawLineButtonClicked);
-      //
+      // 
       // drawRectBoutton
-      //
+      // 
       this.drawRectBoutton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
       this.drawRectBoutton.Image = ((System.Drawing.Image)(resources.GetObject("drawRectBoutton.Image")));
       this.drawRectBoutton.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -218,9 +218,9 @@ namespace FakePowerPoint
       this.drawRectBoutton.Size = new System.Drawing.Size(23, 22);
       this.drawRectBoutton.Text = "Rect";
       this.drawRectBoutton.Click += new System.EventHandler(this.DrawRectButtonClicked);
-      //
+      // 
       // drawEclipseButton
-      //
+      // 
       this.drawEclipseButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
       this.drawEclipseButton.Image = ((System.Drawing.Image)(resources.GetObject("drawEclipseButton.Image")));
       this.drawEclipseButton.ImageTransparentColor = System.Drawing.Color.Magenta;

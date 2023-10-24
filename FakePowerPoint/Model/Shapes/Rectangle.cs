@@ -62,8 +62,11 @@ namespace FakePowerPoint
 
         private System.Drawing.Rectangle ConvertToRectangle()
         {
-            return new System.Drawing.Rectangle(_coordinates[0].Item1, _coordinates[0].Item2,
-                _coordinates[1].Item1 - _coordinates[0].Item1, _coordinates[1].Item2 - _coordinates[0].Item2);
+            var x1 = Math.Min(_coordinates[0].Item1, _coordinates[1].Item1);
+            var x2 = Math.Max(_coordinates[0].Item1, _coordinates[1].Item1);
+            var y1 = Math.Min(_coordinates[0].Item2, _coordinates[1].Item2);
+            var y2 = Math.Max(_coordinates[0].Item2, _coordinates[1].Item2);
+            return new System.Drawing.Rectangle(x1, y1, x2 - x1, y2 - y1);
         }
 
         private void OnPropertyChanged(string propertyName = null)
