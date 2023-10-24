@@ -47,8 +47,8 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Model\Eclipse.cs"/>
         <Compile Include="Model\Model.cs"/>
+        <Compile Include="Model\Shapes\Eclipse.cs" />
         <Compile Include="Model\Shapes\IShape.cs"/>
         <Compile Include="Model\Shapes\Line.cs"/>
         <Compile Include="Model\Shapes\Rectangle.cs"/>

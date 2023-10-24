@@ -13,14 +13,14 @@ namespace FakePowerPoint
         Eclipse
     }
 
-    public interface IShape : INotifyPropertyChanged
-    {
-        ShapeType ShapeType { get; set; }
-        string Coordinates { get; set; }
-        Color Color { get; set; }
-        void Draw(PresentationModel drawer);
-        string GetCoordinates();
-    }
+public interface IShape : INotifyPropertyChanged
+{
+    ShapeType ShapeType { get; }
+    string Coordinates { get; }
+    Color Color { get; set; }
+    void Draw(PresentationModel drawer);
+    string GetCoordinates();
+}
 
     public abstract class ShapeFactory
     {
