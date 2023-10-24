@@ -7,64 +7,79 @@ namespace FakePowerPoint
 {
     public partial class PresentationModel : INotifyPropertyChanged
     {
-        // Use of automatic property syntax
+        // Defines an event to be triggered when property changed
         public event PropertyChangedEventHandler PropertyChanged;
 
+        // Holds the current state of the cursor
         private Cursor _cursor = Cursors.Default;
 
+        // Property for Cursor, handles Property Changed Event if value changed
         public Cursor Cursor
         {
             get => _cursor;
             set
             {
+                // check if new assignment is not the same as old value
                 if (_cursor != value)
                 {
                     _cursor = value;
-                    NotifyPropertyChanged(nameof(Cursor)); // use nameof instead of string literal
+                    //trigger PropertyChanged event
+                    NotifyPropertyChanged(nameof(Cursor));
                 }
             }
         }
 
-        // brief: Constructor
+        // Observable list for selection states
         public ObservableList<bool> Selected { get; private set; } = new ObservableList<bool>();
 
+        // Method to trigger property changed events
         private void NotifyPropertyChanged(string propertyName)
         {
+            // Triggered when a property value has changed
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        // Method to update selected items
         private void UpdateSelected()
         {
+            // Iterates through the Selected list and unselects any selected item
             for (int i = 0; i < Selected.Count; i++)
             {
                 ShowSelectedOrUpdate(i, false);
             }
 
-            // run if _shapeType is not undefined
+            // ensures _shapeType has been defined before using it
             var index = (int)_shapeType;
+            // exits method if index is 0
             if (index == 0) return;
 
-            ShowSelectedOrUpdate(index-1, true);
+            // Select the item at the specific index
+            ShowSelectedOrUpdate(index - 1, true);
         }
 
+        // Updates the selection state of the item at the specified index
         private void ShowSelectedOrUpdate(int index, bool value)
         {
             Selected[index] = value;
         }
 
+        // Class that represents a list and handles item updated events
         public class ObservableList<T> : List<T>
         {
-            // Use of automatic property syntax
+            // Defines an event to be triggered when an item is updated
             public event Action<int, T> ItemUpdated;
 
+            // Overrides the indexer, handles ItemUpdated Event if value changed
             public new T this[int index]
             {
                 get => base[index];
                 set
                 {
+                    // check if new assignment is not the same as old value
                     if (!EqualityComparer<T>.Default.Equals(base[index], value))
                     {
                         base[index] = value;
+                        // Trigger ItemUpdated event
                         ItemUpdated?.Invoke(index, value);
                     }
                 }

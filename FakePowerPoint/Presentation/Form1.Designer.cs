@@ -276,8 +276,6 @@ namespace FakePowerPoint
 
     private System.Windows.Forms.ComboBox ShapeSelect;
 
-    private System.Windows.Forms.Button button3;
-
     private System.Windows.Forms.Button AddShape;
 
     private System.Windows.Forms.Panel panel1;

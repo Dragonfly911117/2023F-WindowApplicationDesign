@@ -5,6 +5,7 @@ using System.Drawing;
 
 namespace FakePowerPoint
 {
+    // Enum to represent different types of shapes
     public enum ShapeType
     {
         Undefined,
@@ -13,23 +14,33 @@ namespace FakePowerPoint
         Eclipse
     }
 
-public interface IShape : INotifyPropertyChanged
-{
-    ShapeType ShapeType { get; }
-    string Coordinates { get; }
-    Color Color { get; set; }
-    void Draw(PresentationModel drawer);
-    string GetCoordinates();
-}
+    // Interface for all types of shapes with standard properties and methods
+    public interface IShape : INotifyPropertyChanged
+    {
+        ShapeType ShapeType { get; } // Property to get the type of shape
+        string Coordinates { get; } // Property to get the coordinates of a shape
 
+        Color Color { get; set; } // Color property of a shape
+
+        // Draw method to be implemented by concrete shape classes
+        void Draw(PresentationModel drawer);
+
+        // Method to get string representation of coordinates
+        string GetCoordinates();
+    }
+
+    // Abstract factory class to create the shapes
     public abstract class ShapeFactory
     {
+        // Creates a new shape of given type with random coordinates
         public static IShape CreateShape(ShapeType shapeType)
         {
             var x1 = GenerateRandomNumber(0, 1358);
             var y1 = GenerateRandomNumber(0, 1052);
             var x2 = GenerateRandomNumber(0, 1358);
             var y2 = GenerateRandomNumber(0, 1052);
+
+            // Select the type of shape to create based on the shapeType argument
             return shapeType switch
             {
                 ShapeType.Rectangle => new Rectangle(x1, x2, y1, y2),
@@ -39,12 +50,15 @@ public interface IShape : INotifyPropertyChanged
             };
         }
 
+        // Creates a new shape of given type with specified coordinates
         public static IShape CreateShape(ShapeType shapeType, List<int> coordinates)
         {
             var x1 = coordinates[0];
             var y1 = coordinates[1];
             var x2 = coordinates[2];
             var y2 = coordinates[3];
+
+            // Select the type of shape to create based on the shapeType argument
             return shapeType switch
             {
                 ShapeType.Rectangle => new Rectangle(x1, x2, y1, y2),
@@ -54,7 +68,8 @@ public interface IShape : INotifyPropertyChanged
             };
         }
 
-        public static IShape CreateShape(ShapeType shapeType, List<int> startCoordinates, List<int> endCoordinates )
+        // Creates a new shape of a given type using start and end coordinate lists
+        public static IShape CreateShape(ShapeType shapeType, List<int> startCoordinates, List<int> endCoordinates)
         {
             var coordinates = new List<int>();
             coordinates.AddRange(startCoordinates);
@@ -62,11 +77,13 @@ public interface IShape : INotifyPropertyChanged
             return CreateShape(shapeType, coordinates);
         }
 
+        // Generates a random number within the specified range
         private static int GenerateRandomNumber(int min, int max)
         {
             return _random.Next(min, max);
         }
 
+        // Private member to generate random numbers
         private static readonly Random _random = new Random();
     }
 }
