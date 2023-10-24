@@ -36,9 +36,9 @@ namespace FakePowerPoint
         public void MouseMove(MouseEventArgs e, Point pos)
         {
             _cursorPos = pos;
+            this.Cursor = Cursors.Default;
             if (IsCursorInsidePaintGroup())
             {
-                this.Cursor = Cursors.Default;
                 MouseMovingOnPanel();
             }
         }
