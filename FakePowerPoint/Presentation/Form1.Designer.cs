@@ -59,9 +59,9 @@ namespace FakePowerPoint
       // PaintGroup
       // 
       this.PaintGroup.ForeColor = System.Drawing.Color.White;
-      this.PaintGroup.Location = new System.Drawing.Point(217, 29);
+      this.PaintGroup.Location = new System.Drawing.Point(217, 54);
       this.PaintGroup.Name = "PaintGroup";
-      this.PaintGroup.Size = new System.Drawing.Size(1358, 1036);
+      this.PaintGroup.Size = new System.Drawing.Size(1358, 1011);
       this.PaintGroup.TabIndex = 3;
       this.PaintGroup.TabStop = false;
       this.PaintGroup.Text = "Paint";
@@ -104,9 +104,9 @@ namespace FakePowerPoint
       this.InfoGroup.Controls.Add(this.ShapeSelect);
       this.InfoGroup.Controls.Add(this.AddShape);
       this.InfoGroup.ForeColor = System.Drawing.Color.White;
-      this.InfoGroup.Location = new System.Drawing.Point(1593, 29);
+      this.InfoGroup.Location = new System.Drawing.Point(1593, 54);
       this.InfoGroup.Name = "InfoGroup";
-      this.InfoGroup.Size = new System.Drawing.Size(226, 1036);
+      this.InfoGroup.Size = new System.Drawing.Size(226, 1011);
       this.InfoGroup.TabIndex = 1;
       this.InfoGroup.TabStop = false;
       this.InfoGroup.Text = "Info";
@@ -165,9 +165,9 @@ namespace FakePowerPoint
       this.SlidesGroup.Controls.Add(this.button2);
       this.SlidesGroup.Controls.Add(this.button1);
       this.SlidesGroup.ForeColor = System.Drawing.Color.White;
-      this.SlidesGroup.Location = new System.Drawing.Point(20, 29);
+      this.SlidesGroup.Location = new System.Drawing.Point(20, 54);
       this.SlidesGroup.Name = "SlidesGroup";
-      this.SlidesGroup.Size = new System.Drawing.Size(177, 1036);
+      this.SlidesGroup.Size = new System.Drawing.Size(177, 1011);
       this.SlidesGroup.TabIndex = 2;
       this.SlidesGroup.TabStop = false;
       this.SlidesGroup.Text = "Slides";

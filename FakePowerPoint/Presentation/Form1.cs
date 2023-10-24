@@ -13,8 +13,7 @@ namespace FakePowerPoint
         {
             _presentationModel = model;
             InitializeComponent();
-            this.DoubleBuffered = true;
-
+        this.DoubleBuffered = true;
             _presentationModel.SetPaintGroup(PaintGroup);
             PaintGroup.Paint += PaintBoardOnPaint;
 
@@ -37,7 +36,6 @@ namespace FakePowerPoint
 
             _presentationModel.Selected.ItemUpdated += List_OnItemUpdated;
 
-            // bind this.Cursor to _presentationModel.Cursor
             this.DataBindings.Add("Cursor", _presentationModel, "Cursor");
         }
 
@@ -54,16 +52,6 @@ namespace FakePowerPoint
 
         private void PaintBoardOnPaint(object sender, PaintEventArgs e)
         {
-            // using (Graphics gOffScreen = Graphics.FromImage(buffer))
-            // {
-            //     gOffScreen.Clear(this.BackColor);
-            //     _presentationModel.DrawEverything();
-            //     // Your drawing operations...
-            //     // Drawing methods performed on 'gOffScreen'
-            // }
-            //
-            // // Draw buffered image to screen
-            // e.Graphics.DrawImageUnscaled(buffer, 0, 0);
             _presentationModel.DrawEverything();
         }
 
@@ -104,8 +92,9 @@ namespace FakePowerPoint
         }
 
         private void MouseMovingOnForm(object sender, MouseEventArgs e)
-        {
-            _presentationModel.MouseMove(e);
+        { Control control = sender as Control;
+            var pos = new Point(e.X + control.Location.X, e.Y + control.Location.Y);
+            _presentationModel.MouseMove(e, pos);
         }
 
         private void MouseUpOnForm(object sender, MouseEventArgs e)
@@ -126,22 +115,5 @@ namespace FakePowerPoint
                 button.Checked = newValue;
             }
         }
-
-        private Bitmap buffer; // Bitmap buffer for double-buffering
-
-
-        // protected override void Dispose(bool disposing)
-        // {
-        //     // Dispose of bitmap buffer when form is disposed
-        //     if (disposing)
-        //     {
-        //         if (components != null)
-        //             components.Dispose();
-        //         if (buffer != null)
-        //             buffer.Dispose();
-        //     }
-        //
-        //     base.Dispose(disposing);
-        // }
     }
 }

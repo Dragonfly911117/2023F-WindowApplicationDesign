@@ -92,20 +92,21 @@ namespace FakePowerPoint
                 this.UpdateSelected();
                 return;
             }
+
             _shapeType = ShapeType.Eclipse;
             this.UpdateSelected();
         }
 
-        public void MouseDownOnPanel(MouseEventArgs mouseEventArgs)
+        public void MouseDownOnPanel()
         {
             if (_shapeType != ShapeType.Undefined)
             {
-                _startPoint = new List<int> { mouseEventArgs.X, mouseEventArgs.Y };
+                _startPoint = new List<int> { _cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y };
                 this.Cursor = Cursors.Cross;
             }
         }
 
-        public void MouseMovingOnPanel(MouseEventArgs mouseEventArgs)
+        public void MouseMovingOnPanel()
         {
             if (_shapeType != ShapeType.Undefined)
             {
@@ -114,35 +115,35 @@ namespace FakePowerPoint
 
             if (_startPoint != null)
             {
-                // if (_tempShape != null)
-                // {
-                //     _tempShape.Color = _paintGroup.BackColor;
-                //     _tempShape.Draw(this);
-                // }
-                var tempCoordinates =
-                    new List<int> { _startPoint[0], _startPoint[1], mouseEventArgs.X, mouseEventArgs.Y };
+                var tempCoordinates = new List<int>
+                {
+                    _startPoint[0], _startPoint[1], _cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y
+                };
                 _tempShape = ShapeFactory.CreateShape(_shapeType.ToString(), tempCoordinates);
                 _paintGroup.Invalidate();
                 // _tempShape.Draw(this);
             }
         }
 
-        public void MouseUpOnPanel(MouseEventArgs mouseEventArgs)
+        public void MouseUpOnPanel()
         {
             if (_startPoint == null || _shapeType == ShapeType.Undefined)
             {
                 return;
             }
 
-            var tempCoordinates = new List<int> { _startPoint[0], _startPoint[1], mouseEventArgs.X, mouseEventArgs.Y };
+            var tempCoordinates = new List<int>
+            {
+                _startPoint[0], _startPoint[1], _cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y
+            };
             var shape = ShapeFactory.CreateShape(_shapeType.ToString(), tempCoordinates);
             _model.AddShape(shape);
-            _paintGroup.Invalidate();
 
             this.Cursor = Cursors.Default;
             _shapeType = ShapeType.Undefined;
             _startPoint = null;
             _tempShape = null;
+            _paintGroup.Invalidate();
             this.UpdateSelected();
         }
 
@@ -156,9 +157,8 @@ namespace FakePowerPoint
         private const string REMOVE = "Remove";
         private const int PEN_WIDTH = 5;
 
-        private const int PAINT_OFFSET_X = 0;
-        private const int PAINT_OFFSET_Y = 0;
-        private const int PAINT_WIDTH = 1358;
-        private const int PAINT_HEIGHT = 1052;
+        private const int PAINT_OFFSET_X = 217;
+        private const int PAINT_OFFSET_Y = 54;
+        private Rectangle _paintRegion = new Rectangle(PAINT_OFFSET_X, PAINT_OFFSET_Y, 1358, 1052);
     }
 }
