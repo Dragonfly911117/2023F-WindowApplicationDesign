@@ -10,28 +10,17 @@ using System.Windows.Forms;
 
 namespace FakePowerPoint
 {
-    public partial class PresentationModel 
+    public partial class PresentationModel
     {
-        // brief: Constructor
-
-
-
-        // brief: Add a shape to the data grid
-        public void AddShape(string shapeType)
+        public void AddShape(ShapeType shapeType)
         {
             _model.AddShape(shapeType);
         }
-
-
-        // brief: Remove a shape from the paint region
 
         public void RemoveShape(int index)
         {
             _model.RemoveShape(index);
         }
-
-
-        // brief: Bind the data grid to the model's shapes
 
         public void BindDataGrid(DataGridView dataGridView)
         {
@@ -39,17 +28,11 @@ namespace FakePowerPoint
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
-
-        // brief: Bind the shape select to the model's shapesInfo
-
         public void BindShapeSelect(ComboBox shapeSelect)
         {
-            var temp = ShapeFactory.ShapeTypeDescriptions.Values.ToList();
-            temp.RemoveAt(0); // remove the ability to select UNDEFINED shape
+            var temp = ((ShapeType[])Enum.GetValues(typeof(ShapeType))).ToList();
+            temp.Remove(ShapeType.Undefined); // remove the ability to select UNDEFINED shape
             shapeSelect.DataSource = temp;
         }
-
-
-
     }
 }

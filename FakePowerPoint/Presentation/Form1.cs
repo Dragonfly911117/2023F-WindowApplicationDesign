@@ -10,7 +10,7 @@ namespace FakePowerPoint
     {
         private const string REMOVE = "Remove";
         private readonly PresentationModel _presentationModel;
-        private Dictionary<ToolStripButton, int> buttonIndexes = new Dictionary<ToolStripButton, int>();
+        // private Dictionary<ToolStripButton, int> buttonIndexes = new Dictionary<ToolStripButton, int>();
 
         public Form1(PresentationModel model)
         {
@@ -55,12 +55,13 @@ namespace FakePowerPoint
 
         private void SetupPresentationModel()
         {
+
             _presentationModel.BindShapeSelect(ShapeSelect);
         }
 
         private void AddShapeButtonClick(object sender, EventArgs e)
         {
-            _presentationModel.AddShape(ShapeSelect.Text);
+            _presentationModel.AddShape((ShapeType)ShapeSelect.SelectedItem);
             PaintGroup.Invalidate();
         }
 

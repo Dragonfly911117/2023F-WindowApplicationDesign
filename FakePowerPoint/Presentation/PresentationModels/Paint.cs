@@ -73,7 +73,7 @@ namespace FakePowerPoint
             if (_startPoint != null)
             {
                 var endPosition = new List<int> {_cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y};
-                _tempShape = ShapeFactory.CreateShape(_shapeType.ToString(), _startPoint, endPosition);
+                _tempShape = ShapeFactory.CreateShape(_shapeType, _startPoint, endPosition);
                 _paintGroup.Invalidate();
             }
         }
@@ -86,7 +86,7 @@ namespace FakePowerPoint
             }
 
             var endPosition = new List<int> {_cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y};
-            var shape = ShapeFactory.CreateShape(_shapeType.ToString(), _startPoint, endPosition);
+            var shape = ShapeFactory.CreateShape(_shapeType, _startPoint, endPosition);
             _model.AddShape(shape);
             ResetShape();
 
