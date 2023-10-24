@@ -40,9 +40,7 @@ namespace FakePowerPoint
         {
             var buttonColumn = new DataGridViewButtonColumn()
             {
-                HeaderText = REMOVE,
-                Text = REMOVE,
-                UseColumnTextForButtonValue = true
+                HeaderText = REMOVE, Text = REMOVE, UseColumnTextForButtonValue = true
             };
 
             dataGridView1.Columns.Insert(0, buttonColumn);
@@ -82,17 +80,17 @@ namespace FakePowerPoint
 
         private void DrawLineButtonClicked(object sender, EventArgs e)
         {
-            _presentationModel.DrawLineButtonClicked();
+            _presentationModel.DrawShapeButtonClicked(ShapeType.Line);
         }
 
         private void DrawRectButtonClicked(object sender, EventArgs e)
         {
-            _presentationModel.DrawRectButtonClicked();
+            _presentationModel.DrawShapeButtonClicked(ShapeType.Rectangle);
         }
 
         private void DrawEclipseButtonClicked(object sender, EventArgs e)
         {
-            _presentationModel.DrawEclipseButtonClicked();
+            _presentationModel.DrawShapeButtonClicked(ShapeType.Eclipse);
         }
 
         private void MouseDownOnForm(object sender, MouseEventArgs e)

@@ -62,6 +62,14 @@ namespace FakePowerPoint
                 _ => throw new ArgumentException("Invalid shape type")
             };
         }
+        public static IShape CreateShape(string shapeType, List<int> startCoordinates, List<int> endCoordinates )
+        {
+            // call the public static IShape CreateShape(string shapeType, List<int> coordinates) method
+            var coordinates = new List<int>();
+            coordinates.AddRange(startCoordinates);
+            coordinates.AddRange(endCoordinates);
+            return CreateShape(shapeType, coordinates);
+        }
 
         // brief: Generate a random number
         private static int GenerateRandomNumber(int min, int max)

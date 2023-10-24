@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -8,30 +7,30 @@ namespace FakePowerPoint
 {
     public partial class PresentationModel
     {
-        public void DrawRectangle(Color color, System.Drawing.Rectangle rectangle)
-        {
-            var myPen = new Pen(color, PEN_WIDTH);
-            var graphics = _paintGroup.CreateGraphics();
-            graphics.DrawRectangle(myPen, rectangle);
-            myPen.Dispose();
-            graphics.Dispose();
-        }
+        public void DrawRectangle(Color color, System.Drawing.Rectangle rectangle) =>
+            DrawShape(color, (g, p) => g.DrawRectangle(p, rectangle));
 
-        // brief: Draw a line on the paint region
-        public void DrawLine(Color color, List<Tuple<int, int>> coordinates)
+        public void DrawLine(Color color, List<Tuple<int, int>> coordinates) =>
+            DrawShape(color, (g, p) =>
+            {
+                g.DrawLine(p, coordinates[0].Item1, coordinates[0].Item2, coordinates[1].Item1, coordinates[1].Item2);
+            });
+
+        public void DrawEclipse(Color color, System.Drawing.Rectangle rectangle) =>
+            DrawShape(color, (g, p) => g.DrawEllipse(p, rectangle));
+
+        private void DrawShape(Color color, Action<Graphics, Pen> drawAction)
         {
-            var myPen = new Pen(color, PEN_WIDTH);
-            var graphics = _paintGroup.CreateGraphics();
-            graphics.DrawLine(myPen, coordinates[0].Item1, coordinates[0].Item2, coordinates[1].Item1,
-                coordinates[1].Item2);
-            myPen.Dispose();
-            graphics.Dispose();
+            using (var myPen = new Pen(color, PEN_WIDTH))
+            using (var graphics = _paintGroup.CreateGraphics())
+            {
+                drawAction(graphics, myPen);
+            }
         }
 
         public void DrawEverything()
         {
-            if (_paintGroup == null)
-                throw new Exception("Paint group is not set");
+            VerifyPaintGroup();
 
             foreach (var shape in _model.Shapes)
                 shape.Draw(this);
@@ -40,64 +39,22 @@ namespace FakePowerPoint
                 _tempShape.Draw(this);
         }
 
-        // brief: set the paint group for the drawer
-        public void SetPaintGroup(GroupBox paintGroup)
-        {
-            _paintGroup = paintGroup;
-        }
+        public void SetPaintGroup(GroupBox paintGroup) => _paintGroup = paintGroup;
 
-        public void DrawEclipse(Color color, System.Drawing.Rectangle convertToRectangle)
+        public void DrawShapeButtonClicked(ShapeType shapeType)
         {
-            var myPen = new Pen(color, PEN_WIDTH);
-            var graphics = _paintGroup.CreateGraphics();
-            graphics.DrawEllipse(myPen, convertToRectangle);
-            myPen.Dispose();
-            graphics.Dispose();
-        }
-
-        public void DrawLineButtonClicked()
-        {
-            if (_shapeType == ShapeType.Line)
+            if (_shapeType == shapeType)
             {
-                _shapeType = ShapeType.Undefined;
-                this.Cursor = Cursors.Default;
-                this.UpdateSelected();
+                ResetShape();
+
                 return;
             }
 
-            _shapeType = ShapeType.Line;
+            _shapeType = shapeType;
             this.UpdateSelected();
         }
 
-        public void DrawRectButtonClicked()
-        {
-            if (_shapeType == ShapeType.Rectangle)
-            {
-                _shapeType = ShapeType.Undefined;
-                this.Cursor = Cursors.Default;
-                this.UpdateSelected();
-                return;
-            }
-
-            _shapeType = ShapeType.Rectangle;
-            this.UpdateSelected();
-        }
-
-        public void DrawEclipseButtonClicked()
-        {
-            if (_shapeType == ShapeType.Eclipse)
-            {
-                _shapeType = ShapeType.Undefined;
-                this.Cursor = Cursors.Default;
-                this.UpdateSelected();
-                return;
-            }
-
-            _shapeType = ShapeType.Eclipse;
-            this.UpdateSelected();
-        }
-
-        public void MouseDownOnPanel()
+        private void MouseDownOnPanel()
         {
             if (_shapeType != ShapeType.Undefined)
             {
@@ -106,7 +63,7 @@ namespace FakePowerPoint
             }
         }
 
-        public void MouseMovingOnPanel()
+        private void MouseMovingOnPanel()
         {
             if (_shapeType != ShapeType.Undefined)
             {
@@ -115,50 +72,51 @@ namespace FakePowerPoint
 
             if (_startPoint != null)
             {
-                var tempCoordinates = new List<int>
-                {
-                    _startPoint[0], _startPoint[1], _cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y
-                };
-                _tempShape = ShapeFactory.CreateShape(_shapeType.ToString(), tempCoordinates);
+                var endPosition = new List<int> {_cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y};
+                _tempShape = ShapeFactory.CreateShape(_shapeType.ToString(), _startPoint, endPosition);
                 _paintGroup.Invalidate();
-                // _tempShape.Draw(this);
             }
         }
 
-        public void MouseUpOnPanel()
+        private void MouseUpOnPanel()
         {
             if (_startPoint == null || _shapeType == ShapeType.Undefined)
             {
                 return;
             }
 
-            var tempCoordinates = new List<int>
-            {
-                _startPoint[0], _startPoint[1], _cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y
-            };
-            var shape = ShapeFactory.CreateShape(_shapeType.ToString(), tempCoordinates);
+            var endPosition = new List<int> {_cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y};
+            var shape = ShapeFactory.CreateShape(_shapeType.ToString(), _startPoint, endPosition);
             _model.AddShape(shape);
+            ResetShape();
 
-            this.Cursor = Cursors.Default;
-            _shapeType = ShapeType.Undefined;
-            _startPoint = null;
-            _tempShape = null;
+            // Invalidate the current paint group to repaint the whole area
             _paintGroup.Invalidate();
+
             this.UpdateSelected();
         }
 
+        private void ResetShape()
+        {
+            _shapeType = ShapeType.Undefined;
+            _startPoint = null;
+            _tempShape = null;
+        }
 
-        private List<int> _startPoint = null;
-        private IShape _tempShape = null;
-        private ShapeType _shapeType = ShapeType.Undefined;
+        private void VerifyPaintGroup()
+        {
+            if (_paintGroup == null)
+                throw new Exception("Paint group is not set");
+        }
 
+        private List<int> _startPoint;
+        private IShape _tempShape;
+        private ShapeType _shapeType;
+        private GroupBox _paintGroup;
 
-        private GroupBox _paintGroup = null;
-        private const string REMOVE = "Remove";
         private const int PEN_WIDTH = 5;
-
         private const int PAINT_OFFSET_X = 217;
         private const int PAINT_OFFSET_Y = 54;
-        private Rectangle _paintRegion = new Rectangle(PAINT_OFFSET_X, PAINT_OFFSET_Y, 1358, 1052);
+        private readonly Rectangle _paintRegion = new Rectangle(PAINT_OFFSET_X, PAINT_OFFSET_Y, 1358, 1052);
     }
 }
