@@ -34,7 +34,7 @@ namespace FakePowerPoint
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
       this.PaintGroup = new System.Windows.Forms.GroupBox();
-      this.miniToolStrip = new System.Windows.Forms.MenuStrip();
+      this.shapeToolStrip = new System.Windows.Forms.MenuStrip();
       this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.panel1 = new System.Windows.Forms.Panel();
@@ -47,9 +47,9 @@ namespace FakePowerPoint
       this.button1 = new System.Windows.Forms.Button();
       this.toolStrip1 = new System.Windows.Forms.ToolStrip();
       this.drawLineButton = new System.Windows.Forms.ToolStripButton();
-      this.drawRectBoutton = new System.Windows.Forms.ToolStripButton();
+      this.drawRectangleButton = new System.Windows.Forms.ToolStripButton();
       this.drawEclipseButton = new System.Windows.Forms.ToolStripButton();
-      this.miniToolStrip.SuspendLayout();
+      this.shapeToolStrip.SuspendLayout();
       this.InfoGroup.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
       this.SlidesGroup.SuspendLayout();
@@ -68,15 +68,15 @@ namespace FakePowerPoint
       // 
       // miniToolStrip
       // 
-      this.miniToolStrip.AutoSize = false;
-      this.miniToolStrip.Font = new System.Drawing.Font("Segoe UI", 8F);
-      this.miniToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.infoToolStripMenuItem });
-      this.miniToolStrip.Location = new System.Drawing.Point(0, 0);
-      this.miniToolStrip.Name = "miniToolStrip";
-      this.miniToolStrip.RightToLeft = System.Windows.Forms.RightToLeft.No;
-      this.miniToolStrip.Size = new System.Drawing.Size(1827, 26);
-      this.miniToolStrip.TabIndex = 0;
-      this.miniToolStrip.TabStop = true;
+      this.shapeToolStrip.AutoSize = false;
+      this.shapeToolStrip.Font = new System.Drawing.Font("Segoe UI", 8F);
+      this.shapeToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.infoToolStripMenuItem });
+      this.shapeToolStrip.Location = new System.Drawing.Point(0, 0);
+      this.shapeToolStrip.Name = "shapeToolStrip";
+      this.shapeToolStrip.RightToLeft = System.Windows.Forms.RightToLeft.No;
+      this.shapeToolStrip.Size = new System.Drawing.Size(1827, 26);
+      this.shapeToolStrip.TabIndex = 0;
+      this.shapeToolStrip.TabStop = true;
       // 
       // infoToolStripMenuItem
       // 
@@ -192,13 +192,13 @@ namespace FakePowerPoint
       // 
       // toolStrip1
       // 
-      this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.drawLineButton, this.drawRectBoutton, this.drawEclipseButton });
+      this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.drawLineButton, this.drawRectangleButton, this.drawEclipseButton });
       this.toolStrip1.Location = new System.Drawing.Point(0, 26);
       this.toolStrip1.Name = "toolStrip1";
       this.toolStrip1.Size = new System.Drawing.Size(1827, 25);
       this.toolStrip1.TabIndex = 4;
       this.toolStrip1.Text = "toolStrip1";
-      this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.DrawLineButtonClicked);
+      this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.HandleDrawLineButtonClicked);
       // 
       // drawLineButton
       // 
@@ -211,13 +211,13 @@ namespace FakePowerPoint
       // 
       // drawRectBoutton
       // 
-      this.drawRectBoutton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.drawRectBoutton.Image = ((System.Drawing.Image)(resources.GetObject("drawRectBoutton.Image")));
-      this.drawRectBoutton.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.drawRectBoutton.Name = "drawRectBoutton";
-      this.drawRectBoutton.Size = new System.Drawing.Size(23, 22);
-      this.drawRectBoutton.Text = "Rect";
-      this.drawRectBoutton.Click += new System.EventHandler(this.DrawRectButtonClicked);
+      this.drawRectangleButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.drawRectangleButton.Image = ((System.Drawing.Image)(resources.GetObject("drawRectBoutton.Image")));
+      this.drawRectangleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.drawRectangleButton.Name = "drawRectangleButton";
+      this.drawRectangleButton.Size = new System.Drawing.Size(23, 22);
+      this.drawRectangleButton.Text = "Rect";
+      this.drawRectangleButton.Click += new System.EventHandler(this.HandleDrawRectangleButtonClick);
       // 
       // drawEclipseButton
       // 
@@ -227,7 +227,7 @@ namespace FakePowerPoint
       this.drawEclipseButton.Name = "drawEclipseButton";
       this.drawEclipseButton.Size = new System.Drawing.Size(23, 22);
       this.drawEclipseButton.Text = "Eclipse";
-      this.drawEclipseButton.Click += new System.EventHandler(this.DrawEclipseButtonClicked);
+      this.drawEclipseButton.Click += new System.EventHandler(this.HandleDrawEclipseButtonClicked);
       // 
       // Form1
       // 
@@ -239,11 +239,11 @@ namespace FakePowerPoint
       this.Controls.Add(this.PaintGroup);
       this.Controls.Add(this.SlidesGroup);
       this.Controls.Add(this.InfoGroup);
-      this.Controls.Add(this.miniToolStrip);
+      this.Controls.Add(this.shapeToolStrip);
       this.Location = new System.Drawing.Point(15, 15);
       this.Name = "Form1";
-      this.miniToolStrip.ResumeLayout(false);
-      this.miniToolStrip.PerformLayout();
+      this.shapeToolStrip.ResumeLayout(false);
+      this.shapeToolStrip.PerformLayout();
       this.InfoGroup.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
       this.SlidesGroup.ResumeLayout(false);
@@ -254,7 +254,7 @@ namespace FakePowerPoint
     }
 
     private System.Windows.Forms.ToolStripButton drawLineButton;
-    private System.Windows.Forms.ToolStripButton drawRectBoutton;
+    private System.Windows.Forms.ToolStripButton drawRectangleButton;
     private System.Windows.Forms.ToolStripButton drawEclipseButton;
 
     private System.Windows.Forms.ToolStrip toolStrip1;
@@ -280,7 +280,7 @@ namespace FakePowerPoint
 
     private System.Windows.Forms.Panel panel1;
 
-    private System.Windows.Forms.MenuStrip miniToolStrip;
+    private System.Windows.Forms.MenuStrip shapeToolStrip;
 
     #endregion
   }

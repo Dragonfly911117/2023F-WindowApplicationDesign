@@ -10,6 +10,7 @@ namespace FakePowerPoint
     {
         // Constant value used for remove string
         private const string REMOVE = "Remove";
+
         // Readonly field to hold the reference of the presentation model
         private readonly PresentationModel _presentationModel;
 
@@ -20,9 +21,9 @@ namespace FakePowerPoint
             InitializeComponent();
             // Set up the software components
             BindShapeSelectToPresentationModel();
-            ConfigurePaintGroupForPainting();
+            BindPaintGroupBox();
             BindEventsToControls();
-            ConfigureDataGridView();
+            BindDataGridViewColumns();
             this.DoubleBuffered = true;
         }
 
@@ -37,11 +38,11 @@ namespace FakePowerPoint
             }
 
             // Bind event to track changes in Selected list of PresentationModel
-            _presentationModel.Selected.ItemUpdated += OnSelectionUpdated;
+            _presentationModel.Selected.ItemUpdated += UpdateSelection;
         }
 
         // Setup the DataGrid with remove button and bind it to the model
-        private void ConfigureDataGridView()
+        private void BindDataGridViewColumns()
         {
             var buttonColumn = new DataGridViewButtonColumn()
             {
@@ -53,7 +54,7 @@ namespace FakePowerPoint
         }
 
         // Prepare the PaintGroup for painting operation
-        private void ConfigurePaintGroupForPainting()
+        private void BindPaintGroupBox()
         {
             _presentationModel.SetPaintGroup(PaintGroup);
             PaintGroup.Paint += PaintBoardOnPaint;
@@ -89,19 +90,19 @@ namespace FakePowerPoint
         }
 
         // Shape button click event handlers
-        private void DrawLineButtonClicked(object sender, EventArgs e)
+        private void HandleDrawLineButtonClicked(object sender, EventArgs e)
         {
             _presentationModel.DrawShapeButtonClicked(ShapeType.Line);
         }
 
         // Shape button click event handlers
-        private void DrawRectButtonClicked(object sender, EventArgs e)
+        private void HandleDrawRectangleButtonClick(object sender, EventArgs e)
         {
             _presentationModel.DrawShapeButtonClicked(ShapeType.Rectangle);
         }
 
         // Shape button click event handlers
-        private void DrawEclipseButtonClicked(object sender, EventArgs e)
+        private void HandleDrawEclipseButtonClicked(object sender, EventArgs e)
         {
             _presentationModel.DrawShapeButtonClicked(ShapeType.Eclipse);
         }
@@ -116,7 +117,8 @@ namespace FakePowerPoint
         private void MouseMovingOnForm(object sender, MouseEventArgs e)
         {
             var control = sender as Control;
-            var pos = new Point(e.X + control.Location.X, e.Y + control.Location.Y); // calculate exact position of the mouse pointer
+            var pos = new Point(e.X + control.Location.X,
+                e.Y + control.Location.Y); // calculate exact position of the mouse pointer
             _presentationModel.MouseMove(e, pos);
         }
 
@@ -127,7 +129,7 @@ namespace FakePowerPoint
         }
 
         // Method invoked when an item has been updated in Selected list
-        private void OnSelectionUpdated(int index, bool newValue)
+        private void UpdateSelection(int index, bool newValue)
         {
             var buttonList = toolStrip1.Items.OfType<ToolStripButton>().ToList(); // get all the buttons
             buttonList.ForEach(x => x.Checked = false);
