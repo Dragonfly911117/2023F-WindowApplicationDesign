@@ -140,5 +140,6 @@ namespace FakePowerPoint
                 buttonList[index].Checked = newValue;
             }
         }
+
     }
 }
