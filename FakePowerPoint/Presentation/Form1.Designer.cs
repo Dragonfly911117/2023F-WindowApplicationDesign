@@ -43,7 +43,6 @@ namespace FakePowerPoint
       this.ShapeSelect = new System.Windows.Forms.ComboBox();
       this.AddShape = new System.Windows.Forms.Button();
       this.SlidesGroup = new System.Windows.Forms.GroupBox();
-      this.button2 = new System.Windows.Forms.Button();
       this.button1 = new System.Windows.Forms.Button();
       this.toolStrip1 = new System.Windows.Forms.ToolStrip();
       this.NormalModeButton = new System.Windows.Forms.ToolStripButton();
@@ -163,7 +162,6 @@ namespace FakePowerPoint
       //
       // SlidesGroup
       //
-      this.SlidesGroup.Controls.Add(this.button2);
       this.SlidesGroup.Controls.Add(this.button1);
       this.SlidesGroup.ForeColor = System.Drawing.Color.White;
       this.SlidesGroup.Location = new System.Drawing.Point(20, 54);
@@ -172,15 +170,6 @@ namespace FakePowerPoint
       this.SlidesGroup.TabIndex = 2;
       this.SlidesGroup.TabStop = false;
       this.SlidesGroup.Text = "Slides";
-      //
-      // button2
-      //
-      this.button2.Location = new System.Drawing.Point(15, 199);
-      this.button2.Name = "button2";
-      this.button2.Size = new System.Drawing.Size(145, 102);
-      this.button2.TabIndex = 1;
-      this.button2.Text = "button2";
-      this.button2.UseVisualStyleBackColor = true;
       //
       // button1
       //
@@ -278,7 +267,6 @@ namespace FakePowerPoint
     private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
 
     private System.Windows.Forms.Button button1;
-    private System.Windows.Forms.Button button2;
 
     private System.Windows.Forms.GroupBox PaintGroup;
 
