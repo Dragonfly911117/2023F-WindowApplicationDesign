@@ -56,7 +56,6 @@ namespace FakePowerPoint
         private void BindPaintGroupBox()
         {
             _presentationModel.SetPaintGroup(PaintGroup);
-            PaintGroup.Paint += PaintBoardOnPaint;
         }
 
         // Set up the presentation model with ShapeSelect object
@@ -69,14 +68,10 @@ namespace FakePowerPoint
         private void AddShapeButtonClick(object sender, EventArgs e)
         {
             _presentationModel.AddShape((ShapeType)ShapeSelect.SelectedItem);
-            PaintGroup.Invalidate();
+            _presentationModel.DrawEverything();
         }
 
         // Event that fires to redraw all shapes on the paint board
-        private void PaintBoardOnPaint(object sender, PaintEventArgs e)
-        {
-            _presentationModel.DrawEverything();
-        }
 
         // Handling removal of shapes from the DataGridView and UI
         private void DeleteShape(object sender, DataGridViewCellEventArgs e)
@@ -84,7 +79,7 @@ namespace FakePowerPoint
             if (e.ColumnIndex == 0) // checking if delete button was clicked/tapped
             {
                 _presentationModel.RemoveShape(e.RowIndex);
-                PaintGroup.Invalidate();
+                _presentationModel.DrawEverything();
             }
         }
         private void HandleNormalModeButtonClicked (object sender, EventArgs e)

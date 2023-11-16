@@ -11,12 +11,16 @@ namespace FakePowerPoint
         public void DrawEverything()
         {
             VerifyPaintGroup();
-
-            foreach (var shape in _model.Shapes)
+            using (var graphics = Graphics.FromImage(_bitmap))
             {
-                shape.Draw(Graphics.FromImage(_bitmap), PEN_WIDTH);
+                graphics.Clear(_paintGroup.BackColor);
+                foreach (var shape in _model.Shapes)
+                {
+                    shape.Draw(graphics, PEN_WIDTH);
+                }
+                _tempShape?.Draw(Graphics.FromImage(_bitmap), PEN_WIDTH);
             }
-            _tempShape?.Draw(Graphics.FromImage(_bitmap), PEN_WIDTH);
+            _paintGroup.Invalidate();
         }
 
         // Sets a paint group.
@@ -65,7 +69,7 @@ namespace FakePowerPoint
             {
                 var endPosition = new List<int> { _cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y };
                 _tempShape = ShapeFactory.CreateShape(_shapeType, _startPoint, endPosition);
-                _paintGroup.Invalidate();
+                DrawEverything();
             }
         }
 
@@ -83,8 +87,7 @@ namespace FakePowerPoint
             ResetShape();
 
             // Invalidate the current paint group to repaint the whole area
-            // _paintGroup.Invalidate();
-            this.DrawEverything();
+            DrawEverything();
 
             this.UpdateSelected();
         }
@@ -111,6 +114,7 @@ namespace FakePowerPoint
         private ShapeType _shapeType;
         private GroupBox _paintGroup;
         private Bitmap _bitmap;
+
 
         // Constants for Pen width and Paint offsets in x and y direction.
         private const int PEN_WIDTH = 5;
