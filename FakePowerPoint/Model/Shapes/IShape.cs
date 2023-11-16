@@ -23,7 +23,7 @@ namespace FakePowerPoint
         Color Color { get; set; } // Color property of a shape
 
         // Draw method to be implemented by concrete shape classes
-        void Draw(PresentationModel drawer);
+        public void Draw(Graphics graphics, int penWidth = 3);
 
         // Method to get string representation of coordinates
         string GetCoordinates();

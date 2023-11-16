@@ -32,7 +32,6 @@ namespace FakePowerPoint
     private void InitializeComponent()
     {
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
       this.PaintGroup = new System.Windows.Forms.GroupBox();
       this.shapeToolStrip = new System.Windows.Forms.MenuStrip();
       this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -173,6 +172,9 @@ namespace FakePowerPoint
       //
       // button1
       //
+      this.button1.BackColor = System.Drawing.Color.Transparent;
+      this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+      this.button1.ForeColor = System.Drawing.Color.Transparent;
       this.button1.Location = new System.Drawing.Point(15, 54);
       this.button1.Name = "button1";
       this.button1.Size = new System.Drawing.Size(145, 102);
@@ -194,7 +196,6 @@ namespace FakePowerPoint
       this.NormalModeButton.Checked = true;
       this.NormalModeButton.CheckState = System.Windows.Forms.CheckState.Checked;
       this.NormalModeButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.NormalModeButton.Image = ((System.Drawing.Image)(resources.GetObject("NormalModeButton.Image")));
       this.NormalModeButton.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.NormalModeButton.Name = "NormalModeButton";
       this.NormalModeButton.Size = new System.Drawing.Size(23, 22);
@@ -204,7 +205,6 @@ namespace FakePowerPoint
       // drawLineButton
       //
       this.drawLineButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.drawLineButton.Image = ((System.Drawing.Image)(resources.GetObject("drawLineButton.Image")));
       this.drawLineButton.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.drawLineButton.Name = "drawLineButton";
       this.drawLineButton.Size = new System.Drawing.Size(23, 22);
@@ -223,7 +223,6 @@ namespace FakePowerPoint
       // drawEclipseButton
       //
       this.drawEclipseButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.drawEclipseButton.Image = ((System.Drawing.Image)(resources.GetObject("drawEclipseButton.Image")));
       this.drawEclipseButton.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.drawEclipseButton.Name = "drawEclipseButton";
       this.drawEclipseButton.Size = new System.Drawing.Size(23, 22);

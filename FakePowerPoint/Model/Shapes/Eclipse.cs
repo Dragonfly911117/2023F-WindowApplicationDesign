@@ -58,9 +58,9 @@ namespace FakePowerPoint
         }
 
         // Draws itself using the presentation model
-        public void Draw(PresentationModel drawer)
+        public void Draw(Graphics graphics, int penWidth)
         {
-            drawer.DrawEclipse(Color, ConvertToRectangle());
+            graphics.DrawEllipse(new Pen(_color, penWidth), ConvertToRectangle());
         }
 
         // Returns coordinates as a formatted string

@@ -53,9 +53,9 @@ namespace FakePowerPoint
         }
 
         // Calls DrawRectangle method of the presentation model to draw the rectangle.
-        public void Draw(PresentationModel drawer)
+        public void Draw(Graphics graphics, int penWidth)
         {
-            drawer.DrawRectangle(Color, ConvertToRectangle());
+            graphics.DrawRectangle(new Pen(_color, penWidth), ConvertToRectangle());
         }
 
         // Returns the string format of coordinates.

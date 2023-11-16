@@ -7,47 +7,25 @@ namespace FakePowerPoint
 {
     public partial class PresentationModel
     {
-        // Draws a rectangle with a specified color and rectangle attributes.
-        public void DrawRectangle(Color color, System.Drawing.Rectangle rectangle) =>
-            DrawShape(color, (g, p) => g.DrawRectangle(p, rectangle));
-
-        // Draws a line with a specified color and coordinates.
-        public void DrawLine(Color color, List<Tuple<int, int>> coordinates) =>
-            DrawShape(color,
-                (g, p) =>
-                {
-                    g.DrawLine(p, coordinates[0].Item1, coordinates[0].Item2, coordinates[1].Item1,
-                        coordinates[1].Item2);
-                });
-
-        // Draws an ellipse with a specified color and rectangle attributes.
-        public void DrawEclipse(Color color, System.Drawing.Rectangle rectangle) =>
-            DrawShape(color, (g, p) => g.DrawEllipse(p, rectangle));
-
-        // Draws a shape with a specified color and draw action.
-        private void DrawShape(Color color, Action<Graphics, Pen> drawAction)
-        {
-            using (var myPen = new Pen(color, PEN_WIDTH))
-            using (var graphics = _paintGroup.CreateGraphics())
-            {
-                drawAction(graphics, myPen);
-            }
-        }
-
         // Iterates through each shape in the model and draws it.
         public void DrawEverything()
         {
             VerifyPaintGroup();
 
             foreach (var shape in _model.Shapes)
-                shape.Draw(this);
-
-            if (_tempShape != null)
-                _tempShape.Draw(this);
+            {
+                shape.Draw(Graphics.FromImage(_bitmap), PEN_WIDTH);
+            }
+            _tempShape?.Draw(Graphics.FromImage(_bitmap), PEN_WIDTH);
         }
 
         // Sets a paint group.
-        public void SetPaintGroup(GroupBox paintGroup) => _paintGroup = paintGroup;
+        public void SetPaintGroup(GroupBox paintGroup)
+        {
+            _paintGroup = paintGroup;
+            _bitmap = new Bitmap(paintGroup.Width, paintGroup.Height);
+            _paintGroup.BackgroundImage = _bitmap;
+        }
 
         /* Manages the button clicked event for the shape:
          * if the shape type is already selected, the shape is reset;
@@ -105,7 +83,8 @@ namespace FakePowerPoint
             ResetShape();
 
             // Invalidate the current paint group to repaint the whole area
-            _paintGroup.Invalidate();
+            // _paintGroup.Invalidate();
+            this.DrawEverything();
 
             this.UpdateSelected();
         }
@@ -131,6 +110,7 @@ namespace FakePowerPoint
         private IShape _tempShape;
         private ShapeType _shapeType;
         private GroupBox _paintGroup;
+        private Bitmap _bitmap;
 
         // Constants for Pen width and Paint offsets in x and y direction.
         private const int PEN_WIDTH = 5;

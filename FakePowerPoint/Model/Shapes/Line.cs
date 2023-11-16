@@ -11,10 +11,13 @@ namespace FakePowerPoint
     {
         // Constant for color property name
         private const string COLOR = "Color";
+
         // Variable to hold the color value of the line
         private Color _color;
+
         // Variable to hold the ShapeType enumeration value
         private ShapeType _shapeType;
+
         // List to hold the coordinates of the line
         private List<Tuple<int, int>> _coordinates;
 
@@ -62,15 +65,17 @@ namespace FakePowerPoint
         }
 
         // Method to draw a line
-        public void Draw(PresentationModel drawer)
+        public void Draw(Graphics graphics, int penWidth)
         {
-            drawer.DrawLine(Color, _coordinates);
+            graphics.DrawLine(new Pen(_color, penWidth), _coordinates[0].Item1, _coordinates[0].Item2,
+                _coordinates[1].Item1, _coordinates[1].Item2);
         }
 
         // Method to get the string representation of the coordinates
         public string GetCoordinates()
         {
-            return $"({_coordinates[0].Item1}, {_coordinates[0].Item2}),\n({_coordinates[1].Item1}, {_coordinates[1].Item2})";
+            return
+                $"({_coordinates[0].Item1}, {_coordinates[0].Item2}),\n({_coordinates[1].Item1}, {_coordinates[1].Item2})";
         }
 
         // Method to call the PropertyChanged event
