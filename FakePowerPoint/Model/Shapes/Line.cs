@@ -54,6 +54,8 @@ namespace FakePowerPoint
             }
         }
 
+        public bool Selected { get; set; }
+
         // Constructor of Line class
         public Line(int x1 = 0, int x2 = 0, int y1 = 0, int y2 = 0)
         {

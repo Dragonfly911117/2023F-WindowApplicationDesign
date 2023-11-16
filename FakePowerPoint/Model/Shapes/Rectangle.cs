@@ -41,6 +41,8 @@ namespace FakePowerPoint
             }
         }
 
+        public bool Selected { get; set; }
+
         /* The Rectangle's constructor.
          * It initializes the rectangle's shape type, coordinates, and color. */
         public Rectangle(int x1 = 0, int x2 = 0, int y1 = 0, int y2 = 0)

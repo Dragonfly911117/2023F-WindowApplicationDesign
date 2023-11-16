@@ -54,9 +54,9 @@ namespace FakePowerPoint
       this.SlidesGroup.SuspendLayout();
       this.toolStrip1.SuspendLayout();
       this.SuspendLayout();
-      //
+      // 
       // PaintGroup
-      //
+      // 
       this.PaintGroup.ForeColor = System.Drawing.Color.White;
       this.PaintGroup.Location = new System.Drawing.Point(217, 54);
       this.PaintGroup.Name = "PaintGroup";
@@ -64,9 +64,9 @@ namespace FakePowerPoint
       this.PaintGroup.TabIndex = 3;
       this.PaintGroup.TabStop = false;
       this.PaintGroup.Text = "Paint";
-      //
+      // 
       // shapeToolStrip
-      //
+      // 
       this.shapeToolStrip.AutoSize = false;
       this.shapeToolStrip.Font = new System.Drawing.Font("Segoe UI", 8F);
       this.shapeToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.infoToolStripMenuItem });
@@ -76,29 +76,29 @@ namespace FakePowerPoint
       this.shapeToolStrip.Size = new System.Drawing.Size(1827, 26);
       this.shapeToolStrip.TabIndex = 0;
       this.shapeToolStrip.TabStop = true;
-      //
+      // 
       // infoToolStripMenuItem
-      //
+      // 
       this.infoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.aboutToolStripMenuItem });
       this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
       this.infoToolStripMenuItem.Size = new System.Drawing.Size(40, 22);
       this.infoToolStripMenuItem.Text = "Info";
-      //
+      // 
       // aboutToolStripMenuItem
-      //
+      // 
       this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
       this.aboutToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
       this.aboutToolStripMenuItem.Text = "About";
-      //
+      // 
       // panel1
-      //
+      // 
       this.panel1.Location = new System.Drawing.Point(0, 0);
       this.panel1.Name = "panel1";
       this.panel1.Size = new System.Drawing.Size(200, 100);
       this.panel1.TabIndex = 0;
-      //
+      // 
       // InfoGroup
-      //
+      // 
       this.InfoGroup.Controls.Add(this.dataGridView1);
       this.InfoGroup.Controls.Add(this.ShapeSelect);
       this.InfoGroup.Controls.Add(this.AddShape);
@@ -109,9 +109,9 @@ namespace FakePowerPoint
       this.InfoGroup.TabIndex = 1;
       this.InfoGroup.TabStop = false;
       this.InfoGroup.Text = "Info";
-      //
+      // 
       // dataGridView1
-      //
+      // 
       this.dataGridView1.AllowUserToAddRows = false;
       this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
       this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
@@ -139,17 +139,17 @@ namespace FakePowerPoint
       this.dataGridView1.Size = new System.Drawing.Size(204, 936);
       this.dataGridView1.TabIndex = 2;
       this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DeleteShape);
-      //
+      // 
       // ShapeSelect
-      //
+      // 
       this.ShapeSelect.FormattingEnabled = true;
       this.ShapeSelect.Location = new System.Drawing.Point(99, 51);
       this.ShapeSelect.Name = "ShapeSelect";
       this.ShapeSelect.Size = new System.Drawing.Size(116, 21);
       this.ShapeSelect.TabIndex = 1;
-      //
+      // 
       // AddShape
-      //
+      // 
       this.AddShape.ForeColor = System.Drawing.Color.Black;
       this.AddShape.Location = new System.Drawing.Point(10, 35);
       this.AddShape.Name = "AddShape";
@@ -158,9 +158,9 @@ namespace FakePowerPoint
       this.AddShape.Text = "Add";
       this.AddShape.UseVisualStyleBackColor = true;
       this.AddShape.Click += new System.EventHandler(this.AddShapeButtonClick);
-      //
+      // 
       // SlidesGroup
-      //
+      // 
       this.SlidesGroup.Controls.Add(this.button1);
       this.SlidesGroup.ForeColor = System.Drawing.Color.White;
       this.SlidesGroup.Location = new System.Drawing.Point(20, 54);
@@ -169,9 +169,9 @@ namespace FakePowerPoint
       this.SlidesGroup.TabIndex = 2;
       this.SlidesGroup.TabStop = false;
       this.SlidesGroup.Text = "Slides";
-      //
+      // 
       // button1
-      //
+      // 
       this.button1.BackColor = System.Drawing.Color.Transparent;
       this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
       this.button1.ForeColor = System.Drawing.Color.Transparent;
@@ -181,18 +181,18 @@ namespace FakePowerPoint
       this.button1.TabIndex = 0;
       this.button1.Text = "\r\n";
       this.button1.UseVisualStyleBackColor = true;
-      //
+      // 
       // toolStrip1
-      //
+      // 
       this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.NormalModeButton, this.drawLineButton, this.drawRectangleButton, this.drawEclipseButton });
       this.toolStrip1.Location = new System.Drawing.Point(0, 26);
       this.toolStrip1.Name = "toolStrip1";
       this.toolStrip1.Size = new System.Drawing.Size(1827, 25);
       this.toolStrip1.TabIndex = 4;
       this.toolStrip1.Text = "toolStrip1";
-      //
+      // 
       // NormalModeButton
-      //
+      // 
       this.NormalModeButton.Checked = true;
       this.NormalModeButton.CheckState = System.Windows.Forms.CheckState.Checked;
       this.NormalModeButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -201,36 +201,36 @@ namespace FakePowerPoint
       this.NormalModeButton.Size = new System.Drawing.Size(23, 22);
       this.NormalModeButton.Text = "Normal Mode";
       this.NormalModeButton.Click += new System.EventHandler(this.HandleNormalModeButtonClicked);
-      //
+      // 
       // drawLineButton
-      //
+      // 
       this.drawLineButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
       this.drawLineButton.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.drawLineButton.Name = "drawLineButton";
       this.drawLineButton.Size = new System.Drawing.Size(23, 22);
       this.drawLineButton.Text = "Line";
       this.drawLineButton.Click += new System.EventHandler(this.HandleDrawLineButtonClicked);
-      //
+      // 
       // drawRectangleButton
-      //
+      // 
       this.drawRectangleButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
       this.drawRectangleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.drawRectangleButton.Name = "drawRectangleButton";
       this.drawRectangleButton.Size = new System.Drawing.Size(23, 22);
       this.drawRectangleButton.Text = "Rect";
       this.drawRectangleButton.Click += new System.EventHandler(this.HandleDrawRectangleButtonClick);
-      //
+      // 
       // drawEclipseButton
-      //
+      // 
       this.drawEclipseButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
       this.drawEclipseButton.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.drawEclipseButton.Name = "drawEclipseButton";
       this.drawEclipseButton.Size = new System.Drawing.Size(23, 22);
       this.drawEclipseButton.Text = "Eclipse";
       this.drawEclipseButton.Click += new System.EventHandler(this.HandleDrawEclipseButtonClicked);
-      //
+      // 
       // Form1
-      //
+      // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.Black;

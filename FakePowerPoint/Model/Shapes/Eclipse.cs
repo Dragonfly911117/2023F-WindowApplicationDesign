@@ -49,6 +49,8 @@ namespace FakePowerPoint
             }
         }
 
+        public bool Selected { get; set; }
+
         // Constructor for eclipse with optional parameters
         public Eclipse(int x1 = 0, int x2 = 0, int y1 = 0, int y2 = 0)
         {

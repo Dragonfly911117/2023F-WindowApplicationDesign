@@ -22,6 +22,8 @@ namespace FakePowerPoint
 
         Color Color { get; set; } // Color property of a shape
 
+        bool Selected { get; set; } // Property to get/set the selection state of a shape
+
         // Draw method to be implemented by concrete shape classes
         public void Draw(Graphics graphics, int penWidth = 3);
 
