@@ -50,11 +50,9 @@ namespace FakePowerPoint
 
             // ensures _shapeType has been defined before using it
             var index = (int)_shapeType;
-            // exits method if index is 0
-            if (index == 0) return;
 
             // Select the item at the specific index
-            ShowSelectedOrUpdate(index - 1, true);
+            ShowSelectedOrUpdate(index, true);
         }
 
         // Updates the selection state of the item at the specified index

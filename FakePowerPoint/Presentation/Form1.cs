@@ -24,7 +24,6 @@ namespace FakePowerPoint
             BindPaintGroupBox();
             BindEventsToControls();
             BindDataGridViewColumns();
-            this.DoubleBuffered = true;
         }
 
         // Method to bind mouse events to all controls on the form
@@ -88,7 +87,10 @@ namespace FakePowerPoint
                 PaintGroup.Invalidate();
             }
         }
-
+        private void HandleNormalModeButtonClicked (object sender, EventArgs e)
+        {
+            _presentationModel.DrawShapeButtonClicked(ShapeType.Undefined);
+        }
         // Shape button click event handlers
         private void HandleDrawLineButtonClicked(object sender, EventArgs e)
         {

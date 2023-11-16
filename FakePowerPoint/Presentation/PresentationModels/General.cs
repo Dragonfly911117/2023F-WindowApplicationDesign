@@ -22,6 +22,8 @@ namespace FakePowerPoint
         private void InitializeSelectionShape()
         {
             var enumLength = Enum.GetValues(typeof(ShapeType)).Length;
+            // Default mode
+            Selected.Add(true);
             // Adds a false to the Selected List for every shape type except for the first one
             for (var i = 1; i < enumLength; i++)
             {

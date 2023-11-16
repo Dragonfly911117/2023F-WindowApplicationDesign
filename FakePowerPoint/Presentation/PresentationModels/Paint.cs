@@ -13,10 +13,12 @@ namespace FakePowerPoint
 
         // Draws a line with a specified color and coordinates.
         public void DrawLine(Color color, List<Tuple<int, int>> coordinates) =>
-            DrawShape(color, (g, p) =>
-            {
-                g.DrawLine(p, coordinates[0].Item1, coordinates[0].Item2, coordinates[1].Item1, coordinates[1].Item2);
-            });
+            DrawShape(color,
+                (g, p) =>
+                {
+                    g.DrawLine(p, coordinates[0].Item1, coordinates[0].Item2, coordinates[1].Item1,
+                        coordinates[1].Item2);
+                });
 
         // Draws an ellipse with a specified color and rectangle attributes.
         public void DrawEclipse(Color color, System.Drawing.Rectangle rectangle) =>
@@ -83,7 +85,7 @@ namespace FakePowerPoint
 
             if (_startPoint != null)
             {
-                var endPosition = new List<int> {_cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y};
+                var endPosition = new List<int> { _cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y };
                 _tempShape = ShapeFactory.CreateShape(_shapeType, _startPoint, endPosition);
                 _paintGroup.Invalidate();
             }
@@ -97,7 +99,7 @@ namespace FakePowerPoint
                 return;
             }
 
-            var endPosition = new List<int> {_cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y};
+            var endPosition = new List<int> { _cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y };
             var shape = ShapeFactory.CreateShape(_shapeType, _startPoint, endPosition);
             _model.AddShape(shape);
             ResetShape();
@@ -112,6 +114,7 @@ namespace FakePowerPoint
         private void ResetShape()
         {
             _shapeType = ShapeType.Undefined;
+            UpdateSelected();
             _startPoint = null;
             _tempShape = null;
         }
@@ -132,7 +135,9 @@ namespace FakePowerPoint
         // Constants for Pen width and Paint offsets in x and y direction.
         private const int PEN_WIDTH = 5;
         private const int PAINT_OFFSET_X = 217;
+
         private const int PAINT_OFFSET_Y = 54;
+
         // Paint region size and position.
         private readonly Rectangle _paintRegion = new Rectangle(PAINT_OFFSET_X, PAINT_OFFSET_Y, 1358, 1052);
     }
