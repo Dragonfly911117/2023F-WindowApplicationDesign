@@ -56,6 +56,7 @@ namespace FakePowerPoint
         private void BindPaintGroupBox()
         {
             _presentationModel.SetPaintGroup(PaintGroup);
+            _presentationModel.BindSlideBackground(button1);
         }
 
         // Set up the presentation model with ShapeSelect object
@@ -82,10 +83,12 @@ namespace FakePowerPoint
                 _presentationModel.DrawEverything();
             }
         }
-        private void HandleNormalModeButtonClicked (object sender, EventArgs e)
+
+        private void HandleNormalModeButtonClicked(object sender, EventArgs e)
         {
             _presentationModel.DrawShapeButtonClicked(ShapeType.Undefined);
         }
+
         // Shape button click event handlers
         private void HandleDrawLineButtonClicked(object sender, EventArgs e)
         {
@@ -135,6 +138,5 @@ namespace FakePowerPoint
                 buttonList[index].Checked = newValue;
             }
         }
-
     }
 }

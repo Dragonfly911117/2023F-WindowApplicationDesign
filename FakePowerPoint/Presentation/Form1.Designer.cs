@@ -179,7 +179,7 @@ namespace FakePowerPoint
       this.button1.Name = "button1";
       this.button1.Size = new System.Drawing.Size(145, 102);
       this.button1.TabIndex = 0;
-      this.button1.Text = "button1";
+      this.button1.Text = "\r\n";
       this.button1.UseVisualStyleBackColor = true;
       //
       // toolStrip1

@@ -83,5 +83,11 @@ namespace FakePowerPoint
                 }
             }
         }
+        public void BindSlideBackground(Button button1)
+        {
+            _button = button1;
+            _button.BackgroundImage = _bitmap;
+            _button.Invalidate();
+        }
     }
 }
