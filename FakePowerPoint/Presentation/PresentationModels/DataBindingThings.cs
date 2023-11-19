@@ -83,6 +83,8 @@ namespace FakePowerPoint
                 }
             }
         }
+
+        // Method to update the selection state of toolbar buttons
         public void BindSlideBackground(Button button1)
         {
             _button = button1;
