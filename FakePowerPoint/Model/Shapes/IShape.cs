@@ -79,6 +79,19 @@ namespace FakePowerPoint
             };
         }
 
+        //Create a new shape of given type with specified coordinates
+        public static IShape CreateShape(ShapeType shapeType, Tuple<Point, Point> coordinates)
+        {
+// Select the type of shape to create based on the shapeType argument
+            return shapeType switch
+            {
+                ShapeType.Rectangle => new Rectangle(coordinates.Item1.X, coordinates.Item2.X, coordinates.Item1.Y, coordinates.Item2.Y),
+                ShapeType.Line => new Line(coordinates.Item1.X, coordinates.Item2.X, coordinates.Item1.Y, coordinates.Item2.Y),
+                ShapeType.Eclipse => new Eclipse(coordinates.Item1.X, coordinates.Item2.X, coordinates.Item1.Y, coordinates.Item2.Y),
+                _ => throw new ArgumentException("Invalid shape type")
+            };
+        }
+
         // Creates a new shape of a given type using start and end coordinate lists
         public static IShape CreateShape(ShapeType shapeType, List<int> startCoordinates, List<int> endCoordinates)
         {

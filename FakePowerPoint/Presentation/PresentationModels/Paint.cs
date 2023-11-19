@@ -67,23 +67,29 @@ namespace FakePowerPoint
                 if (_selectedIndex != -1)
                 {
                     if (_model.Shapes[_selectedIndex]
-                        .IsPointOnShape(Cursor.Position - new Size(PAINT_OFFSET_X, PAINT_OFFSET_Y)))
+                        .IsPointOnShape(new Point(_cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y)))
                     {
                         _dragging = true;
                         _startPoint = new List<int> { _cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y };
                     }
-                }
-
-                bool flag = true;
-                for (int i = 0; i < _model.Shapes.Count; i++)
-                {
-                    _model.Shapes[i].Selected = false;
-                    if (_model.Shapes[i].IsPointOnShape(Cursor.Position - new Size(PAINT_OFFSET_X, PAINT_OFFSET_Y)) &&
-                        flag)
+                    else
                     {
-                        _selectedIndex = i;
-                        _model.Shapes[_selectedIndex].Selected = true;
-                        flag = false;
+                        ResetShape();
+                    }
+                }
+                else
+                {
+                    bool flag = true;
+                    for (int i = 0; i < _model.Shapes.Count; i++)
+                    {
+                        _model.Shapes[i].Selected = false;
+                        if (_model.Shapes[i].IsPointOnShape(new Point(_cursorPos.X - PAINT_OFFSET_X,
+                                _cursorPos.Y - PAINT_OFFSET_Y)) && flag)
+                        {
+                            _selectedIndex = i;
+                            _model.Shapes[_selectedIndex].Selected = true;
+                            flag = false;
+                        }
                     }
                 }
 
@@ -111,13 +117,11 @@ namespace FakePowerPoint
                 {
                     var delta = new Point(_cursorPos.X - PAINT_OFFSET_X - _startPoint[0],
                         _cursorPos.Y - PAINT_OFFSET_Y - _startPoint[1]);
-                    List<int> tempCoordinate = new List<int>();
-                    foreach (var coordinate in _model.Shapes[_selectedIndex].Coordinates)
-                    {
-                        tempCoordinate.Add(coordinate.X + delta.X);
-                        tempCoordinate.Add(coordinate.Y + delta.Y);
-                    }
-
+                    var tempCoordinate = new Tuple<Point, Point>(
+                        new Point(_model.Shapes[_selectedIndex].Coordinates[0].X + delta.X,
+                            _model.Shapes[_selectedIndex].Coordinates[0].Y + delta.Y),
+                        new Point(_model.Shapes[_selectedIndex].Coordinates[1].X + delta.X,
+                            _model.Shapes[_selectedIndex].Coordinates[1].Y + delta.Y));
                     _tempShape = ShapeFactory.CreateShape(_model.Shapes[_selectedIndex].ShapeType, tempCoordinate);
                     DrawEverything();
                 }
@@ -144,18 +148,16 @@ namespace FakePowerPoint
             {
                 if (_dragging)
                 {
-                    _model.RemoveShape(_selectedIndex);
                     _model.AddShape(_tempShape);
-                    _tempShape = null;
-                    _dragging = false;
-                    _selectedIndex = -1;
+                    RemoveShape(_selectedIndex);
+                    ResetShape();
                 }
             }
 
             // Invalidate the current paint group to repaint the whole area
             DrawEverything();
 
-            this.UpdateSelected();
+            UpdateSelected();
         }
 
         // Resets the shape type, start point, and temporary shape.
@@ -166,6 +168,12 @@ namespace FakePowerPoint
             UpdateSelected();
             _startPoint = null;
             _tempShape = null;
+            _dragging = false;
+            if (_selectedIndex != -1)
+            {
+                _model.Shapes[_selectedIndex].Selected = false;
+                _selectedIndex = -1;
+            }
         }
 
         // Verifies that a paint group is set; if it's not, an exception is thrown.
@@ -209,7 +217,7 @@ namespace FakePowerPoint
         {
             if (_selectedIndex != -1)
             {
-                _model.RemoveShape(_selectedIndex);
+                RemoveShape(_selectedIndex);
                 _selectedIndex = -1;
                 DrawEverything();
             }

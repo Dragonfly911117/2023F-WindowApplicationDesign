@@ -90,31 +90,30 @@ namespace FakePowerPoint
             return $"({Coordinates[0].X}, {Coordinates[0].Y}),\n({Coordinates[1].X}, {Coordinates[1].Y})";
         }
 
-        public bool IsPointOnShape(Point point)
+        private double DistanceFromPoint(Point point)
         {
             var x1 = Coordinates[0].X;
             var y1 = Coordinates[0].Y;
             var x2 = Coordinates[1].X;
             var y2 = Coordinates[1].Y;
 
-            var xMin = Math.Min(x1, x2);
-            var xMax = Math.Max(x1, x2);
-            var yMin = Math.Min(y1, y2);
-            var yMax = Math.Max(y1, y2);
 
-            if (xMin - SELECT_TOLERANCE <= point.X && point.X <= xMax + SELECT_TOLERANCE &&
-                yMin - SELECT_TOLERANCE <= point.Y && point.Y <= yMax + SELECT_TOLERANCE)
+            return Math.Abs((x2-x1)*(y1-point.Y)-(x1-point.X)*(y2-y1))/Math.Sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1));
+
+        }
+
+        public bool IsPointOnShape(Point point)
+        {
+            if (DistanceFromPoint(point) <= SELECT_TOLERANCE)
             {
                 return true;
             }
-
             return false;
         }
 
         private const uint SELECT_TOLERANCE = 5;
 
         public List<Handle> Handles { get; set; }
-        public int _width { get; }
 
         // Method to call the PropertyChanged event
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
