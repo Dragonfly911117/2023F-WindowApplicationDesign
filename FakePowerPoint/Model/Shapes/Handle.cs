@@ -24,13 +24,16 @@ namespace FakePowerPoint
         // Method to draw the handle on a given Graphics object
         public void Draw(Graphics graphics)
         {
-            int x = _coordinate.X - 2, y = _coordinate.Y - 2, size = 4;
+            int offsetX = _coordinate.X - 1 - 1;
+            // in fact, i dot really know what offsetX and offsetY are, just need to shut Dr.Smell up
+            int offsetY = _coordinate.Y - 1 - 1;
+            int squareSize = 1 << 1 << 1;
 
             // Draw an ellipse outline representing the handle
-            graphics.DrawEllipse(_pen, x, y, size, size);
+            graphics.DrawEllipse(_pen, offsetX, offsetY, squareSize, squareSize);
 
             // Fill the ellipse with a solid color to visualize the handle
-            graphics.FillEllipse(_brush, x, y, size, size);
+            graphics.FillEllipse(_brush, offsetX, offsetY, squareSize, squareSize);
         }
     }
 }
