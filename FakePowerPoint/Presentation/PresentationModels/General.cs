@@ -73,6 +73,7 @@ namespace FakePowerPoint
         private bool IsInsideRect(Point pos, int x1, int x2, int y1, int y2) =>
             pos.X >= x1 && pos.X <= x2 && pos.Y >= y1 && pos.Y <= y2;
 
+        // Handle the mouse down event on the panel
         public void KeyDown(Keys eKeyCode)
         {
             if (eKeyCode == Keys.Delete)
