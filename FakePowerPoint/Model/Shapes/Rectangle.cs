@@ -42,7 +42,15 @@ namespace FakePowerPoint
             }
         }
 
-        public bool Selected { get; set; } = true; // for test purpose TODO: remove the default val
+        public bool Selected { get; set; }
+
+
+        private static void Swap(ref int x, ref int y)
+        {
+            int temp = x;
+            x = y;
+            y = temp;
+        }
 
         /* The Rectangle's constructor.
          * It initializes the rectangle's shape type, coordinates, and color. */
@@ -50,6 +58,8 @@ namespace FakePowerPoint
         {
             _color = Color.FromArgb(255, 132, 120, 222);
             _shapeType = ShapeType.Rectangle;
+            if (x1 > x2) Swap(ref x1, ref x2);
+            if (y1 > y2) Swap(ref y1, ref y2);
             _coordinates = new List<Point> { new Point(x1, y1), new Point(x2, y2) };
             Handles = new List<Handle>
             {
@@ -67,6 +77,7 @@ namespace FakePowerPoint
         // Calls DrawRectangle method of the presentation model to draw the rectangle.
         public void Draw(Graphics graphics, int penWidth)
         {
+            _width = penWidth;
             graphics.DrawRectangle(new Pen(_color, penWidth), ConvertToRectangle());
             if (Selected)
             {
@@ -88,7 +99,18 @@ namespace FakePowerPoint
             return $"({_coordinates[0].X}, {_coordinates[0].Y}),\n({_coordinates[1].X}, {_coordinates[1].Y})";
         }
 
+
+        public bool IsPointOnShape(Point point)
+        {
+            var rectangle = ConvertToRectangle();
+            var toleranceRectangle = new System.Drawing.Rectangle(rectangle.X - (int)SELECT_TOLERANCE,
+                rectangle.Y - (int)SELECT_TOLERANCE, rectangle.Width + (int)SELECT_TOLERANCE * 2,
+                rectangle.Height + (int)SELECT_TOLERANCE * 2);
+            return toleranceRectangle.Contains(point);
+        }
+
         public List<Handle> Handles { get; set; }
+        public int _width { get; private set; }
 
         /* Converts the coordinates to a System.Drawing.Rectangle object.
          * It determines the top-left point and the bottom-right point to calculate the rectangle. */
@@ -107,5 +129,7 @@ namespace FakePowerPoint
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        private const uint SELECT_TOLERANCE = 5;
     }
 }

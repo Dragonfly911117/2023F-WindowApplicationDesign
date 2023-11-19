@@ -46,7 +46,7 @@ namespace FakePowerPoint
         {
             // Update the cursor position
             _cursorPos = pos;
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
             // Check if the cursor is inside the area where drawings can be made
             if (IsCursorInsidePaintGroup())
             {

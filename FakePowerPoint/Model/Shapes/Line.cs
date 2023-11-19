@@ -64,31 +64,64 @@ namespace FakePowerPoint
             _coordinates = new List<Point>();
             _coordinates.Add(new Point(x1, y1));
             _coordinates.Add(new Point(x2, y2));
+            Handles = new List<Handle>
+            {
+                new Handle(new Point(x1, y1)),
+                new Handle(new Point((x1 + x2) / 2, (y1 + y2) / 2)),
+                new Handle(new Point(x2, y2))
+            };
         }
 
         // Method to draw a line
         public void Draw(Graphics graphics, int penWidth)
         {
-            graphics.DrawLine(new Pen(_color, penWidth), _coordinates[0].X, _coordinates[0].Y,
-                _coordinates[1].X, _coordinates[1].Y);
+            graphics.DrawLine(new Pen(_color, penWidth), _coordinates[0].X, _coordinates[0].Y, _coordinates[1].X,
+                _coordinates[1].Y);
+            if (Selected)
+            {
+                DrawHandle(graphics);
+            }
         }
 
         public void DrawHandle(Graphics graphics)
         {
             foreach (var handle in Handles)
             {
-                graphics.DrawEllipse(new Pen(Color.White, 1), handle.Coordinate.X, handle.Coordinate.Y, 5, 5);
+                handle.Draw(graphics);
             }
         }
 
         // Method to get the string representation of the coordinates
         public string GetCoordinates()
         {
-            return
-                $"({_coordinates[0].X}, {_coordinates[0].Y}),\n({_coordinates[1].X}, {_coordinates[1].Y})";
+            return $"({_coordinates[0].X}, {_coordinates[0].Y}),\n({_coordinates[1].X}, {_coordinates[1].Y})";
         }
 
-        public List<Handle> Handles { get; set;}
+        public bool IsPointOnShape(Point point)
+        {
+            var x1 = _coordinates[0].X;
+            var y1 = _coordinates[0].Y;
+            var x2 = _coordinates[1].X;
+            var y2 = _coordinates[1].Y;
+
+            var xMin = Math.Min(x1, x2);
+            var xMax = Math.Max(x1, x2);
+            var yMin = Math.Min(y1, y2);
+            var yMax = Math.Max(y1, y2);
+
+            if (xMin - SELECT_TOLERANCE <= point.X && point.X <= xMax + SELECT_TOLERANCE &&
+                yMin - SELECT_TOLERANCE <= point.Y && point.Y <= yMax + SELECT_TOLERANCE)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private const uint SELECT_TOLERANCE = 5;
+
+        public List<Handle> Handles { get; set; }
+        public int _width { get; }
 
         // Method to call the PropertyChanged event
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

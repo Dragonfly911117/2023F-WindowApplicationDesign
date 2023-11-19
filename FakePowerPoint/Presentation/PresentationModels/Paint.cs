@@ -18,8 +18,10 @@ namespace FakePowerPoint
                 {
                     shape.Draw(graphics, PEN_WIDTH);
                 }
+
                 _tempShape?.Draw(Graphics.FromImage(_bitmap), PEN_WIDTH);
             }
+
             _paintGroup.Invalidate();
             _button.Invalidate();
         }
@@ -60,6 +62,21 @@ namespace FakePowerPoint
                 _startPoint = new List<int> { _cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y };
                 this.Cursor = Cursors.Cross;
             }
+            else
+            {
+                bool flag = true;
+                foreach (var shape in _model.Shapes)
+                {
+                    shape.Selected = false;
+                    if (shape.IsPointOnShape(Cursor.Position - new Size(PAINT_OFFSET_X, PAINT_OFFSET_Y)) && flag)
+                    {
+                        shape.Selected = true;
+                        flag = false;
+                    }
+                }
+
+                DrawEverything();
+            }
         }
 
         // Handles the mouse movement event on the panel.
@@ -68,14 +85,16 @@ namespace FakePowerPoint
         {
             if (_shapeType != ShapeType.Undefined)
             {
-                this.Cursor = Cursors.Cross;
+                Cursor = Cursors.Cross;
+                if (_startPoint != null)
+                {
+                    var endPosition = new List<int> { _cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y };
+                    _tempShape = ShapeFactory.CreateShape(_shapeType, _startPoint, endPosition);
+                    DrawEverything();
+                }
             }
-
-            if (_startPoint != null)
+            else
             {
-                var endPosition = new List<int> { _cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y };
-                _tempShape = ShapeFactory.CreateShape(_shapeType, _startPoint, endPosition);
-                DrawEverything();
             }
         }
 

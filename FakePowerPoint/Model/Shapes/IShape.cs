@@ -33,7 +33,10 @@ namespace FakePowerPoint
         // Method to get string representation of coordinates
         string GetCoordinates();
 
+        bool IsPointOnShape(Point point); // Method to check if a point is inside a shape
+
         List<Handle> Handles { get; set;}
+
     }
 
     // Abstract factory class to create the shapes
