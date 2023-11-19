@@ -10,11 +10,11 @@ namespace FakePowerPoint
         private const int CANVAS_WIDTH = 1358;
         private const int CANVAS_HEIGHT = 1052;
 
-        private readonly IRandomNumberGenerator _randomNumberGenerator;
+        private static readonly Random _random = new Random();
 
-        public Model(IRandomNumberGenerator randomNumberGenerator)
+        public int GenerateRandomNumber(int min, int max)
         {
-            this._randomNumberGenerator = randomNumberGenerator;
+            return _random.Next(min, max);
         }
 
 
@@ -26,10 +26,10 @@ namespace FakePowerPoint
             {
                 coordinates = new List<int>
                 {
-                    _randomNumberGenerator.GenerateRandomNumber(0, CANVAS_WIDTH),
-                    _randomNumberGenerator.GenerateRandomNumber(0, CANVAS_HEIGHT),
-                    _randomNumberGenerator.GenerateRandomNumber(0, CANVAS_WIDTH),
-                    _randomNumberGenerator.GenerateRandomNumber(0, CANVAS_HEIGHT)
+                    GenerateRandomNumber(0, CANVAS_WIDTH),
+                    GenerateRandomNumber(0, CANVAS_HEIGHT),
+                    GenerateRandomNumber(0, CANVAS_WIDTH),
+                    GenerateRandomNumber(0, CANVAS_HEIGHT)
                 };
             }
 

@@ -81,19 +81,4 @@ namespace FakePowerPoint
             return new Eclipse(x1, x2, y1, y2);
         }
     }
-
-    public interface IRandomNumberGenerator
-    {
-        int GenerateRandomNumber(int min, int max);
-    }
-
-    public class RandomNumberGenerator : IRandomNumberGenerator
-    {
-        private static readonly Random _random = new Random();
-
-        public int GenerateRandomNumber(int min, int max)
-        {
-            return _random.Next(min, max);
-        }
-    }
 }

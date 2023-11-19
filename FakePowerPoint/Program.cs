@@ -17,7 +17,7 @@ namespace FakePowerPoint
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1(new PresentationModel(new Model(new RandomNumberGenerator()))));
+            Application.Run(new Form1(new PresentationModel(new Model())));
         }
     }
 }
