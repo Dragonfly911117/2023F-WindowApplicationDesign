@@ -76,6 +76,7 @@ namespace FakePowerPoint
             }
         }
 
+        // Method to draw the handles
         public void DrawHandle(Graphics graphics)
         {
             foreach (var handle in Handles)
@@ -90,6 +91,7 @@ namespace FakePowerPoint
             return $"({Coordinates[0].X}, {Coordinates[0].Y}),\n({Coordinates[1].X}, {Coordinates[1].Y})";
         }
 
+        // Method to get the distance from a point to the line
         private double DistanceFromPoint(Point point)
         {
             var x1 = Coordinates[0].X;
@@ -102,6 +104,7 @@ namespace FakePowerPoint
 
         }
 
+        // Method to check if a point is on the line
         public bool IsPointOnShape(Point point)
         {
             if (DistanceFromPoint(point) <= SELECT_TOLERANCE)

@@ -35,7 +35,7 @@ namespace FakePowerPoint
         public void BindShapeSelect(ComboBox shapeSelect)
         {
             var temp = ((ShapeType[])Enum.GetValues(typeof(ShapeType))).ToList();
-            temp.Remove(ShapeType.Undefined); // remove the ability to select UNDEFINED shape
+            temp.Remove(ShapeType.Selection); // remove the ability to select UNDEFINED shape
             shapeSelect.DataSource = temp;
         }
     }

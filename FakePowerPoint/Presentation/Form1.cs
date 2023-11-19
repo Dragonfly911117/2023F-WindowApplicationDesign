@@ -122,7 +122,7 @@ namespace FakePowerPoint
         // Button click events for shape drawing
         private void HandleNormalModeButtonClicked(object sender, EventArgs e)
         {
-            _presentationModel.DrawShapeButtonClicked(ShapeType.Undefined);
+            _presentationModel.DrawShapeButtonClicked(ShapeType.Selection);
         }
 
         // Button click events for shape drawing

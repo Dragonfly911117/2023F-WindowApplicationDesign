@@ -106,7 +106,7 @@ namespace FakePowerPoint
         // Handles the mouse down event on the panel
         private void MouseDownOnPanel()
         {
-            if (_shapeType != ShapeType.Undefined)
+            if (_shapeType != ShapeType.Selection)
             {
                 StartDrawingShape();
             }
@@ -128,7 +128,7 @@ namespace FakePowerPoint
         // Handles mouse movement on the panel
         private void MouseMovingOnPanel()
         {
-            if (_shapeType != ShapeType.Undefined)
+            if (_shapeType != ShapeType.Selection)
             {
                 HandlePotentialShapeDrawing();
             }
@@ -143,7 +143,7 @@ namespace FakePowerPoint
         {
             if (_startPoint == null) return;
 
-            if (_shapeType != ShapeType.Undefined)
+            if (_shapeType != ShapeType.Selection)
             {
                 HandleShapeCreation();
             }
@@ -343,7 +343,7 @@ namespace FakePowerPoint
         // Resets shape-related variables
         private void ResetShape()
         {
-            _shapeType = ShapeType.Undefined;
+            _shapeType = ShapeType.Selection;
             UpdateSelected();
             _startPoint = null;
             _tempShape = null;

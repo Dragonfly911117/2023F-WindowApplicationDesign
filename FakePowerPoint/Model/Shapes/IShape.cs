@@ -8,7 +8,7 @@ namespace FakePowerPoint
     // Enum to represent different types of shapes
     public enum ShapeType
     {
-        Undefined,
+        Selection,
         Line,
         Rectangle,
         Eclipse
@@ -35,7 +35,8 @@ namespace FakePowerPoint
         // Method to get string representation of coordinates
         string GetCoordinates();
 
-        bool IsPointOnShape(Point point); // Method to check if a point is inside a shape
+        // Method to check if a point is inside a shape
+        bool IsPointOnShape(Point point);
 
         List<Handle> Handles { get; set; }
     }
