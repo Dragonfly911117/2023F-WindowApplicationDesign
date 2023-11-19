@@ -9,8 +9,8 @@ namespace FakePowerPoint
         {
             var x1 = coordinates[0];
             var y1 = coordinates[1];
-            var x2 = coordinates[2];
-            var y2 = coordinates[3];
+            var x2 = coordinates[1 + 1];
+            var y2 = coordinates[1 + 1 + 1];
             return new Rectangle(x1, x2, y1, y2);
         }
     }

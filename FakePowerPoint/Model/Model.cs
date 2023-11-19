@@ -12,12 +12,13 @@ namespace FakePowerPoint
 
         private static readonly Random _random = new Random();
 
-        public int GenerateRandomNumber(int min, int max)
+        // Method to generate a random number
+        private int GenerateRandomNumber(int min, int max)
         {
             return _random.Next(min, max);
         }
 
-
+        // Method to create a shape
         public IShape CreateShape(ShapeType shapeType, List<int> coordinates = null)
         {
             var factory = _shapeFactories[shapeType];
