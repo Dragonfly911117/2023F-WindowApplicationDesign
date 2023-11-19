@@ -53,6 +53,10 @@
         <Compile Include="Model\Shapes\IShape.cs"/>
         <Compile Include="Model\Shapes\Line.cs"/>
         <Compile Include="Model\Shapes\Rectangle.cs"/>
+        <Compile Include="Model\Shapes\ShapeFactories\EclipseFactory.cs" />
+        <Compile Include="Model\Shapes\ShapeFactories\IShapeFactory.cs" />
+        <Compile Include="Model\Shapes\ShapeFactories\LineFactory.cs" />
+        <Compile Include="Model\Shapes\ShapeFactories\RectangleFactory.cs" />
         <Compile Include="Model\Slide\Slide.cs"/>
         <Compile Include="Presentation\Form1.cs">
             <SubType>Form</SubType>

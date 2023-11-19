@@ -41,44 +41,5 @@ namespace FakePowerPoint
     }
 
     // Abstract factory class to create the shapes
-    public abstract class ShapeFactory
-    {
-        public abstract IShape CreateShape(List<int> coordinates);
-    }
 
-    public class RectangleFactory : ShapeFactory
-    {
-        public override IShape CreateShape(List<int> coordinates)
-        {
-            var x1 = coordinates[0];
-            var y1 = coordinates[1];
-            var x2 = coordinates[2];
-            var y2 = coordinates[3];
-            return new Rectangle(x1, x2, y1, y2);
-        }
-    }
-
-    public class LineFactory : ShapeFactory
-    {
-        public override IShape CreateShape(List<int> coordinates)
-        {
-            var x1 = coordinates[0];
-            var y1 = coordinates[1];
-            var x2 = coordinates[2];
-            var y2 = coordinates[3];
-            return new Line(x1, x2, y1, y2);
-        }
-    }
-
-    public class EclipseFactory : ShapeFactory
-    {
-        public override IShape CreateShape(List<int> coordinates)
-        {
-            var x1 = coordinates[0];
-            var y1 = coordinates[1];
-            var x2 = coordinates[2];
-            var y2 = coordinates[3];
-            return new Eclipse(x1, x2, y1, y2);
-        }
-    }
 }
