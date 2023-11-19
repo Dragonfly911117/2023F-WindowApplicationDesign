@@ -1,217 +1,154 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace FakePowerPoint
 {
     public partial class PresentationModel
     {
-        // Iterates through each shape in the model and draws it.
+        private List<int> _startPoint;
+        private IShape _tempShape;
+        private ShapeType _shapeType;
+        private GroupBox _paintGroup;
+        private Bitmap _bitmap;
+        private Button _button;
+        private int _selectedIndex = -1;
+        private bool _dragging = false;
+
+        private readonly Rectangle _paintRegion =
+            new Rectangle(PAINT_OFFSET_X, PAINT_OFFSET_Y, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+        private const int PEN_WIDTH = 5;
+        private const int PAINT_OFFSET_X = 217;
+        private const int PAINT_OFFSET_Y = 54;
+        private const int CANVAS_WIDTH = 1358;
+        private const int CANVAS_HEIGHT = 1052;
+
         public void DrawEverything()
         {
             VerifyPaintGroup();
-            using (var graphics = Graphics.FromImage(_bitmap))
+            var graphics = CreateGraphicsFromBitmap();
+
+            _tempShape?.Draw(graphics, PEN_WIDTH);
+            DrawShapesOnGraphics(graphics);
+
+            InvalidateControls();
+        }
+
+        private Graphics CreateGraphicsFromBitmap()
+        {
+            var graphics = Graphics.FromImage(_bitmap);
+            graphics.Clear(_paintGroup.BackColor);
+            return graphics;
+        }
+
+        private void DrawShapesOnGraphics(Graphics graphics)
+        {
+            foreach (var shape in _model.Shapes.Reverse())
             {
-                graphics.Clear(_paintGroup.BackColor);
-                foreach (var shape in _model.Shapes)
-                {
-                    shape?.Draw(graphics, PEN_WIDTH);
-                }
-
-                _tempShape?.Draw(Graphics.FromImage(_bitmap), PEN_WIDTH);
+                shape?.Draw(graphics, PEN_WIDTH);
             }
+        }
 
+        private void InvalidateControls()
+        {
             _paintGroup.Invalidate();
             _button.Invalidate();
         }
 
-        // Sets a paint group.
-
         public void SetPaintGroup(GroupBox paintGroup)
         {
             _paintGroup = paintGroup;
-            _bitmap = new Bitmap(paintGroup.Width, paintGroup.Height);
+            CreateBitmapForPaintGroup();
+        }
+
+        private void CreateBitmapForPaintGroup()
+        {
+            _bitmap = new Bitmap(_paintGroup.Width, _paintGroup.Height);
             _paintGroup.DrawToBitmap(_bitmap, _paintGroup.ClientRectangle);
             _paintGroup.BackgroundImage = _bitmap;
         }
 
-        /* Manages the button clicked event for the shape:
-         * if the shape type is already selected, the shape is reset;
-         * otherwise, the shape type is updated, and selected shape is updated. */
-
         public void DrawShapeButtonClicked(ShapeType shapeType)
+        {
+            HandleShapeButtonClick(shapeType);
+        }
+
+        private void HandleShapeButtonClick(ShapeType shapeType)
         {
             if (_shapeType == shapeType)
             {
                 ResetShape();
-
-                return;
             }
-
-            _shapeType = shapeType;
-            this.UpdateSelected();
+            else
+            {
+                UpdateShapeTypeAndSelection(shapeType);
+            }
         }
 
-        // Handles the mouse down event on the panel.
+        private void UpdateShapeTypeAndSelection(ShapeType shapeType)
+        {
+            _shapeType = shapeType;
+            UpdateSelected();
+        }
 
         private void MouseDownOnPanel()
         {
             if (_shapeType != ShapeType.Undefined)
             {
-                _startPoint = new List<int> { _cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y };
-                Cursor = Cursors.Cross;
+                StartDrawingShape();
             }
             else
             {
-                if (_selectedIndex != -1)
-                {
-                    if (_model.Shapes[_selectedIndex]
-                        .IsPointOnShape(new Point(_cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y)))
-                    {
-                        _dragging = true;
-                        _startPoint = new List<int> { _cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y };
-                    }
-                    else
-                    {
-                        ResetShape();
-                    }
-                }
-                else
-                {
-                    bool flag = true;
-                    for (int i = 0; i < _model.Shapes.Count; i++)
-                    {
-                        _model.Shapes[i].Selected = false;
-                        if (_model.Shapes[i].IsPointOnShape(new Point(_cursorPos.X - PAINT_OFFSET_X,
-                                _cursorPos.Y - PAINT_OFFSET_Y)) && flag)
-                        {
-                            _selectedIndex = i;
-                            _model.Shapes[_selectedIndex].Selected = true;
-                            flag = false;
-                        }
-                    }
-                }
-
-                DrawEverything();
+                StartDraggingShape();
             }
+
+            DrawEverything();
         }
 
-        // Handles the mouse movement event on the panel.
+        private void StartDrawingShape()
+        {
+            _startPoint = new List<int> { _cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y };
+            Cursor = Cursors.Cross;
+        }
 
         private void MouseMovingOnPanel()
         {
             if (_shapeType != ShapeType.Undefined)
             {
-                Cursor = Cursors.Cross;
-                if (_startPoint != null)
-                {
-                    var endPosition = new List<int> { _cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y };
-                    _tempShape = ShapeFactory.CreateShape(_shapeType, _startPoint, endPosition);
-                    DrawEverything();
-                }
+                HandlePotentialShapeDrawing();
             }
             else
             {
-                if (_dragging)
-                {
-                    var delta = new Point(_cursorPos.X - PAINT_OFFSET_X - _startPoint[0],
-                        _cursorPos.Y - PAINT_OFFSET_Y - _startPoint[1]);
-                    var tempCoordinate = new Tuple<Point, Point>(
-                        new Point(_model.Shapes[_selectedIndex].Coordinates[0].X + delta.X,
-                            _model.Shapes[_selectedIndex].Coordinates[0].Y + delta.Y),
-                        new Point(_model.Shapes[_selectedIndex].Coordinates[1].X + delta.X,
-                            _model.Shapes[_selectedIndex].Coordinates[1].Y + delta.Y));
-                    _tempShape = ShapeFactory.CreateShape(_model.Shapes[_selectedIndex].ShapeType, tempCoordinate);
-                    DrawEverything();
-                }
+                HandleShapeDragging();
             }
         }
 
-        // Handles the mouse up event on the panel.
 
         private void MouseUpOnPanel()
         {
-            if (_startPoint == null)
-            {
-                return;
-            }
+            if (_startPoint == null) return;
 
-            var endPosition = new List<int> { _cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y };
             if (_shapeType != ShapeType.Undefined)
             {
-                var shape = ShapeFactory.CreateShape(_shapeType, _startPoint, endPosition);
-                _model.AddShape(shape);
-                ResetShape();
+                HandleShapeCreation();
             }
             else
             {
-                if (_dragging)
-                {
-                    _model.AddShape(_tempShape);
-                    RemoveShape(_selectedIndex);
-                    ResetShape();
-                }
+                HandleShapeDraggingCompletion();
             }
 
-            // Invalidate the current paint group to repaint the whole area
             DrawEverything();
-
             UpdateSelected();
         }
-
-        // Resets the shape type, start point, and temporary shape.
-
-        private void ResetShape()
-        {
-            _shapeType = ShapeType.Undefined;
-            UpdateSelected();
-            _startPoint = null;
-            _tempShape = null;
-            _dragging = false;
-            if (_selectedIndex != -1)
-            {
-                _model.Shapes[_selectedIndex].Selected = false;
-                _selectedIndex = -1;
-            }
-        }
-
-        // Verifies that a paint group is set; if it's not, an exception is thrown.
 
         private void VerifyPaintGroup()
         {
             if (_paintGroup == null)
                 throw new Exception("Paint group is not set");
         }
-
-        // The variables and constants used in this class.
-
-        private List<int> _startPoint;
-
-        private IShape _tempShape;
-
-        private ShapeType _shapeType;
-
-        private GroupBox _paintGroup;
-
-        private Bitmap _bitmap;
-
-        private Button _button;
-
-
-        // Constants for Pen width and Paint offsets in x and y direction.
-
-        private const int PEN_WIDTH = 5;
-
-        private const int PAINT_OFFSET_X = 217;
-
-        private const int PAINT_OFFSET_Y = 54;
-
-        // Paint region size and position.
-
-        int _selectedIndex = -1;
-        bool _dragging = false;
-        private readonly Rectangle _paintRegion = new Rectangle(PAINT_OFFSET_X, PAINT_OFFSET_Y, 1358, 1052);
 
         private void DeleteSelectedShape()
         {
@@ -220,6 +157,162 @@ namespace FakePowerPoint
                 RemoveShape(_selectedIndex);
                 _selectedIndex = -1;
                 DrawEverything();
+            }
+        }
+
+        private void StartDraggingShape()
+        {
+            if (_selectedIndex != -1)
+            {
+                InitializeDrag();
+            }
+            else
+            {
+                SelectShapeUnderCursor();
+            }
+        }
+
+        private void InitializeDrag()
+        {
+            // Check if selected shape has the cursor point on it
+            var cursorPoint = CreateCursorPoint();
+            if (_model.Shapes[_selectedIndex].IsPointOnShape(cursorPoint))
+            {
+                _dragging = true;
+                _startPoint = new List<int> { cursorPoint.X, cursorPoint.Y };
+            }
+            else
+            {
+                ResetShape();
+            }
+        }
+
+        private void SelectShapeUnderCursor()
+        {
+            var cursorPoint = CreateCursorPoint();
+            var flag = true;
+            for (int i = 0; i < _model.Shapes.Count && flag; i++)
+            {
+                DeselectShape(i);
+                if (ShouldSelectShape(i, cursorPoint))
+                {
+                    SelectShape(i);
+                    flag = false;
+                }
+            }
+        }
+
+        private void DeselectShape(int i)
+        {
+            _model.Shapes[i].Selected = false;
+        }
+
+        private bool ShouldSelectShape(int i, Point cursorPoint)
+        {
+            return _model.Shapes[i].IsPointOnShape(cursorPoint);
+        }
+
+        private void SelectShape(int i)
+        {
+            _selectedIndex = i;
+            _model.Shapes[_selectedIndex].Selected = true;
+        }
+
+        private Point CreateCursorPoint()
+        {
+            return new Point(_cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y);
+        }
+
+        private void HandlePotentialShapeDrawing()
+        {
+            Cursor = Cursors.Cross;
+            if (_startPoint != null)
+            {
+                CreateAndDrawTempShape();
+            }
+        }
+
+        private void CreateAndDrawTempShape()
+        {
+            var endPosition = CreateCursorPositionList();
+            _tempShape = ShapeFactory.CreateShape(_shapeType, _startPoint, endPosition);
+            DrawEverything();
+        }
+
+        private List<int> CreateCursorPositionList()
+        {
+            return new List<int> { _cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y };
+        }
+
+        private void HandleShapeDragging()
+        {
+            if (_dragging)
+            {
+                UpdateTempShapeForDragging();
+                DrawEverything();
+            }
+        }
+
+        private void UpdateTempShapeForDragging()
+        {
+            var delta = GetShapeShiftDelta();
+            var tempCoordinate = ComputeShapeAfterShiftCoordinates(delta);
+            _tempShape = ShapeFactory.CreateShape(_model.Shapes[_selectedIndex].ShapeType, tempCoordinate);
+        }
+
+        private Point GetShapeShiftDelta()
+        {
+            return new Point(_cursorPos.X - PAINT_OFFSET_X - _startPoint[0],
+                _cursorPos.Y - PAINT_OFFSET_Y - _startPoint[1]);
+        }
+
+        private Tuple<Point, Point> ComputeShapeAfterShiftCoordinates(Point shift)
+        {
+            return new Tuple<Point, Point>(
+                new Point(_model.Shapes[_selectedIndex].Coordinates[0].X + shift.X,
+                    _model.Shapes[_selectedIndex].Coordinates[0].Y + shift.Y),
+                new Point(_model.Shapes[_selectedIndex].Coordinates[1].X + shift.X,
+                    _model.Shapes[_selectedIndex].Coordinates[1].Y + shift.Y));
+        }
+
+        private void HandleShapeCreation()
+        {
+            _model.AddShape(CreateFinalShape());
+            ResetShape();
+        }
+
+        private IShape CreateFinalShape()
+        {
+            var endPosition = CreateCursorPositionList();
+            return ShapeFactory.CreateShape(_shapeType, _startPoint, endPosition);
+        }
+
+        private void HandleShapeDraggingCompletion()
+        {
+            if (_dragging)
+            {
+                _model.AddShape(_tempShape);
+                RemoveShape(_selectedIndex);
+                ResetShape();
+            }
+        }
+
+        private void ResetShape()
+        {
+            _shapeType = ShapeType.Undefined;
+            UpdateSelected();
+            _startPoint = null;
+            _tempShape = null;
+            _dragging = false;
+            ClearShapeSelection();
+        }
+
+        private void ClearShapeSelection()
+        {
+            if (_selectedIndex != -1)
+            {
+                _model.Shapes[_selectedIndex].Selected = false;
+                _selectedIndex = -1;
             }
         }
     }
