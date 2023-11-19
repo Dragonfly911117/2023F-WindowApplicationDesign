@@ -10,7 +10,7 @@ namespace FakePowerPoint
     {
         private const string COLOR = "Color";
         private Color _color;
-        private ShapeType _shapeType;
+        private readonly ShapeType _shapeType;
         private List<Point> _coordinates;
 
         public event PropertyChangedEventHandler PropertyChanged; // Event for handling property changes.
@@ -42,7 +42,7 @@ namespace FakePowerPoint
             }
         }
 
-        public bool Selected { get; set; }
+        public bool Selected { get; set; } = true; // for test purpose TODO: remove the default val
 
         /* The Rectangle's constructor.
          * It initializes the rectangle's shape type, coordinates, and color. */
@@ -51,28 +51,41 @@ namespace FakePowerPoint
             _color = Color.FromArgb(255, 132, 120, 222);
             _shapeType = ShapeType.Rectangle;
             _coordinates = new List<Point> { new Point(x1, y1), new Point(x2, y2) };
-            Handles = new List<Handle> { new Handle(new Point(x1, y1)), new Handle(new Point(x2, y2)) };
+            Handles = new List<Handle>
+            {
+                new Handle(new Point(x1, y1)),
+                new Handle(new Point((x1 + x2) / 2, y1)),
+                new Handle(new Point(x2, y1)),
+                new Handle(new Point(x1, (y1 + y2) / 2)),
+                new Handle(new Point(x2, y2)),
+                new Handle(new Point((x1 + x2) / 2, y2)),
+                new Handle(new Point(x1, y2)),
+                new Handle(new Point(x2, (y1 + y2) / 2))
+            };
         }
 
         // Calls DrawRectangle method of the presentation model to draw the rectangle.
         public void Draw(Graphics graphics, int penWidth)
         {
             graphics.DrawRectangle(new Pen(_color, penWidth), ConvertToRectangle());
+            if (Selected)
+            {
+                DrawHandle(graphics);
+            }
         }
 
         public void DrawHandle(Graphics graphics)
         {
             foreach (var handle in Handles)
             {
-                graphics.DrawEllipse(new Pen(Color.White, 1), handle.Coordinate.X, handle.Coordinate.Y, 5, 5);
+                handle.Draw(graphics);
             }
         }
 
         // Returns the string format of coordinates.
         public string GetCoordinates()
         {
-            return
-                $"({_coordinates[0].X}, {_coordinates[0].Y}),\n({_coordinates[1].X}, {_coordinates[1].Y})";
+            return $"({_coordinates[0].X}, {_coordinates[0].Y}),\n({_coordinates[1].X}, {_coordinates[1].Y})";
         }
 
         public List<Handle> Handles { get; set; }
