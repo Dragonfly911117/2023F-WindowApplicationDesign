@@ -47,6 +47,7 @@ namespace FakePowerPoint
 
         public bool Selected { get; set; }
 
+        // Method to swap two integers
         private static void Swap(ref int x, ref int y)
         {
             int temp = x;
@@ -84,6 +85,7 @@ namespace FakePowerPoint
             }
         }
 
+        // Draws handles
         public void DrawHandle(Graphics graphics)
         {
             foreach (var handle in Handles)
@@ -98,6 +100,7 @@ namespace FakePowerPoint
             return $"({Coordinates[0].X}, {Coordinates[0].Y}),\n({Coordinates[1].X}, {Coordinates[1].Y})";
         }
 
+        // Checks if the point is on the shape
         public bool IsPointOnShape(Point point)
         {
             var rectangle = ConvertToRectangle();
