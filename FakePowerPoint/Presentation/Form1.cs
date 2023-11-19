@@ -3,13 +3,16 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
+// Form1 class to handle user interactions
 namespace FakePowerPoint
 {
     public partial class Form1 : Form
     {
+        // Constants and fields
         private const string REMOVE = "Remove";
         private readonly PresentationModel _presentationModel;
 
+        // Constructor
         public Form1(PresentationModel model)
         {
             _presentationModel = model;
@@ -17,6 +20,7 @@ namespace FakePowerPoint
             Initialize();
         }
 
+        // Initialization method for the form
         private void Initialize()
         {
             BindShapeSelectToPresentationModel();
@@ -26,17 +30,20 @@ namespace FakePowerPoint
             AttachKeyDownEventHandler(this);
         }
 
+        // Binds ShapeSelect control events to PresentationModel
         private void BindShapeSelectToPresentationModel()
         {
             _presentationModel.BindShapeSelect(ShapeSelect);
         }
 
+        // Sets the paint group and binds slide background to a button
         private void BindPaintGroupBox()
         {
             _presentationModel.SetPaintGroup(PaintGroup);
             _presentationModel.BindSlideBackground(button1);
         }
 
+        // Binds mouse events to controls and subscribes to selection updates
         private void BindEventsToControls()
         {
             foreach (Control control in Controls)
@@ -48,17 +55,21 @@ namespace FakePowerPoint
             _presentationModel.Selected.ItemUpdated += UpdateSelection;
         }
 
+        // Binds DataGridView columns and events
         private void BindDataGridViewColumns()
         {
             var buttonColumn = new DataGridViewButtonColumn()
             {
-                HeaderText = REMOVE, Text = REMOVE, UseColumnTextForButtonValue = true
+                HeaderText = REMOVE,
+                Text = REMOVE,
+                UseColumnTextForButtonValue = true
             };
 
             dataGridView1.Columns.Insert(0, buttonColumn);
             _presentationModel.BindDataGrid(dataGridView1);
         }
 
+        // Attaches KeyDown event handler to the form and its child controls
         private void AttachKeyDownEventHandler(Control control)
         {
             control.KeyDown += HandleKeyDown;
@@ -68,12 +79,13 @@ namespace FakePowerPoint
             }
         }
 
-        // Mouse events translating to the model
+        // Mouse down event handling translating to the model
         private void MouseDownOnForm(object sender, MouseEventArgs e)
         {
             _presentationModel.MouseDown(e);
         }
 
+        // Mouse move event handling translating to the model
         private void MouseMovingOnForm(object sender, MouseEventArgs e)
         {
             var control = sender as Control;
@@ -84,12 +96,13 @@ namespace FakePowerPoint
             }
         }
 
+        // Mouse up event handling translating to the model
         private void MouseUpOnForm(object sender, MouseEventArgs e)
         {
             _presentationModel.MouseUp(e);
         }
 
-        // Button click events
+        // Button click events for shape drawing
         private void AddShapeButtonClick(object sender, EventArgs e)
         {
             _presentationModel.AddShape((ShapeType)ShapeSelect.SelectedItem);
@@ -125,7 +138,7 @@ namespace FakePowerPoint
             _presentationModel.DrawShapeButtonClicked(ShapeType.Eclipse);
         }
 
-        // Other methods
+        // Method to update the selection state of toolbar buttons
         private void UpdateSelection(int index, bool newValue)
         {
             var buttonList = toolStrip1.Items.OfType<ToolStripButton>().ToList();
@@ -136,6 +149,7 @@ namespace FakePowerPoint
             }
         }
 
+        // KeyDown event handling translating to the model
         private void HandleKeyDown(object sender, KeyEventArgs e)
         {
             _presentationModel.KeyDown(e.KeyCode);
