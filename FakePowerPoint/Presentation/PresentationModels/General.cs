@@ -72,5 +72,13 @@ namespace FakePowerPoint
         // Check if x and y values of a given point is inside the rectangle area defined by (x1, y1) (x2, y2)
         private bool IsInsideRect(Point pos, int x1, int x2, int y1, int y2) =>
             pos.X >= x1 && pos.X <= x2 && pos.Y >= y1 && pos.Y <= y2;
+
+        public void KeyDown(Keys eKeyCode)
+        {
+            if (eKeyCode == Keys.Delete)
+            {
+                DeleteSelectedShape();
+            }
+        }
     }
 }

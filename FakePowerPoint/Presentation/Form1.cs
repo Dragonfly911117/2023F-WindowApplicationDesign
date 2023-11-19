@@ -24,6 +24,27 @@ namespace FakePowerPoint
             BindPaintGroupBox();
             BindEventsToControls();
             BindDataGridViewColumns();
+
+            // PaintGroup.KeyDown += HandleKeyDown;
+            AttachKeyDownEventHandler(this);
+        }
+        private void AttachKeyDownEventHandler(Control control)
+        {
+            control.KeyDown += HandleKeyDown;
+            foreach (Control childControl in control.Controls)
+            {
+                AttachKeyDownEventHandler(childControl);
+            }
+        }
+
+        private void CommonKeyDown(object sender, KeyEventArgs e)
+        {
+            Control control = sender as Control;
+            if (control != null)
+            {
+                // control is the child that triggered the event
+                Console.WriteLine($"The control that triggered the event is {control.Name}");
+            }
         }
 
         // Method to bind mouse events to all controls on the form
@@ -137,6 +158,10 @@ namespace FakePowerPoint
             {
                 buttonList[index].Checked = newValue;
             }
+        }
+        private void HandleKeyDown(object sender, KeyEventArgs e)
+        {
+            _presentationModel.KeyDown(e.KeyCode);
         }
     }
 }

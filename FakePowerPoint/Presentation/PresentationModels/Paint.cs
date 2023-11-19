@@ -16,7 +16,7 @@ namespace FakePowerPoint
                 graphics.Clear(_paintGroup.BackColor);
                 foreach (var shape in _model.Shapes)
                 {
-                    shape.Draw(graphics, PEN_WIDTH);
+                    shape?.Draw(graphics, PEN_WIDTH);
                 }
 
                 _tempShape?.Draw(Graphics.FromImage(_bitmap), PEN_WIDTH);
@@ -60,7 +60,7 @@ namespace FakePowerPoint
             if (_shapeType != ShapeType.Undefined)
             {
                 _startPoint = new List<int> { _cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y };
-                this.Cursor = Cursors.Cross;
+                Cursor = Cursors.Cross;
             }
             else
             {
@@ -204,5 +204,15 @@ namespace FakePowerPoint
         int _selectedIndex = -1;
         bool _dragging = false;
         private readonly Rectangle _paintRegion = new Rectangle(PAINT_OFFSET_X, PAINT_OFFSET_Y, 1358, 1052);
+
+        private void DeleteSelectedShape()
+        {
+            if (_selectedIndex != -1)
+            {
+                _model.RemoveShape(_selectedIndex);
+                _selectedIndex = -1;
+                DrawEverything();
+            }
+        }
     }
 }
