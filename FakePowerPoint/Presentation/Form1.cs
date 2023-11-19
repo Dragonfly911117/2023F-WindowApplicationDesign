@@ -109,6 +109,7 @@ namespace FakePowerPoint
             _presentationModel.DrawEverything();
         }
 
+        // Button click events for shape drawing
         private void DeleteShape(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0)
@@ -118,21 +119,25 @@ namespace FakePowerPoint
             }
         }
 
+        // Button click events for shape drawing
         private void HandleNormalModeButtonClicked(object sender, EventArgs e)
         {
             _presentationModel.DrawShapeButtonClicked(ShapeType.Undefined);
         }
 
+        // Button click events for shape drawing
         private void HandleDrawLineButtonClicked(object sender, EventArgs e)
         {
             _presentationModel.DrawShapeButtonClicked(ShapeType.Line);
         }
 
+        // Button click events for shape drawing
         private void HandleDrawRectangleButtonClick(object sender, EventArgs e)
         {
             _presentationModel.DrawShapeButtonClicked(ShapeType.Rectangle);
         }
 
+        // Button click events for shape drawing
         private void HandleDrawEclipseButtonClicked(object sender, EventArgs e)
         {
             _presentationModel.DrawShapeButtonClicked(ShapeType.Eclipse);
