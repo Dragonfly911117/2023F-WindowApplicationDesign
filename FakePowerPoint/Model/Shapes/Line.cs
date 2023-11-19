@@ -19,7 +19,7 @@ namespace FakePowerPoint
         private ShapeType _shapeType;
 
         // List to hold the coordinates of the line
-        private List<Tuple<int, int>> _coordinates;
+        private List<Point> _coordinates;
 
         // Event to be triggered when a property value changes
         public event PropertyChangedEventHandler PropertyChanged;
@@ -61,24 +61,34 @@ namespace FakePowerPoint
         {
             _color = Color.FromArgb(255, 123, 0, 33);
             _shapeType = ShapeType.Line;
-            _coordinates = new List<Tuple<int, int>>();
-            _coordinates.Add(new Tuple<int, int>(x1, y1));
-            _coordinates.Add(new Tuple<int, int>(x2, y2));
+            _coordinates = new List<Point>();
+            _coordinates.Add(new Point(x1, y1));
+            _coordinates.Add(new Point(x2, y2));
         }
 
         // Method to draw a line
         public void Draw(Graphics graphics, int penWidth)
         {
-            graphics.DrawLine(new Pen(_color, penWidth), _coordinates[0].Item1, _coordinates[0].Item2,
-                _coordinates[1].Item1, _coordinates[1].Item2);
+            graphics.DrawLine(new Pen(_color, penWidth), _coordinates[0].X, _coordinates[0].Y,
+                _coordinates[1].X, _coordinates[1].Y);
+        }
+
+        public void DrawHandle(Graphics graphics)
+        {
+            foreach (var handle in Handles)
+            {
+                graphics.DrawEllipse(new Pen(Color.White, 1), handle.Coordinate.X, handle.Coordinate.Y, 5, 5);
+            }
         }
 
         // Method to get the string representation of the coordinates
         public string GetCoordinates()
         {
             return
-                $"({_coordinates[0].Item1}, {_coordinates[0].Item2}),\n({_coordinates[1].Item1}, {_coordinates[1].Item2})";
+                $"({_coordinates[0].X}, {_coordinates[0].Y}),\n({_coordinates[1].X}, {_coordinates[1].Y})";
         }
+
+        public List<Handle> Handles { get; set;}
 
         // Method to call the PropertyChanged event
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

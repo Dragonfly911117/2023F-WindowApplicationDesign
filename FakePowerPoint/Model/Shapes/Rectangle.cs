@@ -11,14 +11,15 @@ namespace FakePowerPoint
         private const string COLOR = "Color";
         private Color _color;
         private ShapeType _shapeType;
-        private List<Tuple<int, int>> _coordinates;
+        private List<Point> _coordinates;
 
-        public event PropertyChangedEventHandler PropertyChanged;  // Event for handling property changes.
+        public event PropertyChangedEventHandler PropertyChanged; // Event for handling property changes.
 
         public ShapeType ShapeType
         {
             get => _shapeType;
-            set => throw new InvalidOperationException("The shape type cannot be changed"); // The ShapeType is read-only.
+            set =>
+                throw new InvalidOperationException("The shape type cannot be changed"); // The ShapeType is read-only.
         }
 
         public string Coordinates
@@ -49,9 +50,8 @@ namespace FakePowerPoint
         {
             _color = Color.FromArgb(255, 132, 120, 222);
             _shapeType = ShapeType.Rectangle;
-            _coordinates = new List<Tuple<int, int>>();
-            _coordinates.Add(new Tuple<int, int>(x1, y1));
-            _coordinates.Add(new Tuple<int, int>(x2, y2));
+            _coordinates = new List<Point> { new Point(x1, y1), new Point(x2, y2) };
+            Handles = new List<Handle> { new Handle(new Point(x1, y1)), new Handle(new Point(x2, y2)) };
         }
 
         // Calls DrawRectangle method of the presentation model to draw the rectangle.
@@ -60,20 +60,31 @@ namespace FakePowerPoint
             graphics.DrawRectangle(new Pen(_color, penWidth), ConvertToRectangle());
         }
 
+        public void DrawHandle(Graphics graphics)
+        {
+            foreach (var handle in Handles)
+            {
+                graphics.DrawEllipse(new Pen(Color.White, 1), handle.Coordinate.X, handle.Coordinate.Y, 5, 5);
+            }
+        }
+
         // Returns the string format of coordinates.
         public string GetCoordinates()
         {
-            return $"({_coordinates[0].Item1}, {_coordinates[0].Item2}),\n({_coordinates[1].Item1}, {_coordinates[1].Item2})";
+            return
+                $"({_coordinates[0].X}, {_coordinates[0].Y}),\n({_coordinates[1].X}, {_coordinates[1].Y})";
         }
+
+        public List<Handle> Handles { get; set; }
 
         /* Converts the coordinates to a System.Drawing.Rectangle object.
          * It determines the top-left point and the bottom-right point to calculate the rectangle. */
         private System.Drawing.Rectangle ConvertToRectangle()
         {
-            var x1 = Math.Min(_coordinates[0].Item1, _coordinates[1].Item1);
-            var x2 = Math.Max(_coordinates[0].Item1, _coordinates[1].Item1);
-            var y1 = Math.Min(_coordinates[0].Item2, _coordinates[1].Item2);
-            var y2 = Math.Max(_coordinates[0].Item2, _coordinates[1].Item2);
+            var x1 = Math.Min(_coordinates[0].X, _coordinates[1].X);
+            var x2 = Math.Max(_coordinates[0].X, _coordinates[1].X);
+            var y1 = Math.Min(_coordinates[0].Y, _coordinates[1].Y);
+            var y2 = Math.Max(_coordinates[0].Y, _coordinates[1].Y);
             return new System.Drawing.Rectangle(x1, y1, x2 - x1, y2 - y1);
         }
 
