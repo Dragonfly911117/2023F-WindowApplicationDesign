@@ -18,6 +18,7 @@ namespace FakePowerPoint
     public interface IShape : INotifyPropertyChanged
     {
         ShapeType ShapeType { get; } // Property to get the type of shape
+
         // string Coordinates { get; } // Property to get the coordinates of a shape
         public List<Point> Coordinates { get; set; }
 
@@ -36,78 +37,63 @@ namespace FakePowerPoint
 
         bool IsPointOnShape(Point point); // Method to check if a point is inside a shape
 
-        List<Handle> Handles { get; set;}
-
+        List<Handle> Handles { get; set; }
     }
 
     // Abstract factory class to create the shapes
     public abstract class ShapeFactory
     {
-        // Creates a new shape of given type with random coordinates
-        public static IShape CreateShape(ShapeType shapeType)
-        {
-            var x1 = GenerateRandomNumber(0, 1358);
-            var y1 = GenerateRandomNumber(0, 1052);
-            var x2 = GenerateRandomNumber(0, 1358);
-            var y2 = GenerateRandomNumber(0, 1052);
+        public abstract IShape CreateShape(List<int> coordinates);
+    }
 
-            // Select the type of shape to create based on the shapeType argument
-            return shapeType switch
-            {
-                ShapeType.Rectangle => new Rectangle(x1, x2, y1, y2),
-                ShapeType.Line => new Line(x1, x2, y1, y2),
-                ShapeType.Eclipse => new Eclipse(x1, x2, y1, y2),
-                _ => throw new ArgumentException("Invalid shape type")
-            };
-        }
-
-        // Creates a new shape of given type with specified coordinates
-        public static IShape CreateShape(ShapeType shapeType, List<int> coordinates)
+    public class RectangleFactory : ShapeFactory
+    {
+        public override IShape CreateShape(List<int> coordinates)
         {
             var x1 = coordinates[0];
             var y1 = coordinates[1];
             var x2 = coordinates[2];
             var y2 = coordinates[3];
-
-            // Select the type of shape to create based on the shapeType argument
-            return shapeType switch
-            {
-                ShapeType.Rectangle => new Rectangle(x1, x2, y1, y2),
-                ShapeType.Line => new Line(x1, x2, y1, y2),
-                ShapeType.Eclipse => new Eclipse(x1, x2, y1, y2),
-                _ => throw new ArgumentException("Invalid shape type")
-            };
+            return new Rectangle(x1, x2, y1, y2);
         }
+    }
 
-        //Create a new shape of given type with specified coordinates
-        public static IShape CreateShape(ShapeType shapeType, Tuple<Point, Point> coordinates)
+    public class LineFactory : ShapeFactory
+    {
+        public override IShape CreateShape(List<int> coordinates)
         {
-// Select the type of shape to create based on the shapeType argument
-            return shapeType switch
-            {
-                ShapeType.Rectangle => new Rectangle(coordinates.Item1.X, coordinates.Item2.X, coordinates.Item1.Y, coordinates.Item2.Y),
-                ShapeType.Line => new Line(coordinates.Item1.X, coordinates.Item2.X, coordinates.Item1.Y, coordinates.Item2.Y),
-                ShapeType.Eclipse => new Eclipse(coordinates.Item1.X, coordinates.Item2.X, coordinates.Item1.Y, coordinates.Item2.Y),
-                _ => throw new ArgumentException("Invalid shape type")
-            };
+            var x1 = coordinates[0];
+            var y1 = coordinates[1];
+            var x2 = coordinates[2];
+            var y2 = coordinates[3];
+            return new Line(x1, x2, y1, y2);
         }
+    }
 
-        // Creates a new shape of a given type using start and end coordinate lists
-        public static IShape CreateShape(ShapeType shapeType, List<int> startCoordinates, List<int> endCoordinates)
+    public class EclipseFactory : ShapeFactory
+    {
+        public override IShape CreateShape(List<int> coordinates)
         {
-            var coordinates = new List<int>();
-            coordinates.AddRange(startCoordinates);
-            coordinates.AddRange(endCoordinates);
-            return CreateShape(shapeType, coordinates);
+            var x1 = coordinates[0];
+            var y1 = coordinates[1];
+            var x2 = coordinates[2];
+            var y2 = coordinates[3];
+            return new Eclipse(x1, x2, y1, y2);
         }
+    }
 
-        // Generates a random number within the specified range
-        private static int GenerateRandomNumber(int min, int max)
+    public interface IRandomNumberGenerator
+    {
+        int GenerateRandomNumber(int min, int max);
+    }
+
+    public class RandomNumberGenerator : IRandomNumberGenerator
+    {
+        private static readonly Random _random = new Random();
+
+        public int GenerateRandomNumber(int min, int max)
         {
             return _random.Next(min, max);
         }
-
-        // Private member to generate random numbers
-        private static readonly Random _random = new Random();
     }
 }

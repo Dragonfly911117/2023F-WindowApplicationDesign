@@ -257,9 +257,17 @@ namespace FakePowerPoint
         // Creates and draws a temporary shape
         private void CreateAndDrawTempShape()
         {
-            var endPosition = CreateCursorPositionList();
-            _tempShape = ShapeFactory.CreateShape(_shapeType, _startPoint, endPosition);
+            CreateTempShape();
             DrawEverything();
+        }
+
+        // Creates a temporary shape
+        private void CreateTempShape()
+        {
+            var tempList = new List<int>();
+            tempList.AddRange(_startPoint);
+            tempList.AddRange(CreateCursorPositionList());
+            _tempShape = _model.CreateShape(_shapeType, tempList);
         }
 
         // Creates a list of integers representing cursor position
@@ -283,7 +291,7 @@ namespace FakePowerPoint
         {
             var delta = GetShapeShiftDelta();
             var tempCoordinate = ComputeShapeAfterShiftCoordinates(delta);
-            _tempShape = ShapeFactory.CreateShape(_model.Shapes[_selectedIndex].ShapeType, tempCoordinate);
+            _tempShape =_model.CreateShape(_model.Shapes[_selectedIndex].ShapeType, tempCoordinate);
         }
 
         // Calculates the shift in position for a shape being dragged
@@ -294,13 +302,15 @@ namespace FakePowerPoint
         }
 
         // Computes new shape coordinates after shifting
-        private Tuple<Point, Point> ComputeShapeAfterShiftCoordinates(Point shift)
+        private List<int> ComputeShapeAfterShiftCoordinates(Point shift)
         {
-            return new Tuple<Point, Point>(
-                new Point(_model.Shapes[_selectedIndex].Coordinates[0].X + shift.X,
-                    _model.Shapes[_selectedIndex].Coordinates[0].Y + shift.Y),
-                new Point(_model.Shapes[_selectedIndex].Coordinates[1].X + shift.X,
-                    _model.Shapes[_selectedIndex].Coordinates[1].Y + shift.Y));
+            return new List<int>
+            {
+                _model.Shapes[_selectedIndex].Coordinates[0].X + shift.X,
+                _model.Shapes[_selectedIndex].Coordinates[0].Y + shift.Y,
+                _model.Shapes[_selectedIndex].Coordinates[1].X + shift.X,
+                _model.Shapes[_selectedIndex].Coordinates[1].Y + shift.Y
+            };
         }
 
         // Handles shape creation based on current state
@@ -313,8 +323,10 @@ namespace FakePowerPoint
         // Creates the final shape based on current drawing parameters
         private IShape CreateFinalShape()
         {
-            var endPosition = CreateCursorPositionList();
-            return ShapeFactory.CreateShape(_shapeType, _startPoint, endPosition);
+            var endPosition = new List<int>();
+            endPosition.AddRange(_startPoint);
+            endPosition.AddRange(CreateCursorPositionList());
+            return _model.CreateShape(_shapeType, endPosition);
         }
 
         // Handles completion of shape dragging
