@@ -18,7 +18,8 @@ namespace FakePowerPoint
     public interface IShape : INotifyPropertyChanged
     {
         ShapeType ShapeType { get; } // Property to get the type of shape
-        string Coordinates { get; } // Property to get the coordinates of a shape
+        // string Coordinates { get; } // Property to get the coordinates of a shape
+        public List<Point> Coordinates { get; set; }
 
         Color Color { get; set; } // Color property of a shape
 

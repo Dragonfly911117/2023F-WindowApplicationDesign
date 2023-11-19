@@ -64,13 +64,25 @@ namespace FakePowerPoint
             }
             else
             {
-                bool flag = true;
-                foreach (var shape in _model.Shapes)
+                if (_selectedIndex != -1)
                 {
-                    shape.Selected = false;
-                    if (shape.IsPointOnShape(Cursor.Position - new Size(PAINT_OFFSET_X, PAINT_OFFSET_Y)) && flag)
+                    if (_model.Shapes[_selectedIndex]
+                        .IsPointOnShape(Cursor.Position - new Size(PAINT_OFFSET_X, PAINT_OFFSET_Y)))
                     {
-                        shape.Selected = true;
+                        _dragging = true;
+                        _startPoint = new List<int> { _cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y };
+                    }
+                }
+
+                bool flag = true;
+                for (int i = 0; i < _model.Shapes.Count; i++)
+                {
+                    _model.Shapes[i].Selected = false;
+                    if (_model.Shapes[i].IsPointOnShape(Cursor.Position - new Size(PAINT_OFFSET_X, PAINT_OFFSET_Y)) &&
+                        flag)
+                    {
+                        _selectedIndex = i;
+                        _model.Shapes[_selectedIndex].Selected = true;
                         flag = false;
                     }
                 }
@@ -95,6 +107,20 @@ namespace FakePowerPoint
             }
             else
             {
+                if (_dragging)
+                {
+                    var delta = new Point(_cursorPos.X - PAINT_OFFSET_X - _startPoint[0],
+                        _cursorPos.Y - PAINT_OFFSET_Y - _startPoint[1]);
+                    List<int> tempCoordinate = new List<int>();
+                    foreach (var coordinate in _model.Shapes[_selectedIndex].Coordinates)
+                    {
+                        tempCoordinate.Add(coordinate.X + delta.X);
+                        tempCoordinate.Add(coordinate.Y + delta.Y);
+                    }
+
+                    _tempShape = ShapeFactory.CreateShape(_model.Shapes[_selectedIndex].ShapeType, tempCoordinate);
+                    DrawEverything();
+                }
             }
         }
 
@@ -102,15 +128,29 @@ namespace FakePowerPoint
 
         private void MouseUpOnPanel()
         {
-            if (_startPoint == null || _shapeType == ShapeType.Undefined)
+            if (_startPoint == null)
             {
                 return;
             }
 
             var endPosition = new List<int> { _cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y };
-            var shape = ShapeFactory.CreateShape(_shapeType, _startPoint, endPosition);
-            _model.AddShape(shape);
-            ResetShape();
+            if (_shapeType != ShapeType.Undefined)
+            {
+                var shape = ShapeFactory.CreateShape(_shapeType, _startPoint, endPosition);
+                _model.AddShape(shape);
+                ResetShape();
+            }
+            else
+            {
+                if (_dragging)
+                {
+                    _model.RemoveShape(_selectedIndex);
+                    _model.AddShape(_tempShape);
+                    _tempShape = null;
+                    _dragging = false;
+                    _selectedIndex = -1;
+                }
+            }
 
             // Invalidate the current paint group to repaint the whole area
             DrawEverything();
@@ -161,6 +201,8 @@ namespace FakePowerPoint
 
         // Paint region size and position.
 
+        int _selectedIndex = -1;
+        bool _dragging = false;
         private readonly Rectangle _paintRegion = new Rectangle(PAINT_OFFSET_X, PAINT_OFFSET_Y, 1358, 1052);
     }
 }

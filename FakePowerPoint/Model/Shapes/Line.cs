@@ -19,7 +19,7 @@ namespace FakePowerPoint
         private ShapeType _shapeType;
 
         // List to hold the coordinates of the line
-        private List<Point> _coordinates;
+        public List<Point> Coordinates { get; set; }
 
         // Event to be triggered when a property value changes
         public event PropertyChangedEventHandler PropertyChanged;
@@ -32,13 +32,6 @@ namespace FakePowerPoint
             set => throw new InvalidOperationException("The shape type cannot be changed");
         }
 
-        // Property to get the string value of coordinates
-        public string Coordinates
-        {
-            get => GetCoordinates();
-            // Prevent modification of coordinates directly
-            set => throw new InvalidOperationException("The coordinates cannot be changed directly");
-        }
 
         // Property for color encapsulating _color with INotifyPropertyChanged implementation
         public Color Color
@@ -61,9 +54,9 @@ namespace FakePowerPoint
         {
             _color = Color.FromArgb(255, 123, 0, 33);
             _shapeType = ShapeType.Line;
-            _coordinates = new List<Point>();
-            _coordinates.Add(new Point(x1, y1));
-            _coordinates.Add(new Point(x2, y2));
+            Coordinates = new List<Point>();
+            Coordinates.Add(new Point(x1, y1));
+            Coordinates.Add(new Point(x2, y2));
             Handles = new List<Handle>
             {
                 new Handle(new Point(x1, y1)),
@@ -75,8 +68,8 @@ namespace FakePowerPoint
         // Method to draw a line
         public void Draw(Graphics graphics, int penWidth)
         {
-            graphics.DrawLine(new Pen(_color, penWidth), _coordinates[0].X, _coordinates[0].Y, _coordinates[1].X,
-                _coordinates[1].Y);
+            graphics.DrawLine(new Pen(_color, penWidth), Coordinates[0].X, Coordinates[0].Y, Coordinates[1].X,
+                Coordinates[1].Y);
             if (Selected)
             {
                 DrawHandle(graphics);
@@ -94,15 +87,15 @@ namespace FakePowerPoint
         // Method to get the string representation of the coordinates
         public string GetCoordinates()
         {
-            return $"({_coordinates[0].X}, {_coordinates[0].Y}),\n({_coordinates[1].X}, {_coordinates[1].Y})";
+            return $"({Coordinates[0].X}, {Coordinates[0].Y}),\n({Coordinates[1].X}, {Coordinates[1].Y})";
         }
 
         public bool IsPointOnShape(Point point)
         {
-            var x1 = _coordinates[0].X;
-            var y1 = _coordinates[0].Y;
-            var x2 = _coordinates[1].X;
-            var y2 = _coordinates[1].Y;
+            var x1 = Coordinates[0].X;
+            var y1 = Coordinates[0].Y;
+            var x2 = Coordinates[1].X;
+            var y2 = Coordinates[1].Y;
 
             var xMin = Math.Min(x1, x2);
             var xMax = Math.Max(x1, x2);

@@ -15,7 +15,7 @@ namespace FakePowerPoint
         // Private fields to hold values for color, shape type and coordinates
         private Color _color;
         private ShapeType _shapeType;
-        private List<Point> _coordinates;
+        public List<Point> Coordinates { get; set; }
 
         // Event to notify when a property changes
         public event PropertyChangedEventHandler PropertyChanged;
@@ -29,11 +29,7 @@ namespace FakePowerPoint
         }
 
         // Property for coordinates. It is read-only and cannot be directly changed
-        public string Coordinates
-        {
-            get => GetCoordinates();
-            set => throw new InvalidOperationException("The coordinates cannot be changed directly");
-        }
+
 
         // Property for color of the eclipse. Notifies if it changes.
         public Color Color
@@ -64,7 +60,7 @@ namespace FakePowerPoint
             _shapeType = ShapeType.Eclipse; // default shape type
             if (x1 > x2)  Swap(ref x1, ref x2);
             if (y1 > y2)  Swap(ref y1, ref y2);
-            _coordinates = new List<Point> { new Point(x1, y1), new Point(x2, y2) }; // coordinate list
+            Coordinates = new List<Point> { new Point(x1, y1), new Point(x2, y2) }; // coordinate list
             Handles = new List<Handle>
             {
                 new Handle(new Point(x1, y1)),
@@ -99,7 +95,7 @@ namespace FakePowerPoint
         // Returns coordinates as a formatted string
         public string GetCoordinates()
         {
-            return $"({_coordinates[0].X}, {_coordinates[0].Y}),\n({_coordinates[1].X}, {_coordinates[1].Y})";
+            return $"({Coordinates[0].X}, {Coordinates[0].Y}),\n({Coordinates[1].X}, {Coordinates[1].Y})";
         }
 
         public bool IsPointOnShape(Point point)
@@ -117,8 +113,8 @@ namespace FakePowerPoint
         // Converts coordinates to a Rectangle object
         private System.Drawing.Rectangle ConvertToRectangle()
         {
-            return new System.Drawing.Rectangle(_coordinates[0].X, _coordinates[0].Y,
-                _coordinates[1].X - _coordinates[0].X, _coordinates[1].Y - _coordinates[0].Y);
+            return new System.Drawing.Rectangle(Coordinates[0].X, Coordinates[0].Y,
+                Coordinates[1].X - Coordinates[0].X, Coordinates[1].Y - Coordinates[0].Y);
         }
 
         // Method to raise the PropertyChanged event

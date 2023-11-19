@@ -11,7 +11,7 @@ namespace FakePowerPoint
         private const string COLOR = "Color";
         private Color _color;
         private readonly ShapeType _shapeType;
-        private List<Point> _coordinates;
+        public List<Point> Coordinates { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged; // Event for handling property changes.
 
@@ -22,11 +22,6 @@ namespace FakePowerPoint
                 throw new InvalidOperationException("The shape type cannot be changed"); // The ShapeType is read-only.
         }
 
-        public string Coordinates
-        {
-            get => GetCoordinates(); // The Coordinates is read-only.
-            set => throw new InvalidOperationException("The coordinates cannot be changed directly");
-        }
 
         public Color Color
         {
@@ -60,7 +55,7 @@ namespace FakePowerPoint
             _shapeType = ShapeType.Rectangle;
             if (x1 > x2) Swap(ref x1, ref x2);
             if (y1 > y2) Swap(ref y1, ref y2);
-            _coordinates = new List<Point> { new Point(x1, y1), new Point(x2, y2) };
+            Coordinates = new List<Point> { new Point(x1, y1), new Point(x2, y2) };
             Handles = new List<Handle>
             {
                 new Handle(new Point(x1, y1)),
@@ -96,7 +91,7 @@ namespace FakePowerPoint
         // Returns the string format of coordinates.
         public string GetCoordinates()
         {
-            return $"({_coordinates[0].X}, {_coordinates[0].Y}),\n({_coordinates[1].X}, {_coordinates[1].Y})";
+            return $"({Coordinates[0].X}, {Coordinates[0].Y}),\n({Coordinates[1].X}, {Coordinates[1].Y})";
         }
 
 
@@ -116,10 +111,10 @@ namespace FakePowerPoint
          * It determines the top-left point and the bottom-right point to calculate the rectangle. */
         private System.Drawing.Rectangle ConvertToRectangle()
         {
-            var x1 = Math.Min(_coordinates[0].X, _coordinates[1].X);
-            var x2 = Math.Max(_coordinates[0].X, _coordinates[1].X);
-            var y1 = Math.Min(_coordinates[0].Y, _coordinates[1].Y);
-            var y2 = Math.Max(_coordinates[0].Y, _coordinates[1].Y);
+            var x1 = Math.Min(Coordinates[0].X, Coordinates[1].X);
+            var x2 = Math.Max(Coordinates[0].X, Coordinates[1].X);
+            var y1 = Math.Min(Coordinates[0].Y, Coordinates[1].Y);
+            var y2 = Math.Max(Coordinates[0].Y, Coordinates[1].Y);
             return new System.Drawing.Rectangle(x1, y1, x2 - x1, y2 - y1);
         }
 
