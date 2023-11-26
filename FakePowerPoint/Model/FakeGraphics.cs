@@ -27,6 +27,11 @@ namespace FakePowerPoint
             _graphics = graphics;
         }
 
+        public void SetGraphic(System.Drawing.Graphics graphics)
+        {
+            _graphics = graphics;
+        }
+
 
         public void DrawRectangle(Pen pen, System.Drawing.Rectangle rectangle)
         {

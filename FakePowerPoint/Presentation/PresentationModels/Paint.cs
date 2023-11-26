@@ -41,9 +41,10 @@ namespace FakePowerPoint
         // Creates a graphics object from the bitmap
         private IGraphics CreateGraphicsFromBitmap()
         {
-            var graphics = TheOnlyTrueGraphics.FromImage(_bitmap);
-            graphics.Clear(_paintGroup.BackColor);
-            return graphics;
+            var graphics = Graphics.FromImage(_bitmap);
+            var badGraphics = new TheOnlyTrueGraphics(graphics);
+            badGraphics.Clear(_paintGroup.BackColor);
+            return badGraphics;
         }
 
         // Draws shapes on the provided graphics object
