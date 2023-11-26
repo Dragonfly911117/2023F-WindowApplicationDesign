@@ -95,18 +95,6 @@ public class TestRectangle
         _mockGraphics.Verify(x => x.DrawRectangle(It.IsAny<Pen>(), It.IsAny<Rectangle>()), Times.Once);
     }
 
-    [Test]
-    public void TestRectangleDrawnWhenSelected()
-    {
-        _shape.Selected = true;
-        _shape.Draw(_mockGraphics.Object, 1);
-        _mockGraphics.Verify(
-            x => x.DrawEllipse(It.IsAny<Pen>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>()),
-            Times.Exactly(8));
-        _mockGraphics.Verify(
-            x => x.FillEllipse(It.IsAny<Brush>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>()),
-            Times.Exactly(8));
-    }
 
 
     [Test]

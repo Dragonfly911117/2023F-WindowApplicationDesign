@@ -48,6 +48,9 @@ namespace FakeUnitTest
             {
                 Assert.AreEqual(i, _model.GenerateRandomNumber(0, someUpperBound));
             }
+
+            _random.Reset(_randomNumbers.Count + 1);
+            Assert.AreEqual(0, _model.GenerateRandomNumber(0, someUpperBound));
         }
 
         [Test]
