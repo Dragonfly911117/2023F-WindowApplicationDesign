@@ -5,14 +5,14 @@ namespace FakePowerPoint
 {
     public class Handle
     {
-        private readonly Point _coordinate;
+        public readonly Point Coordinate;
         private readonly SolidBrush _brush;
         private readonly Pen _pen;
 
         // Constructor that initializes the handle with a specific coordinate
         public Handle(Point coordinate)
         {
-            _coordinate = coordinate;
+            Coordinate = coordinate;
             Selected = false;
             _brush = new SolidBrush(Color.White);
             _pen = new Pen(Color.White, 1);
@@ -24,9 +24,9 @@ namespace FakePowerPoint
         // Method to draw the handle on a given Graphics object
         public void Draw(Graphics graphics)
         {
-            int offsetX = _coordinate.X - 1 - 1;
+            int offsetX = Coordinate.X - 1 - 1;
             // in fact, i dot really know what offsetX and offsetY are, just need to shut Dr.Smell up
-            int offsetY = _coordinate.Y - 1 - 1;
+            int offsetY = Coordinate.Y - 1 - 1;
             int squareSize = 1 << 1 << 1;
 
             // Draw an ellipse outline representing the handle

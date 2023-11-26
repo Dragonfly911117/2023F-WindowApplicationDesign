@@ -10,12 +10,18 @@ namespace FakePowerPoint
         private const int CANVAS_WIDTH = 1358;
         private const int CANVAS_HEIGHT = 1052;
 
-        private static readonly Random _random = new Random();
+        private static Random _random = new Random();
 
         // Method to generate a random number
-        private int GenerateRandomNumber(int min, int max)
+        public int GenerateRandomNumber(int min, int max)
         {
             return _random.Next(min, max);
+        }
+
+        // Method to set the random number generator since unit tests can't use the default random number generator
+        public void SetRandom(Random random)
+        {
+            _random = random;
         }
 
         // Method to create a shape
@@ -23,16 +29,13 @@ namespace FakePowerPoint
         {
             var factory = _shapeFactories[shapeType];
 
-            if (coordinates == null)
+            coordinates ??= new List<int>
             {
-                coordinates = new List<int>
-                {
-                    GenerateRandomNumber(0, CANVAS_WIDTH),
-                    GenerateRandomNumber(0, CANVAS_HEIGHT),
-                    GenerateRandomNumber(0, CANVAS_WIDTH),
-                    GenerateRandomNumber(0, CANVAS_HEIGHT)
-                };
-            }
+                GenerateRandomNumber(0, CANVAS_WIDTH),
+                GenerateRandomNumber(0, CANVAS_HEIGHT),
+                GenerateRandomNumber(0, CANVAS_WIDTH),
+                GenerateRandomNumber(0, CANVAS_HEIGHT)
+            };
 
             return factory.CreateShape(coordinates);
         }
