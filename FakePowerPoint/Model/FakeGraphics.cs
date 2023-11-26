@@ -20,7 +20,7 @@ namespace FakePowerPoint
 
     public class TheOnlyTrueGraphics : IGraphics
     {
-        private System.Drawing.Graphics _graphics;
+        private Graphics _graphics;
 
         public TheOnlyTrueGraphics(Graphics graphics)
         {

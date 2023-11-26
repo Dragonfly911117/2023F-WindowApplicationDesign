@@ -72,7 +72,6 @@ namespace FakePowerPoint
         // Calls DrawRectangle method of the presentation model to draw the rectangle.
         public void Draw(IGraphics graphics, int penWidth)
         {
-            _width = penWidth;
             graphics.DrawRectangle(new Pen(_color, penWidth), ConvertToRectangle());
             if (Selected)
             {
@@ -106,7 +105,6 @@ namespace FakePowerPoint
         }
 
         public List<Handle> Handles { get; set; }
-        public int _width { get; private set; }
 
         /* Converts the coordinates to a System.Drawing.Rectangle object.
          * It determines the top-left point and the bottom-right point to calculate the rectangle. */
