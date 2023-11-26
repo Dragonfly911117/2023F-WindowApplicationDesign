@@ -97,6 +97,11 @@
     <ItemGroup>
         <Compile Include="Presentation\PresentationModels\DataBindingThings.cs"/>
         <Content Include="README.md"/>
+        <Content Include="Resources\Eclipse.png" />
+        <Content Include="Resources\Line.png" />
+        <Content Include="Resources\Normal.png" />
+        <Content Include="Resources\Normal1.png" />
+        <Content Include="Resources\Rectangle.png" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
 </Project>

@@ -28,6 +28,7 @@ namespace FakePowerPoint
             BindEventsToControls();
             BindDataGridViewColumns();
             AttachKeyDownEventHandler(this);
+            DataBindings.Add("Cursor", _presentationModel, "Cursor");
         }
 
         // Binds ShapeSelect control events to PresentationModel

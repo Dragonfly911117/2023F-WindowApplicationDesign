@@ -196,6 +196,7 @@ namespace FakePowerPoint
       this.NormalModeButton.Checked = true;
       this.NormalModeButton.CheckState = System.Windows.Forms.CheckState.Checked;
       this.NormalModeButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.NormalModeButton.Image = global::FakePowerPoint.Properties.Resources.Normal1;
       this.NormalModeButton.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.NormalModeButton.Name = "NormalModeButton";
       this.NormalModeButton.Size = new System.Drawing.Size(23, 22);
@@ -205,6 +206,7 @@ namespace FakePowerPoint
       // drawLineButton
       // 
       this.drawLineButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.drawLineButton.Image = global::FakePowerPoint.Properties.Resources.Line;
       this.drawLineButton.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.drawLineButton.Name = "drawLineButton";
       this.drawLineButton.Size = new System.Drawing.Size(23, 22);
@@ -214,6 +216,7 @@ namespace FakePowerPoint
       // drawRectangleButton
       // 
       this.drawRectangleButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.drawRectangleButton.Image = global::FakePowerPoint.Properties.Resources.Rectangle;
       this.drawRectangleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.drawRectangleButton.Name = "drawRectangleButton";
       this.drawRectangleButton.Size = new System.Drawing.Size(23, 22);
@@ -223,6 +226,7 @@ namespace FakePowerPoint
       // drawEclipseButton
       // 
       this.drawEclipseButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.drawEclipseButton.Image = global::FakePowerPoint.Properties.Resources.Eclipes;
       this.drawEclipseButton.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.drawEclipseButton.Name = "drawEclipseButton";
       this.drawEclipseButton.Size = new System.Drawing.Size(23, 22);
