@@ -21,8 +21,8 @@ namespace FakePowerPoint
         // Property indicating whether the handle is selected or not
         public bool Selected { get; set; }
 
-        // Method to draw the handle on a given Graphics object
-        public void Draw(Graphics graphics)
+        // Method to draw the handle on a given IGraphics object
+        public void Draw(IGraphics graphics)
         {
             int offsetX = Coordinate.X - 1 - 1;
             // in fact, i dot really know what offsetX and offsetY are, just need to shut Dr.Smell up

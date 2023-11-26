@@ -70,7 +70,7 @@ namespace FakePowerPoint
         }
 
         // Calls DrawRectangle method of the presentation model to draw the rectangle.
-        public void Draw(Graphics graphics, int penWidth)
+        public void Draw(IGraphics graphics, int penWidth)
         {
             _width = penWidth;
             graphics.DrawRectangle(new Pen(_color, penWidth), ConvertToRectangle());
@@ -81,7 +81,7 @@ namespace FakePowerPoint
         }
 
         // Draws the handles of the rectangle.
-        public void DrawHandle(Graphics graphics)
+        public void DrawHandle(IGraphics graphics)
         {
             foreach (var handle in Handles)
             {

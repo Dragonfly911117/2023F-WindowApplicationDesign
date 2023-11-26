@@ -66,7 +66,7 @@ namespace FakePowerPoint
         }
 
         // Method to draw a line
-        public void Draw(Graphics graphics, int penWidth)
+        public void Draw(IGraphics graphics, int penWidth)
         {
             graphics.DrawLine(new Pen(_color, penWidth), Coordinates[0].X, Coordinates[0].Y, Coordinates[1].X,
                 Coordinates[1].Y);
@@ -77,7 +77,7 @@ namespace FakePowerPoint
         }
 
         // Method to draw the handles
-        public void DrawHandle(Graphics graphics)
+        public void DrawHandle(IGraphics graphics)
         {
             foreach (var handle in Handles)
             {

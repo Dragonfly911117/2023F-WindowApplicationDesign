@@ -76,7 +76,7 @@ namespace FakePowerPoint
         }
 
         // Draws itself using the presentation model
-        public void Draw(Graphics graphics, int penWidth)
+        public void Draw(IGraphics graphics, int penWidth)
         {
             graphics.DrawEllipse(new Pen(_color, penWidth), ConvertToRectangle());
             if (Selected)
@@ -86,7 +86,7 @@ namespace FakePowerPoint
         }
 
         // Draws handles
-        public void DrawHandle(Graphics graphics)
+        public void DrawHandle(IGraphics graphics)
         {
             foreach (var handle in Handles)
             {

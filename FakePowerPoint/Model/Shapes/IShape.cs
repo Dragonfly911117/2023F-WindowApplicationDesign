@@ -27,10 +27,10 @@ namespace FakePowerPoint
         bool Selected { get; set; } // Property to get/set the selection state of a shape
 
         // Draw method to be implemented by concrete shape classes
-        public void Draw(Graphics graphics, int penWidth);
+        public void Draw(IGraphics graphics, int penWidth);
 
         // DrawHandle method to be implemented by concrete shape classes
-        public void DrawHandle(Graphics graphics);
+        public void DrawHandle(IGraphics graphics);
 
         // Method to get string representation of coordinates
         string GetCoordinates();
