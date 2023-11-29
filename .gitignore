@@ -2,3 +2,6 @@
 /FakePowerPoint/bin/
 /FakePowerPoint/obj/
 /FakePowerPoint/StyleCop.Cache
+
+/FakeUnitTest/bin/
+/FakeUnitTest/obj/
