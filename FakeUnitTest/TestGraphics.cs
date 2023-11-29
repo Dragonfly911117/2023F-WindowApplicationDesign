@@ -4,7 +4,7 @@ using Moq;
 using NUnit.Framework;
 using Rectangle = System.Drawing.Rectangle;
 
-namespace FakeUnitTest;
+namespace FakeUnitTest{
 
 public class TestGraphics
 {
@@ -116,4 +116,5 @@ public class TestGraphics
         mockGraphics.Object.FillEllipse(brush, 0, 0, 0, 0);
         mockGraphics.Verify(x => x.FillEllipse(brush, 0, 0, 0, 0), Times.Once);
     }
+}
 }

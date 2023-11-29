@@ -12,6 +12,8 @@ namespace FakePowerPoint
         private IShape _tempShape;
         private ShapeType _shapeType;
         private GroupBox _paintGroup;
+        private int _paintGroupWidth;
+        private int _paintGroupHeight;
         private Bitmap _bitmap;
         private Button _button;
         private int _selectedIndex = -1;
@@ -67,13 +69,15 @@ namespace FakePowerPoint
         public void SetPaintGroup(GroupBox paintGroup)
         {
             _paintGroup = paintGroup;
+            _paintGroupWidth = _paintGroup.Width;
+            _paintGroupHeight = _paintGroup.Height;
             CreateBitmapForPaintGroup();
         }
 
         // Creates a bitmap for the paint group
         private void CreateBitmapForPaintGroup()
         {
-            _bitmap = new Bitmap(_paintGroup.Width, _paintGroup.Height);
+            _bitmap = new Bitmap(_paintGroupWidth, _paintGroupHeight);
             _paintGroup.DrawToBitmap(_bitmap, _paintGroup.ClientRectangle);
             _paintGroup.BackgroundImage = _bitmap;
         }

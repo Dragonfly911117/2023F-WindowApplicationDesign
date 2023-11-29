@@ -1,8 +1,9 @@
 ﻿using FakePowerPoint;
 
-namespace FakeUnitTest;
-
-public class FakeModel: Model
+namespace FakeUnitTest
 {
 
+    public class FakeModel : Model
+    {
+    }
 }

@@ -66,8 +66,8 @@ namespace FakePowerPoint
 
         // Check if cursor position is inside the area where drawings can be made
         private bool IsCursorInsidePaintGroup() =>
-            IsInsideRect(_cursorPos, PAINT_OFFSET_X, PAINT_OFFSET_X + _paintGroup.Width, PAINT_OFFSET_Y,
-                    PAINT_OFFSET_Y + _paintGroup.Height);
+            IsInsideRect(_cursorPos, PAINT_OFFSET_X, PAINT_OFFSET_X + _paintGroupWidth, PAINT_OFFSET_Y,
+                    PAINT_OFFSET_Y + _paintGroupHeight);
 
         // Check if x and y values of a given point is inside the rectangle area defined by (x1, y1) (x2, y2)
         private bool IsInsideRect(Point pos, int x1, int x2, int y1, int y2) =>
