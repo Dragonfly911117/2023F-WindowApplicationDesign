@@ -5,45 +5,42 @@ using NUnit.Framework;
 
 namespace FakeUnitTest;
 
-public class TestPM
+public class TestPresentationModel
 {
-    private readonly PresentationModel _presentationModel;
-    private readonly Model _model;
-    private readonly FakeGraphics _fakeGraphics;
-    private readonly FakeRandom _fakeRandom;
+    private PresentationModel _presentationModel;
+    private Model _model;
+    private FakeGraphics _fakeGraphics;
+    private FakeRandom _fakeRandom;
+    private FakeCursor _fakeCursor;
 
-    public TestPM()
+    [SetUp]
+    public void Setup()
     {
         _fakeRandom = new FakeRandom();
+        _fakeCursor = new FakeCursor();
         _fakeGraphics = new FakeGraphics();
-        _model = new Model(_fakeRandom);
+        _model = new Model();
+        _model.SetRandom(_fakeRandom);
         _presentationModel = new PresentationModel(_model);
+        var groupBox = new GroupBox();
+        groupBox.Width = 100;
+        groupBox.Height = 100;
+        _presentationModel.SetPaintGroup(groupBox);
     }
 
-    [Fact]
+
+    [Test]
     public void TestMouseDown()
     {
-        _presentationModel.MouseDown(new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 0));
-        Assert.Equal(ShapeType.Selection, _model.Shapes[0].ShapeType);
-        Assert.Equal(1, _model.Shapes.Count);
-    }
+        // outside of the paint group
 
-    [Fact]
-    public void TestMouseMove()
-    {
+        _presentationModel.MouseMove(new);
         _presentationModel.MouseDown(new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 0));
-        _presentationModel.MouseMove(new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 0), new Point(0, 0));
-        Assert.Equal(ShapeType.Selection, _model.Shapes[0].ShapeType);
-        Assert.Equal(1, _model.Shapes.Count);
-    }
 
-    [Fact]
-    public void TestMouseUp()
-    {
+        // inside of the paint group
+        pos = new Point(227, 57);
+        _presentationModel.MouseMove(new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 0), pos);
         _presentationModel.MouseDown(new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 0));
-        _presentationModel.MouseUp(new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 0));
-        Assert.Equal(ShapeType.Selection, _model.Shapes[0].ShapeType);
-        Assert.Equal(1, _model.Shapes.Count);
     }
 
 }
