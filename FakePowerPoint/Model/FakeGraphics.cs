@@ -63,7 +63,7 @@ namespace FakePowerPoint
             _graphics.DrawEllipse(pen, rectangle);
         }
 
-        public static IGraphics FromImage(Image image)
+        public static IGraphics FormFromImage(Image image)
         {
             return new TheOnlyTrueGraphics(Graphics.FromImage(image));
         }

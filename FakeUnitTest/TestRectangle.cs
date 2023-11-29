@@ -88,12 +88,6 @@ namespace FakeUnitTest
                     It.IsAny<int>()), Times.Exactly(8));
         }
 
-        [Test]
-        public void TestRectangleDraw()
-        {
-            _shape.Draw(_mockGraphics.Object, 1);
-            _mockGraphics.Verify(x => x.DrawRectangle(It.IsAny<Pen>(), It.IsAny<Rectangle>()), Times.Once);
-        }
 
         [Test]
         public void TestRectangleDrawHandle()

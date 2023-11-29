@@ -11,5 +11,11 @@ namespace FakeUnitTest
             : base(model)
         {
         }
+
+        [SetUp]
+        public void SetUp()
+        {
+
+        }
     }
 }
