@@ -7,14 +7,14 @@ namespace FakePowerPoint
     public partial class PresentationModel
     {
         // To store the coordinates of the mouse cursor
-        private Point _cursorPos = new Point(0, 0);
+        protected Point CursorPos = new Point(0, 0);
         // Model instance for the presentation
-        private readonly Model _model;
+        protected Model Model;
 
         // Presentation model constructor accepting a model instance as parameter
         public PresentationModel(Model model)
         {
-            _model = model;
+            Model = model;
             InitializeSelectionShape();
         }
 
@@ -45,7 +45,7 @@ namespace FakePowerPoint
         public void MouseMove(MouseEventArgs e, Point pos)
         {
             // Update the cursor position
-            _cursorPos = pos;
+            CursorPos = pos;
             Cursor = Cursors.Default;
             // Check if the cursor is inside the area where drawings can be made
             if (IsCursorInsidePaintGroup())
@@ -66,11 +66,11 @@ namespace FakePowerPoint
 
         // Check if cursor position is inside the area where drawings can be made
         private bool IsCursorInsidePaintGroup() =>
-            IsInsideRect(_cursorPos, PAINT_OFFSET_X, PAINT_OFFSET_X + _paintGroupWidth, PAINT_OFFSET_Y,
+            IsInsideRect(CursorPos, PAINT_OFFSET_X, PAINT_OFFSET_X + _paintGroupWidth, PAINT_OFFSET_Y,
                     PAINT_OFFSET_Y + _paintGroupHeight);
 
         // Check if x and y values of a given point is inside the rectangle area defined by (x1, y1) (x2, y2)
-        private bool IsInsideRect(Point pos, int x1, int x2, int y1, int y2) =>
+        protected bool IsInsideRect(Point pos, int x1, int x2, int y1, int y2) =>
             pos.X >= x1 && pos.X <= x2 && pos.Y >= y1 && pos.Y <= y2;
 
         // Handle the mouse down event on the panel

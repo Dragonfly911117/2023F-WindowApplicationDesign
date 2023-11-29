@@ -51,7 +51,7 @@ namespace FakePowerPoint
         // Draws shapes on the provided graphics object
         private void DrawShapesOnGraphics(IGraphics graphics)
         {
-            foreach (var shape in _model.Shapes.Reverse())
+            foreach (var shape in Model.Shapes.Reverse())
             {
                 shape?.Draw(graphics, PEN_WIDTH);
             }
@@ -125,7 +125,7 @@ namespace FakePowerPoint
         // Starts drawing a new shape
         private void StartDrawingShape()
         {
-            _startPoint = new List<int> { _cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y };
+            _startPoint = new List<int> { CursorPos.X - PAINT_OFFSET_X, CursorPos.Y - PAINT_OFFSET_Y };
             Cursor = Cursors.Cross;
         }
 
@@ -196,7 +196,7 @@ namespace FakePowerPoint
         {
             // Check if selected shape has the cursor point on it
             var cursorPoint = CreateCursorPoint();
-            if (_model.Shapes[_selectedIndex].IsPointOnShape(cursorPoint))
+            if (Model.Shapes[_selectedIndex]?.IsPointOnShape(cursorPoint) ?? false)
             {
                 _dragging = true;
                 _startPoint = new List<int> { cursorPoint.X, cursorPoint.Y };
@@ -212,7 +212,7 @@ namespace FakePowerPoint
         {
             var cursorPoint = CreateCursorPoint();
             var flag = true;
-            for (int i = 0; i < _model.Shapes.Count && flag; i++)
+            for (int i = 0; i < Model.Shapes.Count && flag; i++)
             {
                 DeselectShape(i);
                 if (ShouldSelectShape(i, cursorPoint))
@@ -226,26 +226,26 @@ namespace FakePowerPoint
         // Deselects a shape at the given index
         private void DeselectShape(int i)
         {
-            _model.Shapes[i].Selected = false;
+            Model.Shapes[i].Selected = false;
         }
 
         // Checks whether a shape should be selected based on the cursor point
         private bool ShouldSelectShape(int i, Point cursorPoint)
         {
-            return _model.Shapes[i].IsPointOnShape(cursorPoint);
+            return Model.Shapes[i].IsPointOnShape(cursorPoint);
         }
 
         // Selects a shape at the given index
         private void SelectShape(int i)
         {
             _selectedIndex = i;
-            _model.Shapes[_selectedIndex].Selected = true;
+            Model.Shapes[_selectedIndex].Selected = true;
         }
 
         // Creates a point from the cursor position
         private Point CreateCursorPoint()
         {
-            return new Point(_cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y);
+            return new Point(CursorPos.X - PAINT_OFFSET_X, CursorPos.Y - PAINT_OFFSET_Y);
         }
 
         // Handles potential shape drawing based on current state
@@ -271,13 +271,13 @@ namespace FakePowerPoint
             var tempList = new List<int>();
             tempList.AddRange(_startPoint);
             tempList.AddRange(CreateCursorPositionList());
-            _tempShape = _model.CreateShape(_shapeType, tempList);
+            _tempShape = Model.CreateShape(_shapeType, tempList);
         }
 
         // Creates a list of integers representing cursor position
         private List<int> CreateCursorPositionList()
         {
-            return new List<int> { _cursorPos.X - PAINT_OFFSET_X, _cursorPos.Y - PAINT_OFFSET_Y };
+            return new List<int> { CursorPos.X - PAINT_OFFSET_X, CursorPos.Y - PAINT_OFFSET_Y };
         }
 
         // Handles shape dragging logic
@@ -295,14 +295,14 @@ namespace FakePowerPoint
         {
             var delta = GetShapeShiftDelta();
             var tempCoordinate = ComputeShapeAfterShiftCoordinates(delta);
-            _tempShape =_model.CreateShape(_model.Shapes[_selectedIndex].ShapeType, tempCoordinate);
+            _tempShape = Model.CreateShape(Model.Shapes[_selectedIndex].ShapeType, tempCoordinate);
         }
 
         // Calculates the shift in position for a shape being dragged
         private Point GetShapeShiftDelta()
         {
-            return new Point(_cursorPos.X - PAINT_OFFSET_X - _startPoint[0],
-                _cursorPos.Y - PAINT_OFFSET_Y - _startPoint[1]);
+            return new Point(CursorPos.X - PAINT_OFFSET_X - _startPoint[0],
+                CursorPos.Y - PAINT_OFFSET_Y - _startPoint[1]);
         }
 
         // Computes new shape coordinates after shifting
@@ -310,17 +310,17 @@ namespace FakePowerPoint
         {
             return new List<int>
             {
-                _model.Shapes[_selectedIndex].Coordinates[0].X + shift.X,
-                _model.Shapes[_selectedIndex].Coordinates[0].Y + shift.Y,
-                _model.Shapes[_selectedIndex].Coordinates[1].X + shift.X,
-                _model.Shapes[_selectedIndex].Coordinates[1].Y + shift.Y
+                Model.Shapes[_selectedIndex].Coordinates[0].X + shift.X,
+                Model.Shapes[_selectedIndex].Coordinates[0].Y + shift.Y,
+                Model.Shapes[_selectedIndex].Coordinates[1].X + shift.X,
+                Model.Shapes[_selectedIndex].Coordinates[1].Y + shift.Y
             };
         }
 
         // Handles shape creation based on current state
         private void HandleShapeCreation()
         {
-            _model.AddShape(CreateFinalShape());
+            Model.AddShape(CreateFinalShape());
             ResetShape();
         }
 
@@ -330,7 +330,7 @@ namespace FakePowerPoint
             var endPosition = new List<int>();
             endPosition.AddRange(_startPoint);
             endPosition.AddRange(CreateCursorPositionList());
-            return _model.CreateShape(_shapeType, endPosition);
+            return Model.CreateShape(_shapeType, endPosition);
         }
 
         // Handles completion of shape dragging
@@ -338,7 +338,7 @@ namespace FakePowerPoint
         {
             if (_dragging)
             {
-                _model.AddShape(_tempShape);
+                Model.AddShape(_tempShape);
                 RemoveShape(_selectedIndex);
                 ResetShape();
             }
@@ -358,9 +358,9 @@ namespace FakePowerPoint
         // Clears the selection of a shape
         private void ClearShapeSelection()
         {
-            if (_selectedIndex != -1)
+            if (_selectedIndex != -1 && Model.Shapes[_selectedIndex] != null)
             {
-                _model.Shapes[_selectedIndex].Selected = false;
+                Model.Shapes[_selectedIndex].Selected = false;
                 _selectedIndex = -1;
             }
         }

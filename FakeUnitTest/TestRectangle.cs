@@ -88,6 +88,30 @@ namespace FakeUnitTest
                     It.IsAny<int>()), Times.Exactly(8));
         }
 
+        //        public bool IsPointInsideHandle(Point point)
+        [Test]
+        public void TestRectangleIsPointInsideHandle()
+        {
+            var handles = _shape.Handles;
+            Assert.IsTrue(handles[0].IsPointInsideHandle(new Point(1, 2)));
+            Assert.IsTrue(handles[1].IsPointInsideHandle(new Point(2, 2)));
+            Assert.IsTrue(handles[2].IsPointInsideHandle(new Point(3, 2)));
+            Assert.IsTrue(handles[3].IsPointInsideHandle(new Point(1, 3)));
+            Assert.IsTrue(handles[4].IsPointInsideHandle(new Point(3, 4)));
+            Assert.IsTrue(handles[5].IsPointInsideHandle(new Point(2, 4)));
+            Assert.IsTrue(handles[6].IsPointInsideHandle(new Point(1, 4)));
+            Assert.IsTrue(handles[7].IsPointInsideHandle(new Point(3, 3)));
+
+            Assert.IsFalse(handles[0].IsPointInsideHandle(new Point(220, 0)));
+            Assert.IsFalse(handles[1].IsPointInsideHandle(new Point(220, 0)));
+            Assert.IsFalse(handles[2].IsPointInsideHandle(new Point(220, 0)));
+            Assert.IsFalse(handles[3].IsPointInsideHandle(new Point(220, 0)));
+            Assert.IsFalse(handles[4].IsPointInsideHandle(new Point(220, 0)));
+            Assert.IsFalse(handles[5].IsPointInsideHandle(new Point(220, 0)));
+            Assert.IsFalse(handles[6].IsPointInsideHandle(new Point(220, 0)));
+            Assert.IsFalse(handles[7].IsPointInsideHandle(new Point(220, 0)));
+        }
+
 
         [Test]
         public void TestRectangleDrawHandle()

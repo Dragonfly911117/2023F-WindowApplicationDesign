@@ -47,6 +47,7 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Model\FakeCursor.cs" />
         <Compile Include="Model\FakeGraphics.cs" />
         <Compile Include="Model\Model.cs"/>
         <Compile Include="Model\Shapes\Eclipse.cs" />

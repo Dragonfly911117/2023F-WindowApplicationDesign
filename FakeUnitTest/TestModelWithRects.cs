@@ -166,5 +166,20 @@ namespace FakeUnitTest
             var coordinates = shape2.GetCoordinates();
             Assert.AreEqual("(1, 2),\n(3, 4)", coordinates);
         }
+
+
+        /*public bool IsPointInsideHandle(Point point, Handle handle)
+        {
+            return handle.IsPointInsideHandle(point);
+        }*/
+        [Test]
+        public void IsPointInsideHandle()
+        {
+            var handle = new Handle(new Point(1, 2));
+            Assert.IsTrue(_model.IsPointInsideHandle(new Point(1, 2), handle));
+            Assert.IsFalse(_model.IsPointInsideHandle(new Point(2, 22), handle));
+            Assert.IsFalse(_model.IsPointInsideHandle(new Point(1, 32), handle));
+            Assert.IsFalse(_model.IsPointInsideHandle(new Point(2, 113), handle));
+        }
     }
 }

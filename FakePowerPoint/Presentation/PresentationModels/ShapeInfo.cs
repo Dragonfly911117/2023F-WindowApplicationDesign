@@ -15,19 +15,19 @@ namespace FakePowerPoint
         // Adds a new shape of specified type to the model.
         public void AddShape(ShapeType shapeType)
         {
-            _model.AddShape(shapeType);
+            Model.AddShape(shapeType);
         }
 
         // Removes a shape at a specified index from the model.
         public void RemoveShape(int index)
         {
-            _model.RemoveShape(index);
+            Model.RemoveShape(index);
         }
 
         // Binds a DataGridView to the shapes in the model and adjusts its column sizing mode.
         public void BindDataGrid(DataGridView dataGridView)
         {
-            dataGridView.DataSource = _model.Shapes;
+            dataGridView.DataSource = Model.Shapes;
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
