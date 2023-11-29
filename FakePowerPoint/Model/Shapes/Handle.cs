@@ -35,5 +35,15 @@ namespace FakePowerPoint
             // Fill the ellipse with a solid color to visualize the handle
             graphics.FillEllipse(_brush, offsetX, offsetY, squareSize, squareSize);
         }
+
+        public bool IsPointInsideHandle(Point point)
+        {
+            int offsetX = Coordinate.X - 1 - 1;
+            int offsetY = Coordinate.Y - 1 - 1;
+            int squareSize = 1 << 1 << 1;
+
+            return point.X >= offsetX && point.X <= offsetX + squareSize && point.Y >= offsetY &&
+                   point.Y <= offsetY + squareSize;
+        }
     }
 }

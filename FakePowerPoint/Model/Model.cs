@@ -68,5 +68,11 @@ namespace FakePowerPoint
             { ShapeType.Rectangle, new RectangleFactory() },
             { ShapeType.Eclipse, new EclipseFactory() }
         };
+
+        // Method to detect if a point is inside a handle
+        public bool IsPointInsideHandle(Point point, Handle handle)
+        {
+            return handle.IsPointInsideHandle(point);
+        }
     }
 }
