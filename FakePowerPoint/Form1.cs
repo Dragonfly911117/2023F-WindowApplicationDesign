@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -14,6 +13,7 @@ namespace FakePowerPoint
   {
     public Form1()
     {
+      ConstructLayout();
       InitializeComponent();
     }
   }
