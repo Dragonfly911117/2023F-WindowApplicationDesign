@@ -94,30 +94,26 @@ namespace FakePowerPoint
             button.DisplayStyle = ToolStripItemDisplayStyle.Image;
         }
 
+        // Init Menus
         void InitializeSplitContainerMain()
         {
             _splitContainerMain.Dock = DockStyle.Fill;
             _splitContainerMain.Orientation = Orientation.Vertical;
-
-            // var splitContainerLeft = new SplitContainer();
-            // splitContainerLeft.Orientation = Orientation.Horizontal;
-            // splitContainerLeft.Dock = DockStyle.Fill;
-            _splitContainerMain.Panel1.Controls.Add(_groupBoxLeft);
-            // splitContainerLeft.Panel2.Controls.Add(_groupBoxMiddle);
+            _splitContainerMain.SplitterDistance = _splitContainerMain.Width / 10;
 
             var splitContainerRight = new SplitContainer();
             splitContainerRight.Orientation = Orientation.Vertical;
+            splitContainerRight.SplitterDistance = splitContainerRight.Width * 4 / 5;
             splitContainerRight.Dock = DockStyle.Fill;
             splitContainerRight.Panel1.Controls.Add(_groupBoxMiddle);
             splitContainerRight.Panel2.Controls.Add(_groupBoxRight);
 
-            // _splitContainerMain.Panel1.Controls.Add(splitContainerLeft);
+            _splitContainerMain.Panel1.Controls.Add(_groupBoxLeft);
             _splitContainerMain.Panel2.Controls.Add(splitContainerRight);
 
             _splitContainerMain.Parent = this;
         }
 
-        // Init Menus
 
         void InitializeGroupBoxLeft()
         {
