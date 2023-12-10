@@ -13,6 +13,7 @@ namespace FakePowerPoint.Presentation
             ConstructLayout();
             BindThings();
             InitializeComponent();
+            BindEventHandlers();
         }
     }
 }

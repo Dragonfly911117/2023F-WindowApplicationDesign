@@ -33,6 +33,7 @@ namespace FakePowerPoint.Presentation
         GroupBox _groupBoxLeft = new GroupBox();
 
         GroupBox _groupBoxMiddle = new GroupBox();
+        Panel _slidePanel = new Panel();
 
         GroupBox _groupBoxRight = new GroupBox();
         ComboBox _shapeSelector = new ComboBox();
@@ -127,6 +128,8 @@ namespace FakePowerPoint.Presentation
 
         void InitializeGroupBoxMiddle()
         {
+            GiveBirth(_groupBoxMiddle, _slidePanel);
+            _slidePanel.BackgroundImageLayout = ImageLayout.Stretch;
             _groupBoxMiddle.Dock = DockStyle.Fill;
             _groupBoxMiddle.Text = SLIDE;
         }

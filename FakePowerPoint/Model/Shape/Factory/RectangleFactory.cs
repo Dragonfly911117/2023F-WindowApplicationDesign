@@ -10,6 +10,7 @@ namespace FakePowerPoint.Model.Shape.Factory
     {
         public override Shape CreateShape( Tuple<Point, Point> coordinates = null, Color color = default(Color))
         {
+            ReorderCoordinates(ref coordinates);
             return new Shapes.Rectangle(coordinates, color);
         }
     }

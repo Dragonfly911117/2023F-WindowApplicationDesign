@@ -14,5 +14,12 @@ namespace FakePowerPoint.Presentation.PM
                 comboBox.Items.Add(temp.GetValue(i));
             }
         }
+        public void BindSlideBackgroundBitmap(ref Button button, ref Panel panel)
+        {
+            button.BackgroundImage = _bitmap;
+            button.BackgroundImageLayout = ImageLayout.Stretch;
+            panel.BackgroundImage = _bitmap;
+            panel.BackgroundImageLayout = ImageLayout.Stretch;
+        }
     }
 }

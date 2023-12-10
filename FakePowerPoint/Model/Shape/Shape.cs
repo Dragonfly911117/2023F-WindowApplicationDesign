@@ -88,74 +88,67 @@ namespace FakePowerPoint.Model.Shape
             var y1 = Coordinates.Item1.Y;
             var x2 = Coordinates.Item2.X;
             var y2 = Coordinates.Item2.Y;
+
             var dx = coordinates.X - x1;
             var dy = coordinates.Y - y1;
+
             Coordinates = new Tuple<Point, Point>(new Point(x1 + dx, y1 + dy), new Point(x2 + dx, y2 + dy));
-            foreach (var handle in Handles)
-            {
-                handle.Move(new Point(dx, dy));
-            }
+
+            Handles.ForEach(handle => handle.Move(new Point(dx, dy)));
         }
 
-        public void Resize(Point coordinates, HandlePosition handlePosition)
+        public virtual void Resize(Size size, HandlePosition handlePosition = HandlePosition.BottomRight)
         {
             var x1 = Coordinates.Item1.X;
             var y1 = Coordinates.Item1.Y;
             var x2 = Coordinates.Item2.X;
             var y2 = Coordinates.Item2.Y;
-            switch (handlePosition)
+
+            if (new[] { HandlePosition.TopLeft, HandlePosition.MiddleLeft, HandlePosition.BottomLeft }.Contains(
+                    handlePosition))
             {
-                case HandlePosition.TopLeft:
-                    Coordinates = new Tuple<Point, Point>(coordinates, new Point(x2, y2));
-                    break;
-                case HandlePosition.TopMiddle:
-                    Coordinates = new Tuple<Point, Point>(new Point(x1, coordinates.Y), new Point(x2, y2));
-                    break;
-                case HandlePosition.TopRight:
-                    Coordinates = new Tuple<Point, Point>(new Point(x1, coordinates.Y), coordinates);
-                    break;
-                case HandlePosition.MiddleLeft:
-                    Coordinates = new Tuple<Point, Point>(new Point(coordinates.X, y1), new Point(x2, y2));
-                    break;
-                case HandlePosition.MiddleRight:
-                    Coordinates = new Tuple<Point, Point>(new Point(x1, y1), new Point(coordinates.X, y2));
-                    break;
-                case HandlePosition.BottomLeft:
-                    Coordinates = new Tuple<Point, Point>(new Point(coordinates.X, y1), new Point(x2, coordinates.Y));
-                    break;
-                case HandlePosition.BottomMiddle:
-                    Coordinates = new Tuple<Point, Point>(new Point(x1, y1), new Point(x2, coordinates.Y));
-                    break;
-                case HandlePosition.BottomRight:
-                    Coordinates = new Tuple<Point, Point>(new Point(x1, y1), coordinates);
-                    break;
+                x1 += size.Width;
             }
 
+            if (new[] { HandlePosition.TopRight, HandlePosition.MiddleRight, HandlePosition.BottomRight }.Contains(
+                    handlePosition))
             {
-                x1 = Coordinates.Item1.X;
-                y1 = Coordinates.Item1.Y;
-                x2 = Coordinates.Item2.X;
-                y2 = Coordinates.Item2.Y;
-                Handles = new List<Handle>
-                {
-                    new Handle(new Point(x1, y1), HandlePosition.TopLeft),
-                    new Handle(new Point((x1 + x2) / 2, y1), HandlePosition.TopMiddle),
-                    new Handle(new Point(x2, y1), HandlePosition.TopRight),
-                    new Handle(new Point(x1, (y1 + y2) / 2), HandlePosition.MiddleLeft),
-                    new Handle(new Point(x2, (y1 + y2) / 2), HandlePosition.MiddleRight),
-                    new Handle(new Point(x1, y2), HandlePosition.BottomLeft),
-                    new Handle(new Point((x1 + x2) / 2, y2), HandlePosition.BottomMiddle),
-                    new Handle(new Point(x2, y2), HandlePosition.BottomRight)
-                };
+                x2 += size.Width;
             }
+
+            if (new[] { HandlePosition.TopLeft, HandlePosition.TopMiddle, HandlePosition.TopRight }.Contains(
+                    handlePosition))
+            {
+                y1 += size.Height;
+            }
+
+            if (new[] { HandlePosition.BottomLeft, HandlePosition.BottomMiddle, HandlePosition.BottomRight }.Contains(
+                    handlePosition))
+            {
+                y2 += size.Height;
+            }
+            Coordinates = new Tuple<Point, Point>(new Point(x1, y1), new Point(x2, y2));
+
+            Handles = new List<Handle>
+            {
+                new(new Point(x1, y1), HandlePosition.TopLeft),
+                new(new Point((x1 + x2) / 2, y1), HandlePosition.TopMiddle),
+                new(new Point(x2, y1), HandlePosition.TopRight),
+                new(new Point(x1, (y1 + y2) / 2), HandlePosition.MiddleLeft),
+                new(new Point(x2, (y1 + y2) / 2), HandlePosition.MiddleRight),
+                new(new Point(x1, y2), HandlePosition.BottomLeft),
+                new(new Point((x1 + x2) / 2, y2), HandlePosition.BottomMiddle),
+                new(new Point(x2, y2), HandlePosition.BottomRight)
+            };
         }
 
-        public abstract void Draw(System.Drawing.Graphics graphics);
 
+        public abstract void Draw(Graphics graphics);
 
         protected void DrawHandles(Graphics graphics)
         {
             Handles.ForEach(handle => handle.Draw(graphics));
         }
+
     }
 }

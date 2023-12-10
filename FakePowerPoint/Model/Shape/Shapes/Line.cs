@@ -1,15 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Net;
+using FakePowerPoint.Model.Enums;
 
 namespace FakePowerPoint.Model.Shape.Shapes
 {
     public class Line : Shape
     {
+        protected void ReorderCoordinates(ref Tuple<Point, Point> coordinates)
+        {
+        }
+
         public Line(Tuple<Point, Point> coordinates, Color color = default(Color))
         {
             Coordinates = coordinates ?? new Tuple<Point, Point>(new Point(0, 0), new Point(0, 0));
             Color = color == default ? Color.Violet : color;
+            Handles = new List<Handle>
+            {
+                new Handle(Coordinates.Item1, HandlePosition.TopLeft),
+                new Handle(Coordinates.Item2, HandlePosition.BottomRight)
+            };
         }
+
 
         public override void Draw(Graphics graphics)
         {

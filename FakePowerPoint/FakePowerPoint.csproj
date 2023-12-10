@@ -12,6 +12,7 @@
         <FileAlignment>512</FileAlignment>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <Deterministic>true</Deterministic>
+        <LangVersion>latestmajor</LangVersion>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
@@ -58,6 +59,7 @@
         <Compile Include="Model\Shape\Shapes\Ellipse.cs" />
         <Compile Include="Model\Shape\Shapes\Line.cs" />
         <Compile Include="Model\Shape\Shapes\Rectangle.cs" />
+        <Compile Include="Model\Slide.cs" />
         <Compile Include="Presentation\EventHandler.cs" />
         <Compile Include="Presentation\Form1.cs">
           <SubType>Form</SubType>
@@ -70,6 +72,7 @@
         <Compile Include="Presentation\PM\DataBinding.cs" />
         <Compile Include="Presentation\PM\General.cs" />
         <Compile Include="Presentation\PM\Input.cs" />
+        <Compile Include="Presentation\PM\Paint.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <EmbeddedResource Include="Presentation\Form1.resx">
