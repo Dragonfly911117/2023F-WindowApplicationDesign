@@ -31,7 +31,7 @@ namespace FakePowerPoint.Model.Shape.Shapes
             }
         }
 
-        public void Draw(Graphics graphics)
+        protected override void Draw(Graphics graphics)
         {
             var x1 = Coordinates.Item1.X;
             var y1 = Coordinates.Item1.Y;

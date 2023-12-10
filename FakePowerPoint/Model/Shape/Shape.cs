@@ -150,10 +150,8 @@ namespace FakePowerPoint.Model.Shape
             }
         }
 
-        void Draw(System.Drawing.Graphics graphics)
-        {
-            throw new NotImplementedException();
-        }
+        protected abstract void Draw(System.Drawing.Graphics graphics);
+
 
         protected void DrawHandles(Graphics graphics)
         {
