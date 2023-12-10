@@ -15,9 +15,18 @@ namespace FakePowerPoint
     public partial class Form1 : Form
     {
         ToolStripContainer _menu;
+
+        // TODO: move these const strings to resources
         const string ABOUT_TEXT = "About";
         const string INFO_TEXT = "Info";
         const string ABOUT_MESSAGE = "Fake PowerPoint is a fake version of PowerPoint. ";
+        const string NORMAL = "Normal";
+        const string LINE = "Line";
+        const string RECTANGLE = "Rectangle";
+        const string ELLIPSE = "Ellipse";
+        const string SLIDES = "Slides";
+        const string SLIDE = "Slide";
+        const string SHAPES = "Shapes";
 
         ToolStripContainer _functionMenu;
         ToolStripButton _normalModeButton;
@@ -28,17 +37,18 @@ namespace FakePowerPoint
         SplitContainer _splitContainerMain = new SplitContainer();
 
         GroupBox _groupBoxLeft = new GroupBox();
+
         GroupBox _groupBoxMiddle = new GroupBox();
+
         GroupBox _groupBoxRight = new GroupBox();
+        ComboBox _shapeSelector = new ComboBox();
+        Button _addShapeButton = new Button();
+
+        DataGridView _shapesDataGridView = new DataGridView();
 
         void ConstructLayout()
         {
-            InitializeWidgets();
-        }
-
-        void InitializeWidgets()
-        {
-            // the order matters, the later one will be on top
+            // the order matters, the later one overrides the former ones
             InitializeGroupBoxLeft();
             InitializeGroupBoxMiddle();
             InitializeGroupBoxRight();
@@ -47,7 +57,8 @@ namespace FakePowerPoint
             InitializeMenu();
         }
 
-        private void InitializeMenu()
+
+        void InitializeMenu()
         {
             _menu = new ToolStripContainer();
             _menu.Parent = this;
@@ -63,7 +74,7 @@ namespace FakePowerPoint
             _menu.TopToolStripPanel.Controls.Add(menuStrip); // Add the MenuStrip to the container
         }
 
-        private void InitializeFunctionMenu()
+        void InitializeFunctionMenu()
         {
             _functionMenu = new ToolStripContainer();
             _functionMenu.Parent = this;
@@ -72,10 +83,10 @@ namespace FakePowerPoint
 
             var functionMenu = new ToolStrip(); // Create a MenuStrip control
 
-            InitializeToolStripButton("Normal", ref _normalModeButton);
-            InitializeToolStripButton("Line", ref _lineButton);
-            InitializeToolStripButton("Rectangle", ref _rectangleButton);
-            InitializeToolStripButton("Ellipse", ref _ellipseButton);
+            InitializeToolStripButton(NORMAL, ref _normalModeButton);
+            InitializeToolStripButton(LINE, ref _lineButton);
+            InitializeToolStripButton(RECTANGLE, ref _rectangleButton);
+            InitializeToolStripButton(ELLIPSE, ref _ellipseButton);
 
             functionMenu.Items.Add(_normalModeButton); // Add the ToolStripMenuItem to the MenuStrip
             functionMenu.Items.Add(_lineButton); // Add the ToolStripMenuItem to the MenuStrip
@@ -85,7 +96,7 @@ namespace FakePowerPoint
             _functionMenu.TopToolStripPanel.Controls.Add(functionMenu); // Add the MenuStrip to the container
         }
 
-        private void InitializeToolStripButton(string imageName, ref ToolStripButton button)
+        void InitializeToolStripButton(string imageName, ref ToolStripButton button)
         {
             button = new ToolStripButton();
             var imageBytes = (byte[])Properties.Resources.ResourceManager.GetObject(imageName);
@@ -97,7 +108,6 @@ namespace FakePowerPoint
         // Init Menus
         void InitializeSplitContainerMain()
         {
-            _splitContainerMain.Dock = DockStyle.Fill;
             _splitContainerMain.Orientation = Orientation.Vertical;
             _splitContainerMain.SplitterDistance = _splitContainerMain.Width / 10;
 
@@ -111,29 +121,53 @@ namespace FakePowerPoint
             _splitContainerMain.Panel1.Controls.Add(_groupBoxLeft);
             _splitContainerMain.Panel2.Controls.Add(splitContainerRight);
 
-            _splitContainerMain.Parent = this;
+            GiveBirth(this, _splitContainerMain);
         }
 
 
         void InitializeGroupBoxLeft()
         {
             _groupBoxLeft.Dock = DockStyle.Fill;
-            _groupBoxLeft.Text = "Left";
-            _groupBoxLeft.ForeColor = Color.Purple;
+            _groupBoxLeft.Text = SLIDES;
         }
 
         void InitializeGroupBoxMiddle()
         {
             _groupBoxMiddle.Dock = DockStyle.Fill;
-            _groupBoxMiddle.Text = "Middle";
-            _groupBoxMiddle.ForeColor = Color.Yellow;
+            _groupBoxMiddle.Text = SLIDE;
         }
 
         void InitializeGroupBoxRight()
         {
             _groupBoxRight.Dock = DockStyle.Fill;
-            _groupBoxRight.Text = "Right";
-            _groupBoxRight.ForeColor = Color.Blue;
+            _groupBoxRight.Text = SHAPES;
+
+            _shapeSelector.Dock = DockStyle.Fill;
+            _addShapeButton.Text = Resources.Form1_InitializeGroupBoxRight_Add;
+            _addShapeButton.ForeColor = Color.LightGray;
+            _shapesDataGridView.Dock = DockStyle.Fill;
+
+            var splitter = new SplitContainer();
+            splitter.Dock = DockStyle.Fill;
+            splitter.Orientation = Orientation.Vertical;
+            splitter.SplitterDistance = splitter.Width * 4 / 5;
+            splitter.Panel1.Controls.Add(_shapeSelector);
+            splitter.Panel2.Controls.Add(_addShapeButton);
+
+            var splitter2 = new SplitContainer();
+            splitter2.Dock = DockStyle.Fill;
+            splitter2.Orientation = Orientation.Horizontal;
+            splitter2.SplitterDistance = _groupBoxRight.Height / 20;
+            splitter2.Panel1.Controls.Add(splitter);
+            splitter2.Panel2.Controls.Add(_shapesDataGridView);
+
+            _groupBoxRight.Controls.Add(splitter2);
+        }
+
+        static void GiveBirth(Control parent, Control child, DockStyle dockStyle = DockStyle.Fill)
+        {
+            child.Dock = dockStyle;
+            child.Parent = parent;
         }
     }
 }

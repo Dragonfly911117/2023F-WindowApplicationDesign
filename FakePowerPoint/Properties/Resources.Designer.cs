@@ -70,6 +70,15 @@ namespace FakePowerPoint.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        internal static string Form1_InitializeGroupBoxRight_Add {
+            get {
+                return ResourceManager.GetString("Form1_InitializeGroupBoxRight_Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] Line {
