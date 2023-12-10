@@ -1,4 +1,6 @@
-﻿namespace FakePowerPoint.Presentation.PM
+﻿using FakePowerPoint.Model.Enums;
+
+namespace FakePowerPoint.Presentation.PM
 {
     public partial class PresentationModel
     {
@@ -8,9 +10,10 @@
             _model = model;
         }
 
-        public void AddShape(string shapeSelectorText)
+        public void AddShape(ShapeType shapeType)
         {
-            _model.AddShape(shapeSelectorText);
+            _model.AddShape(shapeType);
+            Repaint();
         }
     }
 }

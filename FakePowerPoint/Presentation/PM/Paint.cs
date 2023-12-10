@@ -6,9 +6,9 @@ public partial class PresentationModel
 {
     Bitmap _bitmap;
 
-    public void Repaint(out Bitmap bitmap)
+    public void Repaint()
     {
         _model.Repaint();
-        bitmap = _bitmap = _model.GetCurrentSlideBitmap();
+        SlideBitmap = _model.GetCurrentSlideBitmap();
     }
 }

@@ -23,13 +23,13 @@ namespace FakePowerPoint.Model
             return new Point(_random.Next(size.Width), _random.Next(size.Height));
         }
 
-        public void AddShape(string shapeSelectorText, Tuple<Point, Point> coordinates = null,
+        public void AddShape(ShapeType shaptype, Tuple<Point, Point> coordinates = null,
             Color color = default(Color))
         {
             var size = _currentSlide.GetSize();
             coordinates ??= new Tuple<Point, Point>(GetRandomPoint(size), GetRandomPoint(size));
-            ShapeType shapeType = (ShapeType)Enum.Parse(typeof(ShapeType), shapeSelectorText);
-            ShapeFactory shapeFactory = _shapeFactories[shapeType];
+            if (shaptype == ShapeType.Undefined) return;
+            ShapeFactory shapeFactory = _shapeFactories[shaptype];
             Shape.Shape shape = shapeFactory.CreateShape(coordinates, color);
             _currentSlide.AddShape(shape);
         }

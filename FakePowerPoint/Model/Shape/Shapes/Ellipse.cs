@@ -37,7 +37,7 @@ namespace FakePowerPoint.Model.Shape.Shapes
             var y1 = Coordinates.Item1.Y;
             var x2 = Coordinates.Item2.X;
             var y2 = Coordinates.Item2.Y;
-            graphics.DrawRectangle(pen: new Pen(Color, 1 << 1 << 1), x: x1, y: y1, width: x2 - x1, height: y2 - y1);
+            graphics.DrawEllipse(pen: new Pen(Color, 1 << 1 << 1), x: x1, y: y1, width: x2 - x1, height: y2 - y1);
             if (Selected)
             {
                 DrawHandles(graphics);

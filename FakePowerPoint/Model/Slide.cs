@@ -8,17 +8,25 @@ namespace FakePowerPoint.Model
     {
         Bitmap _bitmap;
         readonly List<Shape.Shape> _shapes;
+        Graphics _graphics;
+        Size _size;
 
         public Slide(Size size)
         {
             _bitmap = new Bitmap(size.Width, size.Height);
             _shapes = new List<Shape.Shape>();
+            _graphics = Graphics.FromImage(_bitmap);
+            _size = size;
         }
 
-        void Resize(Size size)
+        void Resize(Size size) // TODO: Get size from view
         {
             _shapes.ForEach(shape => shape.Resize(size));
             _bitmap = new Bitmap(size.Width, size.Height);
+            _graphics?.Dispose();
+            _graphics = Graphics.FromImage(_bitmap);
+            _size = size;
+            Draw();
         }
 
         public void AddShape(Shape.Shape shape)
@@ -34,9 +42,8 @@ namespace FakePowerPoint.Model
 
         public void Draw()
         {
-            using var graphics = Graphics.FromImage(_bitmap);
-            graphics.Clear(Color.Black);
-            _shapes.ForEach (shape => shape.Draw(graphics));
+            _graphics.Clear(Color.Black);
+            _shapes.ForEach(shape => shape.Draw(_graphics));
         }
 
         public Panel ToPanel()
@@ -57,7 +64,7 @@ namespace FakePowerPoint.Model
 
         public Size GetSize()
         {
-            return _bitmap.Size;
+            return _size;
         }
 
         public Bitmap GetBitmap()
