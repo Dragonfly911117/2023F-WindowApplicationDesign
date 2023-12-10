@@ -1,4 +1,4 @@
-﻿namespace FakePowerPoint
+﻿namespace FakePowerPoint.Presentation
 {
   partial class Form1
   {

@@ -7,7 +7,7 @@ namespace FakePowerPoint.Model.Shape.Shapes
 {
     public class Ellipse : Shape
     {
-        public Ellipse(Tuple<Point, Point> coordinates)
+        public Ellipse(Tuple<Point, Point> coordinates, Color color = default(Color))
         {
             Coordinates = coordinates;
             {
@@ -27,7 +27,7 @@ namespace FakePowerPoint.Model.Shape.Shapes
                     new Handle(new Point((x1 + x2) / 2, y2), HandlePosition.BottomMiddle),
                     new Handle(new Point(x2, y2), HandlePosition.BottomRight)
                 };
-                Color = Color.Goldenrod;
+                Color = color == default ? Color.Goldenrod : color;
             }
         }
 

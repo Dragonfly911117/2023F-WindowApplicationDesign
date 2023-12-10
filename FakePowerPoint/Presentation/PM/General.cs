@@ -7,5 +7,10 @@
         {
             _model = model;
         }
+
+        public void AddShape(string shapeSelectorText)
+        {
+            _model.AddShape(shapeSelectorText);
+        }
     }
 }

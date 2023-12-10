@@ -1,13 +1,14 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace FakePowerPoint.Model.Shape.Shapes
 {
     public class Line : Shape
     {
-        public Line(Point point1, Point point2)
+        public Line(Tuple<Point, Point> coordinates, Color color = default(Color))
         {
-            Coordinates = new System.Tuple<Point, Point>(point1, point2);
-            Color = Color.Violet;
+            Coordinates = coordinates ?? new Tuple<Point, Point>(new Point(0, 0), new Point(0, 0));
+            Color = color == default ? Color.Violet : color;
         }
 
         public override void Draw(Graphics graphics)

@@ -49,11 +49,16 @@
         <Compile Include="Model\Enums\HandlePosition.cs" />
         <Compile Include="Model\Enums\ShapeType.cs" />
         <Compile Include="Model\Model.cs" />
+        <Compile Include="Model\Shape\Factory\EllipseFactory.cs" />
+        <Compile Include="Model\Shape\Factory\LineFactory.cs" />
+        <Compile Include="Model\Shape\Factory\RectangleFactory.cs" />
+        <Compile Include="Model\Shape\Factory\ShapeFactory.cs" />
         <Compile Include="Model\Shape\Handle.cs" />
         <Compile Include="Model\Shape\Shape.cs" />
         <Compile Include="Model\Shape\Shapes\Ellipse.cs" />
         <Compile Include="Model\Shape\Shapes\Line.cs" />
         <Compile Include="Model\Shape\Shapes\Rectangle.cs" />
+        <Compile Include="Presentation\EventHandler.cs" />
         <Compile Include="Presentation\Form1.cs">
           <SubType>Form</SubType>
         </Compile>
@@ -61,10 +66,12 @@
           <DependentUpon>Form1.cs</DependentUpon>
         </Compile>
         <Compile Include="Presentation\FormDesigner.cs" />
+        <Compile Include="Presentation\Initializer.cs" />
+        <Compile Include="Presentation\PM\DataBinding.cs" />
         <Compile Include="Presentation\PM\General.cs" />
         <Compile Include="Presentation\PM\Input.cs" />
-        <Compile Include="Program.cs"/>
-        <Compile Include="Properties\AssemblyInfo.cs"/>
+        <Compile Include="Program.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs" />
         <EmbeddedResource Include="Presentation\Form1.resx">
           <DependentUpon>Form1.cs</DependentUpon>
         </EmbeddedResource>
@@ -88,7 +95,7 @@
         </Compile>
     </ItemGroup>
     <ItemGroup>
-        <None Include="App.config"/>
+        <None Include="App.config" />
     </ItemGroup>
     <ItemGroup>
       <EmbeddedResource Include="Assets\Ellipse.png" />
@@ -98,7 +105,6 @@
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Model\Command\" />
-      <Folder Include="Model\Shape\Factory\" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
 </Project>
