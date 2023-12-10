@@ -99,6 +99,15 @@ namespace FakePowerPoint.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The property being got is not set..
+        /// </summary>
+        internal static string Property_is_not_set {
+            get {
+                return ResourceManager.GetString("Property_is_not_set", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] Rectangle {

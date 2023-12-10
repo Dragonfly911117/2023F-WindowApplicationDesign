@@ -129,4 +129,7 @@
   <data name="Form1_InitializeGroupBoxRight_Add" xml:space="preserve">
     <value>Add</value>
   </data>
+  <data name="Property_is_not_set" xml:space="preserve">
+    <value>The property being got is not set.</value>
+  </data>
 </root>

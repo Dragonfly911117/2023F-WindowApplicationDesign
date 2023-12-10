@@ -46,16 +46,24 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Form1.cs">
-            <SubType>Form</SubType>
+        <Compile Include="Model\Enums\HandlePosition.cs" />
+        <Compile Include="Model\Enums\ShapeType.cs" />
+        <Compile Include="Model\Model.cs" />
+        <Compile Include="Model\Shape\Handle.cs" />
+        <Compile Include="Model\Shape\Shape.cs" />
+        <Compile Include="Model\Shape\Shapes\Rectangle.cs" />
+        <Compile Include="Presentation\Form1.cs">
+          <SubType>Form</SubType>
         </Compile>
-        <Compile Include="Form1.Designer.cs">
-            <DependentUpon>Form1.cs</DependentUpon>
+        <Compile Include="Presentation\Form1.Designer.cs">
+          <DependentUpon>Form1.cs</DependentUpon>
         </Compile>
-        <Compile Include="FormDesigner.cs" />
+        <Compile Include="Presentation\FormDesigner.cs" />
+        <Compile Include="Presentation\PM\General.cs" />
+        <Compile Include="Presentation\PM\Input.cs" />
         <Compile Include="Program.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
-        <EmbeddedResource Include="Form1.resx">
+        <EmbeddedResource Include="Presentation\Form1.resx">
           <DependentUpon>Form1.cs</DependentUpon>
         </EmbeddedResource>
         <EmbeddedResource Include="Properties\Resources.resx">
@@ -85,6 +93,10 @@
       <EmbeddedResource Include="Assets\Line.png" />
       <EmbeddedResource Include="Assets\Normal.png" />
       <EmbeddedResource Include="Assets\Rectangle.png" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Model\Command\" />
+      <Folder Include="Model\Shape\Factory\" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
 </Project>
