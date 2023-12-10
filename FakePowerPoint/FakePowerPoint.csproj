@@ -51,6 +51,8 @@
         <Compile Include="Model\Model.cs" />
         <Compile Include="Model\Shape\Handle.cs" />
         <Compile Include="Model\Shape\Shape.cs" />
+        <Compile Include="Model\Shape\Shapes\Ellipse.cs" />
+        <Compile Include="Model\Shape\Shapes\Line.cs" />
         <Compile Include="Model\Shape\Shapes\Rectangle.cs" />
         <Compile Include="Presentation\Form1.cs">
           <SubType>Form</SubType>

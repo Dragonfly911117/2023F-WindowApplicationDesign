@@ -150,7 +150,7 @@ namespace FakePowerPoint.Model.Shape
             }
         }
 
-        protected abstract void Draw(System.Drawing.Graphics graphics);
+        public abstract void Draw(System.Drawing.Graphics graphics);
 
 
         protected void DrawHandles(Graphics graphics)

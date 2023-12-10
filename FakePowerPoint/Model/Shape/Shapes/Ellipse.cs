@@ -5,9 +5,9 @@ using FakePowerPoint.Model.Enums;
 
 namespace FakePowerPoint.Model.Shape.Shapes
 {
-    public class Rectangle : Shape
+    public class Ellipse : Shape
     {
-        public Rectangle(Tuple<Point, Point> coordinates)
+        public Ellipse(Tuple<Point, Point> coordinates)
         {
             Coordinates = coordinates;
             {
@@ -27,7 +27,7 @@ namespace FakePowerPoint.Model.Shape.Shapes
                     new Handle(new Point((x1 + x2) / 2, y2), HandlePosition.BottomMiddle),
                     new Handle(new Point(x2, y2), HandlePosition.BottomRight)
                 };
-                Color = Color.FromArgb(255, 132, 120, 222);
+                Color = Color.Goldenrod;
             }
         }
 
