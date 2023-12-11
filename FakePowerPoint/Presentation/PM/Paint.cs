@@ -1,14 +1,15 @@
 ﻿using System.Drawing;
 
-namespace FakePowerPoint.Presentation.PM;
-
-public partial class PresentationModel
+namespace FakePowerPoint.Presentation.PM
 {
-    Bitmap _bitmap;
-
-    public void Repaint()
+    public partial class PresentationModel
     {
-        _model.Repaint();
-        SlideBitmap = _model.GetCurrentSlideBitmap();
+        Bitmap _bitmap;
+
+        public void Repaint()
+        {
+            _model.Repaint();
+            SlideBitmap = _model.GetCurrentSlideBitmap();
+        }
     }
 }

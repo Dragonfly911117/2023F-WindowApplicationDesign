@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using FakePowerPoint.Model.Enums;
+using FakePowerPoint.Model.Shape;
 
 namespace FakePowerPoint.Presentation.PM
 {
     public partial class PresentationModel : INotifyPropertyChanged
     {
+
+
         public Bitmap SlideBitmap
         {
             get => _bitmap;
@@ -33,6 +37,10 @@ namespace FakePowerPoint.Presentation.PM
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        public void BindShapeList(ref DataGridView shapesDataGridView)
+        {
+            shapesDataGridView.DataSource = _model.GetShapes();;
         }
     }
 }

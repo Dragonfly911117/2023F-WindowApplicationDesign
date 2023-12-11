@@ -9,6 +9,7 @@ namespace FakePowerPoint.Model.Shape.Shapes
     {
         public Ellipse(Tuple<Point, Point> coordinates, Color color = default(Color))
         {
+            ShapeType = Enums.ShapeType.Ellipse;
             Coordinates = coordinates;
             {
                 var x1 = Coordinates.Item1.X;

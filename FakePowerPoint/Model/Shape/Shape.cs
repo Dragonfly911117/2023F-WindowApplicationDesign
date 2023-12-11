@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -7,11 +8,19 @@ using FakePowerPoint.Model.Enums;
 
 namespace FakePowerPoint.Model.Shape
 {
-    public abstract class Shape
+    public abstract class Shape : INotifyPropertyChanged
     {
+        protected ShapeType ShapeType;
+        public string ShapeTypeString => ShapeType.ToString();
         protected Tuple<Point, Point> Coordinates;
+
+        public string CoordinatesString =>
+            $"({Coordinates.Item1.X}, {Coordinates.Item1.Y}), ({Coordinates.Item2.X}, {Coordinates.Item2.Y})";
+
         protected Color Color;
-        protected ShapeType _shapeType;
+        public string ColorString => $"{Color.R}, {Color.G}, {Color.B}, {Color.A}";
+
+
         protected bool Selected = false;
         protected List<Handle> Handles = new List<Handle>();
 
@@ -21,7 +30,7 @@ namespace FakePowerPoint.Model.Shape
 
         protected Shape(ShapeType shapeType)
         {
-            _shapeType = shapeType;
+            ShapeType = shapeType;
         }
 
         public Tuple<Point, Point> GetCoordinates()
@@ -48,7 +57,7 @@ namespace FakePowerPoint.Model.Shape
 
         public ShapeType GetShapeType()
         {
-            return _shapeType;
+            return ShapeType;
         }
 
         public bool GetSelected()
@@ -64,6 +73,7 @@ namespace FakePowerPoint.Model.Shape
         public void SetColor(Color color)
         {
             Color = color;
+            OnPropertyChanged(nameof(Color));
         }
 
         public HandlePosition? IfHandleClicked(Point coordinates)
@@ -95,6 +105,7 @@ namespace FakePowerPoint.Model.Shape
             Coordinates = new Tuple<Point, Point>(new Point(x1 + dx, y1 + dy), new Point(x2 + dx, y2 + dy));
 
             Handles.ForEach(handle => handle.Move(new Point(dx, dy)));
+            OnPropertyChanged(nameof(Coordinates));
         }
 
         public virtual void Resize(Size size, HandlePosition handlePosition = HandlePosition.BottomRight)
@@ -127,6 +138,7 @@ namespace FakePowerPoint.Model.Shape
             {
                 y2 += size.Height;
             }
+
             Coordinates = new Tuple<Point, Point>(new Point(x1, y1), new Point(x2, y2));
 
             Handles = new List<Handle>
@@ -140,6 +152,7 @@ namespace FakePowerPoint.Model.Shape
                 new(new Point((x1 + x2) / 2, y2), HandlePosition.BottomMiddle),
                 new(new Point(x2, y2), HandlePosition.BottomRight)
             };
+            OnPropertyChanged(nameof(Coordinates));
         }
 
 
@@ -150,5 +163,11 @@ namespace FakePowerPoint.Model.Shape
             Handles.ForEach(handle => handle.Draw(graphics));
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -7,21 +8,25 @@ namespace FakePowerPoint.Model
     public class Slide
     {
         Bitmap _bitmap;
-        readonly List<Shape.Shape> _shapes;
+        BindingList<Shape.Shape> _shapes;
         Graphics _graphics;
         Size _size;
 
         public Slide(Size size)
         {
             _bitmap = new Bitmap(size.Width, size.Height);
-            _shapes = new List<Shape.Shape>();
+            _shapes = new BindingList<Shape.Shape>();
             _graphics = Graphics.FromImage(_bitmap);
             _size = size;
         }
 
         void Resize(Size size) // TODO: Get size from view
         {
-            _shapes.ForEach(shape => shape.Resize(size));
+            foreach (var shape in _shapes)
+            {
+                shape.Resize(size);
+            }
+
             _bitmap = new Bitmap(size.Width, size.Height);
             _graphics?.Dispose();
             _graphics = Graphics.FromImage(_bitmap);
@@ -35,15 +40,19 @@ namespace FakePowerPoint.Model
             Draw();
         }
 
-        public void RemoveShape(Shape.Shape shape)
+        public void RemoveShape(int index)
         {
-            _shapes.Remove(shape);
+            _shapes.RemoveAt(index);
+            Draw();
         }
 
         public void Draw()
         {
             _graphics.Clear(Color.Black);
-            _shapes.ForEach(shape => shape.Draw(_graphics));
+            foreach (var shape in _shapes)
+            {
+                shape.Draw(_graphics);
+            }
         }
 
         public Panel ToPanel()
@@ -70,6 +79,16 @@ namespace FakePowerPoint.Model
         public Bitmap GetBitmap()
         {
             return _bitmap;
+        }
+
+        public BindingList<Shape.Shape> GetShapes()
+        {
+            return _shapes;
+        }
+
+        public void SetShapes(BindingList<Shape.Shape> value)
+        {
+            _shapes = value;
         }
     }
 }

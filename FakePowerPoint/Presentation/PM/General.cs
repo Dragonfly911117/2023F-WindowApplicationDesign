@@ -1,4 +1,5 @@
 ﻿using FakePowerPoint.Model.Enums;
+using FakePowerPoint.Model.Shape;
 
 namespace FakePowerPoint.Presentation.PM
 {
@@ -13,6 +14,12 @@ namespace FakePowerPoint.Presentation.PM
         public void AddShape(ShapeType shapeType)
         {
             _model.AddShape(shapeType);
+            Repaint();
+        }
+
+        public void RemoveShape(int index)
+        {
+            _model.RemoveShape(index);
             Repaint();
         }
     }

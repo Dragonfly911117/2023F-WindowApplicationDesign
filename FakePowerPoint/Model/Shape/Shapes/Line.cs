@@ -8,12 +8,10 @@ namespace FakePowerPoint.Model.Shape.Shapes
 {
     public class Line : Shape
     {
-        protected void ReorderCoordinates(ref Tuple<Point, Point> coordinates)
-        {
-        }
 
         public Line(Tuple<Point, Point> coordinates, Color color = default(Color))
         {
+            ShapeType = Enums.ShapeType.Line;
             Coordinates = coordinates ?? new Tuple<Point, Point>(new Point(0, 0), new Point(0, 0));
             Color = color == default ? Color.Violet : color;
             Handles = new List<Handle>

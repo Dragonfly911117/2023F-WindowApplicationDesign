@@ -7,6 +7,7 @@ namespace FakePowerPoint.Presentation
         void BindThings()
         {
             _presentationModel.BindShapeSelectComboBox(ref _shapeSelector);
+
         }
     }
 }

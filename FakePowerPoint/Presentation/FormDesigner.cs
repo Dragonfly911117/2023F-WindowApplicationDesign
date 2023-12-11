@@ -44,6 +44,7 @@ namespace FakePowerPoint.Presentation
         void ConstructLayout()
         {
             // the order matters, the later one overrides the former ones
+            InitializeShapeDataGridView();
             InitializeGroupBoxLeft();
             InitializeGroupBoxMiddle();
             InitializeGroupBoxRight();
@@ -159,6 +160,26 @@ namespace FakePowerPoint.Presentation
             splitter2.Panel2.Controls.Add(_shapesDataGridView);
 
             _groupBoxRight.Controls.Add(splitter2);
+        }
+
+        void InitializeShapeDataGridView()
+        {
+            _presentationModel.BindShapeList(ref _shapesDataGridView);
+            var deleteButtonColumn = new DataGridViewButtonColumn
+            {
+                Name = "Delete",
+                Text = "Delete",
+                UseColumnTextForButtonValue = true
+            };
+            _shapesDataGridView.RowHeadersVisible = false;
+            _shapesDataGridView.Columns.Insert(0, deleteButtonColumn);
+            _shapesDataGridView.CellClick += (sender, args) =>
+            {
+                if (args.ColumnIndex == 0)
+                {
+                    _presentationModel.RemoveShape(args.RowIndex);
+                }
+            };
         }
 
         static void GiveBirth(Control parent, Control child, DockStyle dockStyle = DockStyle.Fill)
