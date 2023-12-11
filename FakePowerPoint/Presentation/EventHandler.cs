@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Windows.Forms;
 using FakePowerPoint.Model.Enums;
 
 namespace FakePowerPoint.Presentation
@@ -14,6 +15,7 @@ namespace FakePowerPoint.Presentation
             _presentationModel.PropertyChanged += ModelPropertyChanged;
             _undoButton.Click += HandleUndoButtonClicked;
             _redoButton.Click += HandleRedoButtonClicked;
+            _slidePanel.Resize += HandlePanelResize;
         }
 
         void HandleAddShapeButtonClicked(object sender, EventArgs e)
@@ -40,6 +42,7 @@ namespace FakePowerPoint.Presentation
                     throw new NotImplementedException();
             }
         }
+
         void HandleUndoButtonClicked(object sender, EventArgs e)
         {
             _presentationModel.Undo();
@@ -50,6 +53,11 @@ namespace FakePowerPoint.Presentation
         {
             _presentationModel.Redo();
             _slidePanel.Invalidate();
+        }
+
+        void HandlePanelResize(object sender, EventArgs e)
+        {
+            _slidePanel.Size = _presentationModel.NormalizeSize(_slidePanel.Size);
         }
     }
 }

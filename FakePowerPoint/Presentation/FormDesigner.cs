@@ -139,6 +139,8 @@ namespace FakePowerPoint.Presentation
 
         void InitializeGroupBoxMiddle()
         {
+            _groupBoxMiddle.BackColor = Color.DarkGray;
+            _slidePanel.BackColor = Color.Black;
             GiveBirth(_groupBoxMiddle, _slidePanel);
             _slidePanel.BackgroundImageLayout = ImageLayout.Stretch;
             _groupBoxMiddle.Dock = DockStyle.Fill;
@@ -147,6 +149,8 @@ namespace FakePowerPoint.Presentation
 
         void InitializeGroupBoxRight()
         {
+            _shapeSelector.DropDownStyle = ComboBoxStyle.DropDownList;
+
             _groupBoxRight.Dock = DockStyle.Fill;
             _groupBoxRight.Text = SHAPES;
 
@@ -195,5 +199,7 @@ namespace FakePowerPoint.Presentation
             child.Dock = dockStyle;
             child.Parent = parent;
         }
+
+
     }
 }
