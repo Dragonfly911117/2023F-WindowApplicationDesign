@@ -12,6 +12,8 @@ namespace FakePowerPoint.Presentation
             _addShapeButton.Click += HandleAddShapeButtonClicked;
             Paint += HandleRepaint;
             _presentationModel.PropertyChanged += ModelPropertyChanged;
+            _undoButton.Click += HandleUndoButtonClicked;
+            _redoButton.Click += HandleRedoButtonClicked;
         }
 
         void HandleAddShapeButtonClicked(object sender, EventArgs e)
@@ -37,6 +39,17 @@ namespace FakePowerPoint.Presentation
                 default:
                     throw new NotImplementedException();
             }
+        }
+        void HandleUndoButtonClicked(object sender, EventArgs e)
+        {
+            _presentationModel.Undo();
+            _slidePanel.Invalidate();
+        }
+
+        void HandleRedoButtonClicked(object sender, EventArgs e)
+        {
+            _presentationModel.Redo();
+            _slidePanel.Invalidate();
         }
     }
 }

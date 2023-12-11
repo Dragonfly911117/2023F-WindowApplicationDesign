@@ -47,6 +47,9 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Model\Commands\AddShape.cs" />
+        <Compile Include="Model\Commands\Command.cs" />
+        <Compile Include="Model\Commands\RemoveShape.cs" />
         <Compile Include="Model\Enums\HandlePosition.cs" />
         <Compile Include="Model\Enums\ShapeType.cs" />
         <Compile Include="Model\Model.cs" />
@@ -69,6 +72,7 @@
         </Compile>
         <Compile Include="Presentation\FormDesigner.cs" />
         <Compile Include="Presentation\Initializer.cs" />
+        <Compile Include="Presentation\PM\Commands.cs" />
         <Compile Include="Presentation\PM\DataBinding.cs" />
         <Compile Include="Presentation\PM\General.cs" />
         <Compile Include="Presentation\PM\Input.cs" />
@@ -107,7 +111,10 @@
       <EmbeddedResource Include="Assets\Rectangle.png" />
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Model\Command\" />
+      <EmbeddedResource Include="Assets\Redo.png" />
+    </ItemGroup>
+    <ItemGroup>
+      <Content Include="Assets\Undo.png" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
 </Project>

@@ -28,19 +28,24 @@ namespace FakePowerPoint.Model
             return new Point(_random.Next(size.Width), _random.Next(size.Height));
         }
 
-        public void AddShape(ShapeType shapeType, Tuple<Point, Point> coordinates = null, Color color = default(Color))
+        public void AddShape(ShapeType shapeType, Tuple<Point, Point> coordinates = null, Color color = default, int index = -1)
         {
             var size = _currentSlide.GetSize();
             coordinates ??= new Tuple<Point, Point>(GetRandomPoint(size), GetRandomPoint(size));
             if (shapeType == ShapeType.Undefined) return;
-            ShapeFactory shapeFactory = _shapeFactories[shapeType];
-            Shape.Shape shape = shapeFactory.CreateShape(coordinates, color);
-            _currentSlide.AddShape(shape);
+            var shapeFactory = _shapeFactories[shapeType];
+            var shape = shapeFactory.CreateShape(coordinates, color);
+            _currentSlide.AddShape(shape, index);
         }
 
         public void RemoveShape(int index)
         {
             _currentSlide.RemoveShape(index);
+        }
+
+        public void RemoveShape(Shape.Shape shape)
+        {
+            _currentSlide.RemoveShape(shape);
         }
 
 

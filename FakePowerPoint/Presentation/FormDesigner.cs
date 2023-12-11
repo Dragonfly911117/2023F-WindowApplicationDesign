@@ -27,6 +27,8 @@ namespace FakePowerPoint.Presentation
         ToolStripButton _lineButton;
         ToolStripButton _rectangleButton;
         ToolStripButton _ellipseButton;
+        ToolStripButton _undoButton;
+        ToolStripButton _redoButton;
 
         SplitContainer _splitContainerMain = new SplitContainer();
 
@@ -83,7 +85,11 @@ namespace FakePowerPoint.Presentation
             InitializeToolStripButton(LINE, ref _lineButton);
             InitializeToolStripButton(RECTANGLE, ref _rectangleButton);
             InitializeToolStripButton(ELLIPSE, ref _ellipseButton);
+            InitializeToolStripButton(REDO, ref _undoButton);
+            InitializeToolStripButton(UNDO, ref _redoButton);
 
+            functionMenu.Items.Add(_undoButton); // Add the ToolStripMenuItem to the MenuStrip
+            functionMenu.Items.Add(_redoButton); // Add the ToolStripMenuItem to the MenuStrip
             functionMenu.Items.Add(_normalModeButton); // Add the ToolStripMenuItem to the MenuStrip
             functionMenu.Items.Add(_lineButton); // Add the ToolStripMenuItem to the MenuStrip
             functionMenu.Items.Add(_rectangleButton); // Add the ToolStripMenuItem to the MenuStrip
@@ -91,6 +97,10 @@ namespace FakePowerPoint.Presentation
 
             _functionMenu.TopToolStripPanel.Controls.Add(functionMenu); // Add the MenuStrip to the container
         }
+
+        const string REDO = "Redo";
+
+        const string UNDO = "Undo";
 
         void InitializeToolStripButton(string imageName, ref ToolStripButton button)
         {
@@ -167,9 +177,7 @@ namespace FakePowerPoint.Presentation
             _presentationModel.BindShapeList(ref _shapesDataGridView);
             var deleteButtonColumn = new DataGridViewButtonColumn
             {
-                Name = "Delete",
-                Text = "Delete",
-                UseColumnTextForButtonValue = true
+                Name = "Delete", Text = "Delete", UseColumnTextForButtonValue = true
             };
             _shapesDataGridView.RowHeadersVisible = false;
             _shapesDataGridView.Columns.Insert(0, deleteButtonColumn);

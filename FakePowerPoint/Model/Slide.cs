@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -34,15 +35,25 @@ namespace FakePowerPoint.Model
             Draw();
         }
 
-        public void AddShape(Shape.Shape shape)
+        public void AddShape(Shape.Shape shape, int index = -1)
         {
-            _shapes.Add(shape);
+            if (index > _shapes.Count)
+            {
+                throw new IndexOutOfRangeException();
+            }
+            index = index == -1 ? _shapes.Count : index;
+            _shapes.Insert(index, shape);
             Draw();
         }
 
         public void RemoveShape(int index)
         {
             _shapes.RemoveAt(index);
+            Draw();
+        }
+        public void RemoveShape(Shape.Shape shape)
+        {
+            _shapes.Remove(shape);
             Draw();
         }
 
