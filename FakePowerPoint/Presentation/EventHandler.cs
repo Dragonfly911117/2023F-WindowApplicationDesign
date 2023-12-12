@@ -27,6 +27,7 @@ namespace FakePowerPoint.Presentation
         void HandleRepaint(object sender, EventArgs e)
         {
             _presentationModel.Repaint();
+
         }
 
         void ModelPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -37,6 +38,8 @@ namespace FakePowerPoint.Presentation
                     // _slidePanel.BackgroundImage?.Dispose();
                     _slidePanel.BackgroundImage = _presentationModel.SlideBitmap;
                     _slidePanel.Invalidate();
+                    _slideButtons[0].BackgroundImage = _presentationModel.SlideBitmap; // hard  coded
+                    _slideButtons[0].Invalidate();
                     break;
                 default:
                     throw new NotImplementedException();

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -33,6 +34,8 @@ namespace FakePowerPoint.Presentation
         SplitContainer _splitContainerMain = new SplitContainer();
 
         GroupBox _groupBoxLeft = new GroupBox();
+        Panel _slideButtonsPanel = new Panel();
+        List<Button> _slideButtons = new List<Button>();
 
         GroupBox _groupBoxMiddle = new GroupBox();
         Panel _slidePanel = new Panel();
@@ -144,11 +147,26 @@ namespace FakePowerPoint.Presentation
         {
             _groupBoxLeft.Dock = DockStyle.Fill;
             _groupBoxLeft.Text = SLIDES;
+            _slideButtonsPanel.AutoScroll = true;
+            _groupBoxLeft.Resize += (sender, args) =>
+            {
+                _slideButtonsPanel.Size = new Size(_groupBoxLeft.Width, _groupBoxLeft.Width * 9 / 16);
+                _slideButtons.ForEach(button => button.Size = new Size(_groupBoxLeft.Width, _groupBoxLeft.Width * 9 / 16));
+            };
+            _slideButtons.Add(new Button());
+            _slideButtons[0].Size = new Size(_groupBoxLeft.Width, _groupBoxLeft.Width * 9 / 16);
+            _slideButtons[0].BackgroundImageLayout = ImageLayout.Stretch;
+
+            // _slideButtons[0].FlatStyle = FlatStyle.Flat;
+            // _slideButtons[0].FlatAppearance.BorderSize = 0;
+            GiveBirth(_slideButtonsPanel, _slideButtons[0], DockStyle.None);
+
+            GiveBirth(_groupBoxLeft, _slideButtonsPanel);
         }
 
         void InitializeGroupBoxMiddle()
         {
-            _groupBoxMiddle.BackColor = Color.DarkGray;
+            // _groupBoxMiddle.BackColor = Color.DarkGray;
             _slidePanel.BackColor = Color.Black;
             GiveBirth(_groupBoxMiddle, _slidePanel, DockStyle.None);
             _slidePanel.Size = new Size(int.Parse(Resources.DEFAULT_SLIDE_WIDTH), int.Parse(Resources.DEFAULT_SLIDE_HEIGHT));
