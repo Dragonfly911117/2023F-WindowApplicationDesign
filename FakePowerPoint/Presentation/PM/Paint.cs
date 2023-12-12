@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using FakePowerPoint.Model.Enums;
 using FakePowerPoint.Properties;
 
 namespace FakePowerPoint.Presentation.PM
@@ -6,7 +7,7 @@ namespace FakePowerPoint.Presentation.PM
     public partial class PresentationModel
     {
         Bitmap _bitmap;
-        Size _size = new (int.Parse(Resources.DEFAULT_SLIDE_WIDTH), int.Parse(Resources.DEFAULT_SLIDE_HEIGHT));
+        ShapeType _shapeType = ShapeType.Undefined;
 
         public void Repaint()
         {

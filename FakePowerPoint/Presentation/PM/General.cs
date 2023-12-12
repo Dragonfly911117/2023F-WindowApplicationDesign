@@ -11,6 +11,7 @@ namespace FakePowerPoint.Presentation.PM
         public PresentationModel(Model.Model model)
         {
             _model = model;
+            InitializeSelectionShape();
         }
 
         public void AddShape(ShapeType shapeType)
@@ -33,7 +34,7 @@ namespace FakePowerPoint.Presentation.PM
 
         public void Resize(Size slidePanelSize)
         {
-            _size = slidePanelSize;
+            _slidePanelSize = slidePanelSize;
             _model.Resize();
         }
     }

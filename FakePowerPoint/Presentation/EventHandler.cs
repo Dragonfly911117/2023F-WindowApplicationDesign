@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using FakePowerPoint.Model.Enums;
+using FakePowerPoint.Properties;
 
 namespace FakePowerPoint.Presentation
 {
@@ -16,6 +18,14 @@ namespace FakePowerPoint.Presentation
             _undoButton.Click += HandleUndoButtonClicked;
             _redoButton.Click += HandleRedoButtonClicked;
             _slidePanel.Resize += HandlePanelResize;
+            _slidePanel.MouseDown += HandleMouseDown;
+            _slidePanel.MouseUp += HandleMouseUp;
+            _slidePanel.MouseMove += HandleMouseMove;
+            _presentationModel.Selected.ItemUpdated += HandleSelectedUpdated;
+            _normalModeButton.Click += HandleFunctionButtonClicked;
+            _lineButton.Click += HandleFunctionButtonClicked;
+            _rectangleButton.Click += HandleFunctionButtonClicked;
+            _ellipseButton.Click += HandleFunctionButtonClicked;
         }
 
         void HandleAddShapeButtonClicked(object sender, EventArgs e)
@@ -27,7 +37,6 @@ namespace FakePowerPoint.Presentation
         void HandleRepaint(object sender, EventArgs e)
         {
             _presentationModel.Repaint();
-
         }
 
         void ModelPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -62,6 +71,52 @@ namespace FakePowerPoint.Presentation
         {
             _slidePanel.Size = _presentationModel.NormalizeSize(_slidePanel.Size);
             _presentationModel.Resize(_slidePanel.Size);
+        }
+
+        void HandleMouseDown(object sender, MouseEventArgs e)
+        {
+            _presentationModel.HandleMouseDown(e.Location);
+        }
+
+        void HandleMouseUp(object sender, MouseEventArgs e)
+        {
+            _presentationModel.HandleMouseUp(e.Location);
+        }
+
+        void HandleMouseMove(object sender, MouseEventArgs e)
+        {
+            _presentationModel.HandleMouseMove(e.Location);
+        }
+
+        void HandleSelectedUpdated(int index, bool newValue)
+        {
+            var functionButtons =
+                new ToolStripButton[] { _normalModeButton, _lineButton, _rectangleButton, _ellipseButton };
+            functionButtons[index].Checked = newValue;
+        }
+
+        void HandleFunctionButtonClicked(object sender, EventArgs e)
+        {
+            var button = (ToolStripButton)sender;
+            var index = -1;
+            var normal = Resources.Normal;
+            switch (button.Name)
+            {
+                case NORMAL:
+                    index = 0;
+                    break;
+                case LINE:
+                    index = 1;
+                    break;
+                case RECTANGLE:
+                    index = 2;
+                    break;
+                case ELLIPSE:
+                    index = 3;
+                    break;
+            }
+            _presentationModel.UpdateSelected(index);
+
         }
     }
 }

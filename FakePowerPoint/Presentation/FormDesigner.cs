@@ -99,6 +99,7 @@ namespace FakePowerPoint.Presentation
             functionMenu.Items.Add(_undoButton); // Add the ToolStripMenuItem to the MenuStrip
             functionMenu.Items.Add(_redoButton); // Add the ToolStripMenuItem to the MenuStrip
             functionMenu.Items.Add(_normalModeButton); // Add the ToolStripMenuItem to the MenuStrip
+            _normalModeButton.Checked = true;
             functionMenu.Items.Add(_lineButton); // Add the ToolStripMenuItem to the MenuStrip
             functionMenu.Items.Add(_rectangleButton); // Add the ToolStripMenuItem to the MenuStrip
             functionMenu.Items.Add(_ellipseButton); // Add the ToolStripMenuItem to the MenuStrip
@@ -114,6 +115,7 @@ namespace FakePowerPoint.Presentation
         {
             button = new ToolStripButton();
             var imageBytes = (byte[])Properties.Resources.ResourceManager.GetObject(imageName);
+            button.Name = imageName;
             button.Image = Image.FromStream(new MemoryStream(imageBytes ?? throw new InvalidOperationException()));
             button.ImageScaling = ToolStripItemImageScaling.SizeToFit;
             button.DisplayStyle = ToolStripItemDisplayStyle.Image;
