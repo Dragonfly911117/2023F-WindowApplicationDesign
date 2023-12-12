@@ -11,7 +11,18 @@ namespace FakePowerPoint.Presentation.PM
 {
     public partial class PresentationModel : INotifyPropertyChanged
     {
+        Cursor _cursor = Cursors.Default;
+        System.Drawing.Rectangle _slidePanelRectangle;
 
+        public Cursor Cursor
+        {
+            get => _cursor;
+            set
+            {
+                _cursor = value;
+                OnPropertyChanged();
+            }
+        }
 
         public Bitmap SlideBitmap
         {

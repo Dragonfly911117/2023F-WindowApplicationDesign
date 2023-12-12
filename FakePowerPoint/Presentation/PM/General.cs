@@ -1,7 +1,9 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using FakePowerPoint.Model.Commands;
 using FakePowerPoint.Model.Enums;
 using FakePowerPoint.Model.Shape;
+using FakePowerPoint.Properties;
 
 namespace FakePowerPoint.Presentation.PM
 {
@@ -11,6 +13,8 @@ namespace FakePowerPoint.Presentation.PM
         public PresentationModel(Model.Model model)
         {
             _model = model;
+            this._coordinates = null;
+            _slidePanelRectangle = new Rectangle(0, 0, int.Parse(Resources.DEFAULT_SLIDE_WIDTH), int.Parse(Resources.DEFAULT_SLIDE_HEIGHT));
             InitializeSelectionShape();
         }
 
@@ -32,9 +36,9 @@ namespace FakePowerPoint.Presentation.PM
             Repaint();
         }
 
-        public void Resize(Size slidePanelSize)
+        public void Resize(Rectangle slidePanelSize)
         {
-            _slidePanelSize = slidePanelSize;
+            _slidePanelRectangle = slidePanelSize;
             _model.Resize();
         }
     }

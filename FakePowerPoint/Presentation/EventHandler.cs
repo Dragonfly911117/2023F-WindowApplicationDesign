@@ -50,6 +50,9 @@ namespace FakePowerPoint.Presentation
                     _slideButtons[0].BackgroundImage = _presentationModel.SlideBitmap; // hard  coded
                     _slideButtons[0].Invalidate();
                     break;
+                case nameof(_presentationModel.Cursor):
+                    _slidePanel.Cursor = _presentationModel.Cursor;
+                    break;
                 default:
                     throw new NotImplementedException();
             }
@@ -70,7 +73,7 @@ namespace FakePowerPoint.Presentation
         void HandlePanelResize(object sender, EventArgs e)
         {
             _slidePanel.Size = _presentationModel.NormalizeSize(_slidePanel.Size);
-            _presentationModel.Resize(_slidePanel.Size);
+            _presentationModel.Resize(_slidePanel.Bounds);
         }
 
         void HandleMouseDown(object sender, MouseEventArgs e)

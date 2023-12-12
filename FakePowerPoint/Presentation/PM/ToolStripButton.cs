@@ -42,7 +42,7 @@ namespace FakePowerPoint.Presentation.PM
             }
         }
 
-        public void UpdateSelected(int index = -1)
+        public void UpdateSelected(int index = 0)
         {
             // Iterates through the Selected list and unselects any selected item
             for (var i = 0; i < Selected.Count; i++)
