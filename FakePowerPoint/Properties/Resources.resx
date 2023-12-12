@@ -138,4 +138,16 @@
   <data name="Property_is_not_set" xml:space="preserve">
     <value>The property being got is not set.</value>
   </data>
+  <data name="DEFAULT_WINDOW_WIDTH" xml:space="preserve">
+    <value>1920</value>
+  </data>
+  <data name="DEFAULT_WINDOW_HEIGHT" xml:space="preserve">
+    <value>1080</value>
+  </data>
+  <data name="DEFAULT_SLIDE_WIDTH" xml:space="preserve">
+    <value>1312</value>
+  </data>
+  <data name="DEFAULT_SLIDE_HEIGHT" xml:space="preserve">
+    <value>738</value>
+  </data>
 </root>

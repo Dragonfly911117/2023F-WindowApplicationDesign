@@ -46,6 +46,7 @@ namespace FakePowerPoint.Presentation
         void ConstructLayout()
         {
             // the order matters, the later one overrides the former ones
+            InitForm();
             InitializeShapeDataGridView();
             InitializeGroupBoxLeft();
             InitializeGroupBoxMiddle();
@@ -55,6 +56,10 @@ namespace FakePowerPoint.Presentation
             InitializeMenu();
         }
 
+        void InitForm()
+        {
+            Size = new Size(int.Parse(Resources.DEFAULT_WINDOW_WIDTH),int.Parse( Resources.DEFAULT_WINDOW_HEIGHT));
+        }
 
         void InitializeMenu()
         {
@@ -119,10 +124,14 @@ namespace FakePowerPoint.Presentation
 
             var splitContainerRight = new SplitContainer();
             splitContainerRight.Orientation = Orientation.Vertical;
-            splitContainerRight.SplitterDistance = splitContainerRight.Width * 4 / 5;
+            splitContainerRight.SplitterDistance = int.Parse(Resources.DEFAULT_SLIDE_WIDTH);
             splitContainerRight.Dock = DockStyle.Fill;
             splitContainerRight.Panel1.Controls.Add(_groupBoxMiddle);
             splitContainerRight.Panel2.Controls.Add(_groupBoxRight);
+            splitContainerRight.SplitterMoved += (sender, args) =>
+            {
+                _slidePanel.Size = new Size(splitContainerRight.SplitterDistance, _slidePanel.Height);
+            };
 
             _splitContainerMain.Panel1.Controls.Add(_groupBoxLeft);
             _splitContainerMain.Panel2.Controls.Add(splitContainerRight);
@@ -141,8 +150,10 @@ namespace FakePowerPoint.Presentation
         {
             _groupBoxMiddle.BackColor = Color.DarkGray;
             _slidePanel.BackColor = Color.Black;
-            GiveBirth(_groupBoxMiddle, _slidePanel);
+            GiveBirth(_groupBoxMiddle, _slidePanel, DockStyle.None);
+            _slidePanel.Size = new Size(int.Parse(Resources.DEFAULT_SLIDE_WIDTH), int.Parse(Resources.DEFAULT_SLIDE_HEIGHT));
             _slidePanel.BackgroundImageLayout = ImageLayout.Stretch;
+            _slidePanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             _groupBoxMiddle.Dock = DockStyle.Fill;
             _groupBoxMiddle.Text = SLIDE;
         }
@@ -162,16 +173,18 @@ namespace FakePowerPoint.Presentation
             var splitter = new SplitContainer();
             splitter.Dock = DockStyle.Fill;
             splitter.Orientation = Orientation.Vertical;
-            splitter.SplitterDistance = splitter.Width * 4 / 5;
             splitter.Panel1.Controls.Add(_shapeSelector);
             splitter.Panel2.Controls.Add(_addShapeButton);
+            splitter.SplitterDistance = splitter.Width * 4 / 5;
 
             var splitter2 = new SplitContainer();
             splitter2.Dock = DockStyle.Fill;
             splitter2.Orientation = Orientation.Horizontal;
-            splitter2.SplitterDistance = _groupBoxRight.Height / 20;
             splitter2.Panel1.Controls.Add(splitter);
             splitter2.Panel2.Controls.Add(_shapesDataGridView);
+            splitter2.Panel1MinSize = _addShapeButton.Height / 2;
+            splitter2.SplitterDistance = splitter2.Panel1MinSize;
+
 
             _groupBoxRight.Controls.Add(splitter2);
         }

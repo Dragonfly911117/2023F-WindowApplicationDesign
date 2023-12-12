@@ -1,10 +1,12 @@
 ﻿using System.Drawing;
+using FakePowerPoint.Properties;
 
 namespace FakePowerPoint.Presentation.PM
 {
     public partial class PresentationModel
     {
         Bitmap _bitmap;
+        Size _size = new (int.Parse(Resources.DEFAULT_SLIDE_WIDTH), int.Parse(Resources.DEFAULT_SLIDE_HEIGHT));
 
         public void Repaint()
         {
@@ -14,18 +16,8 @@ namespace FakePowerPoint.Presentation.PM
 
         public Size NormalizeSize(Size slidePanelSize)
         {
-            var aspectRatio = 16.0 / 9.0;
-
-
-
-            if (slidePanelSize.Width > (slidePanelSize.Height * aspectRatio))
-            {
-                slidePanelSize.Width = (int)(slidePanelSize.Height * aspectRatio);
-            }
-            else
-            {
-                slidePanelSize.Height = (int)(slidePanelSize.Width / aspectRatio);
-            }
+            const double ASPECT_RATIO = 16.0 / 9.0;
+            slidePanelSize.Height = (int)(slidePanelSize.Width / ASPECT_RATIO);
 
             return slidePanelSize;
         }

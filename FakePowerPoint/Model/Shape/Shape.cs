@@ -110,6 +110,10 @@ namespace FakePowerPoint.Model.Shape
 
         public virtual void Resize(Size size, HandlePosition handlePosition = HandlePosition.BottomRight)
         {
+            var currSize = new Size(Coordinates.Item2.X - Coordinates.Item1.X,
+                Coordinates.Item2.Y - Coordinates.Item1.Y);
+            var dx = size.Width - currSize.Width;
+            var dy = size.Height - currSize.Height;
             var x1 = Coordinates.Item1.X;
             var y1 = Coordinates.Item1.Y;
             var x2 = Coordinates.Item2.X;
@@ -118,25 +122,25 @@ namespace FakePowerPoint.Model.Shape
             if (new[] { HandlePosition.TopLeft, HandlePosition.MiddleLeft, HandlePosition.BottomLeft }.Contains(
                     handlePosition))
             {
-                x1 += size.Width;
+                x1 -= dx;
             }
 
             if (new[] { HandlePosition.TopRight, HandlePosition.MiddleRight, HandlePosition.BottomRight }.Contains(
                     handlePosition))
             {
-                x2 += size.Width;
+                x2 += dx;
             }
 
             if (new[] { HandlePosition.TopLeft, HandlePosition.TopMiddle, HandlePosition.TopRight }.Contains(
                     handlePosition))
             {
-                y1 += size.Height;
+                y1 -= dy;
             }
 
             if (new[] { HandlePosition.BottomLeft, HandlePosition.BottomMiddle, HandlePosition.BottomRight }.Contains(
                     handlePosition))
             {
-                y2 += size.Height;
+                y2 += dy;
             }
 
             Coordinates = new Tuple<Point, Point>(new Point(x1, y1), new Point(x2, y2));

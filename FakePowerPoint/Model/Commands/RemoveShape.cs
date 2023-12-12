@@ -2,8 +2,8 @@ namespace FakePowerPoint.Model.Commands
 {
     public class RemoveShape : Commands.Command
     {
-        private int _index;
-        private Shape.Shape _shape;
+        int _index;
+        Shape.Shape _shape;
 
         public RemoveShape(Model receiver, int index)
             : base(receiver)

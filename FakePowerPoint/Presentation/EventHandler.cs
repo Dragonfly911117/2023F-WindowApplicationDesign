@@ -58,6 +58,7 @@ namespace FakePowerPoint.Presentation
         void HandlePanelResize(object sender, EventArgs e)
         {
             _slidePanel.Size = _presentationModel.NormalizeSize(_slidePanel.Size);
+            _presentationModel.Resize(_slidePanel.Size);
         }
     }
 }

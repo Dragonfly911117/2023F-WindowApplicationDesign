@@ -1,4 +1,5 @@
-﻿using FakePowerPoint.Model.Commands;
+﻿using System.Drawing;
+using FakePowerPoint.Model.Commands;
 using FakePowerPoint.Model.Enums;
 using FakePowerPoint.Model.Shape;
 
@@ -28,6 +29,12 @@ namespace FakePowerPoint.Presentation.PM
             _undo.Clear();
             _command.Push(command);
             Repaint();
+        }
+
+        public void Resize(Size slidePanelSize)
+        {
+            _size = slidePanelSize;
+            _model.Resize();
         }
     }
 }

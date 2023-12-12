@@ -10,9 +10,9 @@ namespace FakePowerPoint.Presentation
         public Form1(PresentationModel presentationModel)
         {
             _presentationModel = presentationModel;
+            InitializeComponent();
             ConstructLayout();
             BindThings();
-            InitializeComponent();
             BindEventHandlers();
         }
     }

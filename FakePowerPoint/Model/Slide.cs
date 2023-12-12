@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using FakePowerPoint.Properties;
 
 namespace FakePowerPoint.Model
 {
@@ -10,28 +11,17 @@ namespace FakePowerPoint.Model
     {
         Bitmap _bitmap;
         BindingList<Shape.Shape> _shapes;
-        Graphics _graphics;
         Size _size;
 
-        public Slide(Size size)
+        public Slide()
         {
-            _bitmap = new Bitmap(size.Width, size.Height);
+            _size = new Size(int.Parse(Resources.DEFAULT_WINDOW_WIDTH), int.Parse(Resources.DEFAULT_WINDOW_HEIGHT));
+            _bitmap = new Bitmap(_size.Width, _size.Height);
             _shapes = new BindingList<Shape.Shape>();
-            _graphics = Graphics.FromImage(_bitmap);
-            _size = size;
         }
 
-        void Resize(Size size) // TODO: Get size from view
+        public void Resize()
         {
-            foreach (var shape in _shapes)
-            {
-                shape.Resize(size);
-            }
-
-            _bitmap = new Bitmap(size.Width, size.Height);
-            _graphics?.Dispose();
-            _graphics = Graphics.FromImage(_bitmap);
-            _size = size;
             Draw();
         }
 
@@ -59,11 +49,13 @@ namespace FakePowerPoint.Model
 
         public void Draw()
         {
-            _graphics.Clear(Color.Black);
+            var graphics = Graphics.FromImage(_bitmap);
+            graphics.Clear(Color.Black);
             foreach (var shape in _shapes)
             {
-                shape.Draw(_graphics);
+                shape.Draw(graphics);
             }
+            graphics.Dispose();
         }
 
         public Panel ToPanel()

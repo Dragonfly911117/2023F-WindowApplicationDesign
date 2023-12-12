@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using FakePowerPoint.Model.Enums;
 using FakePowerPoint.Model.Shape.Factory;
+using FakePowerPoint.Properties;
 
 namespace FakePowerPoint.Model
 {
@@ -16,7 +17,7 @@ namespace FakePowerPoint.Model
 
         public Model()
         {
-            _slides.Add(new Slide(new Size(1000, 1000)));
+            _slides.Add(new Slide());
             _currentSlide = _slides[0];
             _currentShapes.RaiseListChangedEvents = true;
             _currentShapes.ListChanged += (sender, args) => Repaint();
@@ -74,6 +75,11 @@ namespace FakePowerPoint.Model
         public void SetShapes(BindingList<Shape.Shape> value)
         {
             _currentSlide.SetShapes(value);
+        }
+
+        public void Resize()
+        {
+            _currentSlide.Resize();
         }
     }
 }
