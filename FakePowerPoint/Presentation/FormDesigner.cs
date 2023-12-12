@@ -85,8 +85,8 @@ namespace FakePowerPoint.Presentation
             InitializeToolStripButton(LINE, ref _lineButton);
             InitializeToolStripButton(RECTANGLE, ref _rectangleButton);
             InitializeToolStripButton(ELLIPSE, ref _ellipseButton);
-            InitializeToolStripButton(REDO, ref _undoButton);
-            InitializeToolStripButton(UNDO, ref _redoButton);
+            InitializeToolStripButton(REDO, ref _redoButton);
+            InitializeToolStripButton(UNDO, ref _undoButton);
 
             functionMenu.Items.Add(_undoButton); // Add the ToolStripMenuItem to the MenuStrip
             functionMenu.Items.Add(_redoButton); // Add the ToolStripMenuItem to the MenuStrip
