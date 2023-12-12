@@ -61,7 +61,9 @@ namespace FakePowerPoint.Presentation.PM
             DrawShape(normalizedPoint);
             var command = new AddShape(_model, _shapeType, _coordinates);
             command.Execute();
+            _dos[0] = true;
             _undo.Clear();
+            _dos[1] = false;
             _command.Push(command);
             _tempShape = null;
             _coordinates = null;

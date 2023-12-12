@@ -22,6 +22,7 @@ namespace FakePowerPoint.Presentation
             _slidePanel.MouseUp += HandleMouseUp;
             _slidePanel.MouseMove += HandleMouseMove;
             _presentationModel.Selected.ItemUpdated += HandleSelectedUpdated;
+            _presentationModel.Dos.ItemUpdated += HandleDosUpdated;
             _normalModeButton.Click += HandleFunctionButtonClicked;
             _lineButton.Click += HandleFunctionButtonClicked;
             _rectangleButton.Click += HandleFunctionButtonClicked;
@@ -91,18 +92,22 @@ namespace FakePowerPoint.Presentation
             _presentationModel.HandleMouseMove(e.Location);
         }
 
+        void HandleDosUpdated(int index, bool newValue)
+        {
+            var functionButtons = new ToolStripButton[] { _undoButton, _redoButton };
+                functionButtons[index].Enabled = newValue;
+        }
+
         void HandleSelectedUpdated(int index, bool newValue)
         {
             var functionButtons =
                 new ToolStripButton[] { _normalModeButton, _lineButton, _rectangleButton, _ellipseButton };
             functionButtons[index].Checked = newValue;
         }
-
         void HandleFunctionButtonClicked(object sender, EventArgs e)
         {
             var button = (ToolStripButton)sender;
             var index = -1;
-            var normal = Resources.Normal;
             switch (button.Name)
             {
                 case NORMAL:

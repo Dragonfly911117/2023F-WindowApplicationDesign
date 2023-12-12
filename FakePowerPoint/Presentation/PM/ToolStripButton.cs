@@ -7,6 +7,19 @@ namespace FakePowerPoint.Presentation.PM
     public partial class PresentationModel
     {
         ObservableList<bool> _selected = new ObservableList<bool>();
+        ObservableList<bool> _dos = new ObservableList<bool>();
+
+        public ObservableList<bool> Dos
+        {
+            get => _dos;
+            private set
+            {
+                if (Equals(value, _dos))
+                    return;
+                _dos = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ObservableList<bool> Selected
         {
@@ -72,6 +85,12 @@ namespace FakePowerPoint.Presentation.PM
             {
                 Selected.Add(false);
             }
+        }
+
+        void InitializeDo()
+        {
+            _dos.Add(false);
+            _dos.Add(false);
         }
     }
 }

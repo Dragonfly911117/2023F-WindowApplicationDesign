@@ -13,16 +13,19 @@ namespace FakePowerPoint.Presentation.PM
         public PresentationModel(Model.Model model)
         {
             _model = model;
-            this._coordinates = null;
+            _coordinates = null;
             _slidePanelRectangle = new Rectangle(0, 0, int.Parse(Resources.DEFAULT_SLIDE_WIDTH), int.Parse(Resources.DEFAULT_SLIDE_HEIGHT));
             InitializeSelectionShape();
+            InitializeDo();
         }
 
         public void AddShape(ShapeType shapeType)
         {
             var command = new AddShape(_model, shapeType);
             command.Execute();
+            _dos[0] = true;
             _undo.Clear();
+            _dos[1] = false;
             _command.Push(command);
             Repaint();
         }
@@ -31,7 +34,9 @@ namespace FakePowerPoint.Presentation.PM
         {
             var command = new RemoveShape(_model, index);
             command.Execute();
+            _dos[0] = true;
             _undo.Clear();
+            _dos[1] = false;
             _command.Push(command);
             Repaint();
         }

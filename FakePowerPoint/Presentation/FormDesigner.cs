@@ -97,7 +97,9 @@ namespace FakePowerPoint.Presentation
             InitializeToolStripButton(UNDO, ref _undoButton);
 
             functionMenu.Items.Add(_undoButton); // Add the ToolStripMenuItem to the MenuStrip
+            _undoButton.Enabled = false;
             functionMenu.Items.Add(_redoButton); // Add the ToolStripMenuItem to the MenuStrip
+            _redoButton.Enabled = false;
             functionMenu.Items.Add(_normalModeButton); // Add the ToolStripMenuItem to the MenuStrip
             _normalModeButton.Checked = true;
             functionMenu.Items.Add(_lineButton); // Add the ToolStripMenuItem to the MenuStrip
