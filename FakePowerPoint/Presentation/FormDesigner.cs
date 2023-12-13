@@ -61,7 +61,7 @@ namespace FakePowerPoint.Presentation
 
         void InitForm()
         {
-            Size = new Size(int.Parse(Resources.DEFAULT_WINDOW_WIDTH),int.Parse( Resources.DEFAULT_WINDOW_HEIGHT));
+            Size = new Size(int.Parse(Resources.DEFAULT_WINDOW_WIDTH), int.Parse(Resources.DEFAULT_WINDOW_HEIGHT));
         }
 
         void InitializeMenu()
@@ -155,7 +155,8 @@ namespace FakePowerPoint.Presentation
             _groupBoxLeft.Resize += (sender, args) =>
             {
                 _slideButtonsPanel.Size = new Size(_groupBoxLeft.Width, _groupBoxLeft.Width * 9 / 16);
-                _slideButtons.ForEach(button => button.Size = new Size(_groupBoxLeft.Width, _groupBoxLeft.Width * 9 / 16));
+                _slideButtons.ForEach(button =>
+                    button.Size = new Size(_groupBoxLeft.Width, _groupBoxLeft.Width * 9 / 16));
             };
             _slideButtons.Add(new Button());
             _slideButtons[0].Size = new Size(_groupBoxLeft.Width, _groupBoxLeft.Width * 9 / 16);
@@ -170,10 +171,12 @@ namespace FakePowerPoint.Presentation
 
         void InitializeGroupBoxMiddle()
         {
-            // _groupBoxMiddle.BackColor = Color.DarkGray;
+            _groupBoxMiddle.BackColor = Color.DarkGray;
             _slidePanel.BackColor = Color.Black;
             GiveBirth(_groupBoxMiddle, _slidePanel, DockStyle.None);
-            _slidePanel.Size = new Size(int.Parse(Resources.DEFAULT_SLIDE_WIDTH), int.Parse(Resources.DEFAULT_SLIDE_HEIGHT));
+            _slidePanel.Size = _presentationModel.NormalizeSize(new Size(int.Parse(Resources.DEFAULT_SLIDE_WIDTH),
+                int.Parse(Resources.DEFAULT_SLIDE_HEIGHT)));
+            _presentationModel.Resize(_slidePanel.Bounds);
             _slidePanel.BackgroundImageLayout = ImageLayout.Stretch;
             _slidePanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             _groupBoxMiddle.Dock = DockStyle.Fill;
@@ -207,7 +210,6 @@ namespace FakePowerPoint.Presentation
             splitter2.Panel1MinSize = _addShapeButton.Height / 2;
             splitter2.SplitterDistance = splitter2.Panel1MinSize;
 
-
             _groupBoxRight.Controls.Add(splitter2);
         }
 
@@ -234,7 +236,5 @@ namespace FakePowerPoint.Presentation
             child.Dock = dockStyle;
             child.Parent = parent;
         }
-
-
     }
 }

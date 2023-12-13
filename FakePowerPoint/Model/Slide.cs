@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using FakePowerPoint.Model.Enums;
 using FakePowerPoint.Properties;
 
 namespace FakePowerPoint.Model
@@ -114,6 +115,12 @@ namespace FakePowerPoint.Model
             {
                 shape.SetSelected(false);
             }
+        }
+
+        public void ResizeShape(int index, Size size, HandlePosition handlePosition)
+        {
+            _shapes[index].Resize(size, handlePosition);
+            Draw();
         }
     }
 }

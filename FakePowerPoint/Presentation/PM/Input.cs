@@ -12,15 +12,21 @@ namespace FakePowerPoint.Presentation.PM
         {
             if (IfInSlidePanel(point))
             {
+                var normalizedPoint = NormalizePoint(point);
                 if (IfInDrawingMode())
                 {
-                    var normalizedPoint = NormalizePoint(point);
                     DropPen(normalizedPoint);
                 }
                 else if (IfInSelectionMode())
                 {
-                    var normalizedPoint = NormalizePoint(point);
-                    SelectShape(normalizedPoint);
+                    if (_selectedShapeIndex == -1)
+                    {
+                        SelectShape(normalizedPoint);
+                    }
+                    else
+                    {
+                        OperateShape(normalizedPoint);
+                    }
                 }
             }
             else
@@ -38,10 +44,21 @@ namespace FakePowerPoint.Presentation.PM
         {
             if (IfInSlidePanel(point))
             {
+                var normalizedPoint = NormalizePoint(point);
                 if (IfInDrawingMode())
                 {
-                    var normalizedPoint = NormalizePoint(point);
                     PickUpThePen(normalizedPoint);
+                }
+                else if (IfInSelectionMode())
+                {
+                    if (_selectedShapeIndex != -1)
+                    {
+                        if (_coordinates != null)
+                        {
+                            OperateShape(normalizedPoint, true);
+                            _model.Repaint();
+                        }
+                    }
                 }
             }
             else
@@ -60,20 +77,42 @@ namespace FakePowerPoint.Presentation.PM
             Cursor = Cursors.Default;
             if (IfInSlidePanel(point))
             {
+                var normalizedPoint = NormalizePoint(point);
                 if (IfInDrawingMode())
                 {
                     Cursor = Cursors.Cross;
-                    var normalizedPoint = NormalizePoint(point);
                     DrawShape(normalizedPoint);
                 }
-            }
-            else
-            {
-                if (IfInDrawingMode())
+                else if (IfInSelectionMode())
                 {
-                    _coordinates = null;
-                    _tempShape = null;
-                    // Repaint();
+                    if (_selectedShapeIndex != -1)
+                    {
+                        var temp = _model.GetShapes()[_selectedShapeIndex].IfHandleClicked(normalizedPoint);
+                        if (temp != HandlePosition.Undefined)
+                        {
+                            Cursor = temp switch
+                            {
+                                HandlePosition.BottomLeft => Cursors.SizeNESW,
+                                HandlePosition.BottomRight => Cursors.SizeNWSE,
+                                HandlePosition.TopRight => Cursors.SizeNESW,
+                                HandlePosition.TopLeft => Cursors.SizeNWSE,
+                                HandlePosition.BottomMiddle => Cursors.SizeNS,
+                                HandlePosition.TopMiddle => Cursors.SizeNS,
+                                HandlePosition.MiddleLeft => Cursors.SizeWE,
+                                HandlePosition.MiddleRight => Cursors.SizeWE,
+                                _ => Cursor
+                            };
+                        }
+                    }
+                }
+                else
+                {
+                    if (IfInDrawingMode())
+                    {
+                        _coordinates = null;
+                        _tempShape = null;
+                        // Repaint();
+                    }
                 }
             }
         }
@@ -83,11 +122,10 @@ namespace FakePowerPoint.Presentation.PM
             return _shapeType == ShapeType.Undefined;
         }
 
-        public Point NormalizePoint(Point point)
+        Point NormalizePoint(Point point)
         {
             point = new Point(point.X - _slidePanelRectangle.X, point.Y - _slidePanelRectangle.Y);
-            var bitmapSize = new Size(int.Parse(Resources.DEFAULT_WINDOW_WIDTH),
-                int.Parse(Resources.DEFAULT_WINDOW_HEIGHT));
+            var bitmapSize = _model.GetCurrentSlideBitmap().Size;
             var ratio = (double)bitmapSize.Width / _slidePanelRectangle.Width;
             return new Point((int)(point.X * ratio), (int)(point.Y * ratio));
         }

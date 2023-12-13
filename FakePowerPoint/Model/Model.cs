@@ -79,7 +79,7 @@ namespace FakePowerPoint.Model
 
         public void Resize()
         {
-            _currentSlide.Resize();
+            // _currentSlide.Resize();
         }
 
         public int GetShapeIndex(Point normalizedPoint)
@@ -90,6 +90,11 @@ namespace FakePowerPoint.Model
         public void UnselectShapes()
         {
             _currentSlide.UnselectShapes();
+        }
+
+        public void ResizeShape(int index, Size size, HandlePosition handlePosition)
+        {
+            _currentSlide.ResizeShape(index, size, handlePosition);
         }
     }
 }

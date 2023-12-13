@@ -47,6 +47,8 @@ namespace FakePowerPoint.Presentation.PM
 
             // Select the item at the specific index
             ShowSelectedOrUpdate(index, true);
+            UnselectShapes();
+            Repaint();
         }
 
         void ShowSelectedOrUpdate(int index, bool value)

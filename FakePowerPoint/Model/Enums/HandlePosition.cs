@@ -9,6 +9,7 @@
         MiddleRight,
         BottomLeft,
         BottomMiddle,
-        BottomRight
+        BottomRight,
+        Undefined
     }
 }

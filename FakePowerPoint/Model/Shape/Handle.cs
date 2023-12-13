@@ -41,8 +41,9 @@ namespace FakePowerPoint.Model.Shape
 
         public bool IfClicked(Point coordinates)
         {
-            return coordinates.X >= _coordinate.X - 5 && coordinates.X <= _coordinate.X + 5 &&
-                   coordinates.Y >= _coordinate.Y - 5 && coordinates.Y <= _coordinate.Y + 5;
+            // return true;
+            return coordinates.X >= _coordinate.X - 15 && coordinates.X <= _coordinate.X + 15 &&
+                   coordinates.Y >= _coordinate.Y - 15 && coordinates.Y <= _coordinate.Y + 15;
         }
 
         public void Move(Point delta)

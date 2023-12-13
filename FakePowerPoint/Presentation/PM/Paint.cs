@@ -23,6 +23,7 @@ namespace FakePowerPoint.Presentation.PM
                 var graphics = Graphics.FromImage(_bitmap);
                 _tempShape.Draw(graphics);
             }
+
             SlideBitmap = temp;
         }
 
@@ -38,6 +39,7 @@ namespace FakePowerPoint.Presentation.PM
         {
             _coordinates = new Tuple<Point, Point>(normalizedPoint, normalizedPoint);
         }
+
         void DrawShape(Point normalizedPoint)
         {
             if (_coordinates == null)
@@ -49,6 +51,7 @@ namespace FakePowerPoint.Presentation.PM
 
         Shape _tempShape;
         Tuple<Point, Point> _coordinates;
+
         readonly Dictionary<ShapeType, ShapeFactory> _shapeFactories = new()
         {
             { ShapeType.Line, new LineFactory() },
@@ -77,6 +80,57 @@ namespace FakePowerPoint.Presentation.PM
             _selectedShapeIndex = _model.GetShapeIndex(normalizedPoint);
             Repaint();
         }
+
         int _selectedShapeIndex = -1;
+        HandlePosition _selectedHandlePosition = HandlePosition.Undefined;
+
+        void UnselectShapes()
+        {
+            _selectedShapeIndex = -1;
+            _selectedHandlePosition = HandlePosition.Undefined;
+            _model.UnselectShapes();
+            Repaint();
+        }
+
+        void OperateShape(Point normalizedPoint, bool isMouseUp = false)
+        {
+            var shape = _model.GetShapes()[_selectedShapeIndex];
+            if (isMouseUp)
+            {
+                Command command = null;
+                if (_selectedHandlePosition != HandlePosition.Undefined)
+                {
+                    var delta= new Size(normalizedPoint.X - _coordinates.Item1.X,
+                        normalizedPoint.Y - _coordinates.Item1.Y);
+                    command = new ResizeShape(_model, _selectedShapeIndex, delta, _selectedHandlePosition);
+                }
+                else
+                {
+                    // command = new MoveShape(_model, _selectedShapeIndex, _coordinates);
+                }
+
+                command?.Execute();
+                Dos[0] = true;
+                _undo.Clear();
+                Dos[1] = false;
+                _command.Push(command);
+                _coordinates = null;
+                _selectedHandlePosition = HandlePosition.Undefined;
+                UpdateSelected();
+                Repaint();
+            }
+            else
+            {
+                _selectedHandlePosition = shape.IfHandleClicked(normalizedPoint);
+                if (_selectedHandlePosition != HandlePosition.Undefined || shape.IfShapeClicked(normalizedPoint))
+                {
+                    _coordinates = new Tuple<Point, Point>(normalizedPoint, normalizedPoint);
+                }
+                else
+                {
+                    UnselectShapes();
+                }
+            }
+        }
     }
 }

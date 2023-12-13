@@ -76,20 +76,20 @@ namespace FakePowerPoint.Model.Shape
             OnPropertyChanged(nameof(Color));
         }
 
-        public HandlePosition? IfHandleClicked(Point coordinates)
+        public HandlePosition IfHandleClicked(Point coordinates)
         {
             foreach (var handle in Handles.Where(handle => handle.IfClicked(coordinates)))
             {
                 return handle.GetPosition();
             }
 
-            return null;
+            return HandlePosition.Undefined;
         }
 
         public virtual bool IfShapeClicked(Point point)
         {
-            return point.X >= Coordinates.Item1.X && point.X <= Coordinates.Item2.X &&
-                   point.Y >= Coordinates.Item1.Y && point.Y <= Coordinates.Item2.Y;
+            return point.X >= Coordinates.Item1.X && point.X <= Coordinates.Item2.X && point.Y >= Coordinates.Item1.Y &&
+                   point.Y <= Coordinates.Item2.Y;
         }
 
         public void Move(Point coordinates)
@@ -112,8 +112,8 @@ namespace FakePowerPoint.Model.Shape
         {
             var currSize = new Size(Coordinates.Item2.X - Coordinates.Item1.X,
                 Coordinates.Item2.Y - Coordinates.Item1.Y);
-            var dx = size.Width - currSize.Width;
-            var dy = size.Height - currSize.Height;
+            var dx = size.Width; //- currSize.Width;
+            var dy = size.Height; // - currSize.Height;
             var x1 = Coordinates.Item1.X;
             var y1 = Coordinates.Item1.Y;
             var x2 = Coordinates.Item2.X;
@@ -122,7 +122,7 @@ namespace FakePowerPoint.Model.Shape
             if (new[] { HandlePosition.TopLeft, HandlePosition.MiddleLeft, HandlePosition.BottomLeft }.Contains(
                     handlePosition))
             {
-                x1 -= dx;
+                x1 += dx;
             }
 
             if (new[] { HandlePosition.TopRight, HandlePosition.MiddleRight, HandlePosition.BottomRight }.Contains(
@@ -134,13 +134,23 @@ namespace FakePowerPoint.Model.Shape
             if (new[] { HandlePosition.TopLeft, HandlePosition.TopMiddle, HandlePosition.TopRight }.Contains(
                     handlePosition))
             {
-                y1 -= dy;
+                y1 += dy;
             }
 
             if (new[] { HandlePosition.BottomLeft, HandlePosition.BottomMiddle, HandlePosition.BottomRight }.Contains(
                     handlePosition))
             {
                 y2 += dy;
+            }
+
+            // check if coojdinates are in correct order
+            if (x1 > x2)
+            {
+                (x1, x2) = (x2, x1);
+            }
+            if  (y1 > y2)
+            {
+                (y1, y2) = (y2, y1);
             }
 
             Coordinates = new Tuple<Point, Point>(new Point(x1, y1), new Point(x2, y2));

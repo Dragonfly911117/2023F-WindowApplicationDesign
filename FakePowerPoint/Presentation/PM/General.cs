@@ -44,7 +44,7 @@ namespace FakePowerPoint.Presentation.PM
         public void Resize(Rectangle slidePanelSize)
         {
             _slidePanelRectangle = slidePanelSize;
-            _model.Resize();
+            // _model.Resize();
         }
     }
 }
