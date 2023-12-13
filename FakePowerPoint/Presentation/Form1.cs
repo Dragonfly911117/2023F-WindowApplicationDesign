@@ -1,5 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing;
+using System.Windows.Forms;
 using FakePowerPoint.Presentation.PM;
+using FakePowerPoint.Properties;
 
 namespace FakePowerPoint.Presentation
 {
@@ -14,6 +16,7 @@ namespace FakePowerPoint.Presentation
             ConstructLayout();
             BindThings();
             BindEventHandlers();
+            Size = new Size(int.Parse(Resources.DEFAULT_WINDOW_WIDTH), int.Parse(Resources.DEFAULT_WINDOW_HEIGHT));
         }
     }
 }

@@ -61,7 +61,9 @@ namespace FakePowerPoint.Presentation
 
         void InitForm()
         {
-            Size = new Size(int.Parse(Resources.DEFAULT_WINDOW_WIDTH), int.Parse(Resources.DEFAULT_WINDOW_HEIGHT));
+            Size = new Size(int.Parse(Resources.DEFAULT_WINDOW_WIDTH) >> 1,
+                int.Parse(Resources
+                    .DEFAULT_WINDOW_HEIGHT)); // Force Panel resize on start to hard fix weird positioning bug of resizing shapes
         }
 
         void InitializeMenu()
@@ -174,9 +176,10 @@ namespace FakePowerPoint.Presentation
             _groupBoxMiddle.BackColor = Color.DarkGray;
             _slidePanel.BackColor = Color.Black;
             GiveBirth(_groupBoxMiddle, _slidePanel, DockStyle.None);
-            _slidePanel.Size = _presentationModel.NormalizeSize(new Size(int.Parse(Resources.DEFAULT_SLIDE_WIDTH),
-                int.Parse(Resources.DEFAULT_SLIDE_HEIGHT)));
-            _presentationModel.Resize(_slidePanel.Bounds);
+            _slidePanel.Size = new Size(int.Parse(Resources.DEFAULT_SLIDE_WIDTH),
+                int.Parse(Resources.DEFAULT_SLIDE_HEIGHT));
+            HandlePanelResize(_slidePanel, null);
+
             _slidePanel.BackgroundImageLayout = ImageLayout.Stretch;
             _slidePanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             _groupBoxMiddle.Dock = DockStyle.Fill;
