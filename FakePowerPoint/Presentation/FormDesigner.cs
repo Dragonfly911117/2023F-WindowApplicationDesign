@@ -38,7 +38,7 @@ namespace FakePowerPoint.Presentation
         List<Button> _slideButtons = new List<Button>();
 
         GroupBox _groupBoxMiddle = new GroupBox();
-        Panel _slidePanel = new Panel();
+        DoubleBufferedPanel _slidePanel = new DoubleBufferedPanel();
 
         GroupBox _groupBoxRight = new GroupBox();
         ComboBox _shapeSelector = new ComboBox();
@@ -64,6 +64,7 @@ namespace FakePowerPoint.Presentation
             Size = new Size(int.Parse(Resources.DEFAULT_WINDOW_WIDTH) >> 1,
                 int.Parse(Resources
                     .DEFAULT_WINDOW_HEIGHT)); // Force Panel resize on start to hard fix weird positioning bug of resizing shapes
+            DoubleBuffered = true;
         }
 
         void InitializeMenu()
@@ -182,6 +183,7 @@ namespace FakePowerPoint.Presentation
 
             _slidePanel.BackgroundImageLayout = ImageLayout.Stretch;
             _slidePanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+
             _groupBoxMiddle.Dock = DockStyle.Fill;
             _groupBoxMiddle.Text = SLIDE;
         }
@@ -239,5 +241,25 @@ namespace FakePowerPoint.Presentation
             child.Dock = dockStyle;
             child.Parent = parent;
         }
+    }
+
+    public sealed class DoubleBufferedPanel : Panel
+    {
+        public DoubleBufferedPanel()
+        {
+            // Enable double buffering for this panel
+            this.DoubleBuffered = true;
+        }
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000; // WS_EX_COMPOSITED
+                return cp;
+            }
+        }
+
     }
 }

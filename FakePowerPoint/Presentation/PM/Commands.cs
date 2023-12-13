@@ -34,7 +34,6 @@ namespace FakePowerPoint.Presentation.PM
             Dos[0] = true;
             Dos[1] = _undo.Count != 0;
             Repaint();
-
         }
     }
 }
