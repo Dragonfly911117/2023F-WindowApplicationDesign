@@ -106,7 +106,9 @@ namespace FakePowerPoint.Presentation.PM
                 }
                 else
                 {
-                    // command = new MoveShape(_model, _selectedShapeIndex, _coordinates);
+                    var delta = new Size(normalizedPoint.X - _coordinates.Item1.X,
+                        normalizedPoint.Y - _coordinates.Item1.Y);
+                    command = new MoveShape(_model, _selectedShapeIndex, delta);
                 }
 
                 command?.Execute();

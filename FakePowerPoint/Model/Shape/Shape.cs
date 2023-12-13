@@ -92,19 +92,17 @@ namespace FakePowerPoint.Model.Shape
                    point.Y <= Coordinates.Item2.Y;
         }
 
-        public void Move(Point coordinates)
+        public void Move(Size offset)
         {
-            var x1 = Coordinates.Item1.X;
-            var y1 = Coordinates.Item1.Y;
-            var x2 = Coordinates.Item2.X;
-            var y2 = Coordinates.Item2.Y;
+            var x1 = Coordinates.Item1.X + offset.Width;
+            var y1 = Coordinates.Item1.Y + offset.Height;
+            var x2 = Coordinates.Item2.X + offset.Width;
+            var y2 = Coordinates.Item2.Y + offset.Height;
+            Coordinates = new Tuple<Point, Point>(new Point(x1, y1), new Point(x2, y2));
 
-            var dx = coordinates.X - x1;
-            var dy = coordinates.Y - y1;
 
-            Coordinates = new Tuple<Point, Point>(new Point(x1 + dx, y1 + dy), new Point(x2 + dx, y2 + dy));
 
-            Handles.ForEach(handle => handle.Move(new Point(dx, dy)));
+            Handles.ForEach(handle => handle.Move(new Point(offset.Width, offset.Height)));
             OnPropertyChanged(nameof(Coordinates));
         }
 

@@ -122,5 +122,11 @@ namespace FakePowerPoint.Model
             _shapes[index].Resize(size, handlePosition);
             Draw();
         }
+
+        public void MoveShape(int index, Size offset)
+        {
+            _shapes[index].Move(offset);
+            Draw();
+        }
     }
 }

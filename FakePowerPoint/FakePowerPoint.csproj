@@ -49,6 +49,7 @@
     <ItemGroup>
         <Compile Include="Model\Commands\AddShape.cs" />
         <Compile Include="Model\Commands\Command.cs" />
+        <Compile Include="Model\Commands\MoveShape.cs" />
         <Compile Include="Model\Commands\RemoveShape.cs" />
         <Compile Include="Model\Commands\ResizeShape.cs" />
         <Compile Include="Model\Enums\HandlePosition.cs" />

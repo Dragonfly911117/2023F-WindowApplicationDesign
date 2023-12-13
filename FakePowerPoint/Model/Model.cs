@@ -96,5 +96,10 @@ namespace FakePowerPoint.Model
         {
             _currentSlide.ResizeShape(index, size, handlePosition);
         }
+
+        public void MoveShape(int index, Size offset)
+        {
+            _currentSlide.MoveShape(index, offset);
+        }
     }
 }
