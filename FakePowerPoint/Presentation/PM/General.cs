@@ -23,9 +23,9 @@ namespace FakePowerPoint.Presentation.PM
         {
             var command = new AddShape(_model, shapeType);
             command.Execute();
-            _dos[0] = true;
+            Dos[0] = true;
             _undo.Clear();
-            _dos[1] = false;
+            Dos[1] = false;
             _command.Push(command);
             Repaint();
         }
@@ -34,9 +34,9 @@ namespace FakePowerPoint.Presentation.PM
         {
             var command = new RemoveShape(_model, index);
             command.Execute();
-            _dos[0] = true;
+            Dos[0] = true;
             _undo.Clear();
-            _dos[1] = false;
+            Dos[1] = false;
             _command.Push(command);
             Repaint();
         }

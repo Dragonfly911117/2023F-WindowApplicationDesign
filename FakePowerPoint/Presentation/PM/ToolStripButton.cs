@@ -9,30 +9,9 @@ namespace FakePowerPoint.Presentation.PM
         ObservableList<bool> _selected = new ObservableList<bool>();
         ObservableList<bool> _dos = new ObservableList<bool>();
 
-        public ObservableList<bool> Dos
-        {
-            get => _dos;
-            private set
-            {
-                if (Equals(value, _dos))
-                    return;
-                _dos = value;
-                OnPropertyChanged();
-            }
-        }
+        public ObservableList<bool> Dos => _dos;
 
-        public ObservableList<bool> Selected
-        {
-            get => _selected;
-            private set
-            {
-                if (Equals(value, _selected))
-                    return;
-                _selected = value;
-                UpdateSelected();
-                OnPropertyChanged();
-            }
-        }
+        public ObservableList<bool> Selected => _selected;
 
         public class ObservableList<T> : List<T>
         {

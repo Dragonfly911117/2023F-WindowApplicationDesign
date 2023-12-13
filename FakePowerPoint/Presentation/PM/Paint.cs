@@ -47,9 +47,9 @@ namespace FakePowerPoint.Presentation.PM
             Repaint();
         }
 
-        Shape _tempShape = null;
+        Shape _tempShape;
         Tuple<Point, Point> _coordinates;
-        readonly Dictionary<ShapeType, ShapeFactory> _shapeFactories = new Dictionary<ShapeType, ShapeFactory>
+        readonly Dictionary<ShapeType, ShapeFactory> _shapeFactories = new()
         {
             { ShapeType.Line, new LineFactory() },
             { ShapeType.Rectangle, new RectangleFactory() },
@@ -61,9 +61,9 @@ namespace FakePowerPoint.Presentation.PM
             DrawShape(normalizedPoint);
             var command = new AddShape(_model, _shapeType, _coordinates);
             command.Execute();
-            _dos[0] = true;
+            Dos[0] = true;
             _undo.Clear();
-            _dos[1] = false;
+            Dos[1] = false;
             _command.Push(command);
             _tempShape = null;
             _coordinates = null;
@@ -71,5 +71,12 @@ namespace FakePowerPoint.Presentation.PM
             UpdateSelected();
             Repaint();
         }
+
+        void SelectShape(Point normalizedPoint)
+        {
+            _selectedShapeIndex = _model.GetShapeIndex(normalizedPoint);
+            Repaint();
+        }
+        int _selectedShapeIndex = -1;
     }
 }

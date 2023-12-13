@@ -86,10 +86,10 @@ namespace FakePowerPoint.Model.Shape
             return null;
         }
 
-        public bool IfShapeClicked(Point coordinates)
+        public virtual bool IfShapeClicked(Point point)
         {
-            return coordinates.X >= Coordinates.Item1.X && coordinates.X <= Coordinates.Item2.X &&
-                   coordinates.Y >= Coordinates.Item1.Y && coordinates.Y <= Coordinates.Item2.Y;
+            return point.X >= Coordinates.Item1.X && point.X <= Coordinates.Item2.X &&
+                   point.Y >= Coordinates.Item1.Y && point.Y <= Coordinates.Item2.Y;
         }
 
         public void Move(Point coordinates)

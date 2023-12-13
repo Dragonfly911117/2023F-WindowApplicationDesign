@@ -8,7 +8,6 @@ namespace FakePowerPoint.Model.Shape.Shapes
 {
     public class Line : Shape
     {
-
         public Line(Tuple<Point, Point> coordinates, Color color = default(Color))
         {
             ShapeType = Enums.ShapeType.Line;
@@ -33,6 +32,26 @@ namespace FakePowerPoint.Model.Shape.Shapes
             {
                 DrawHandles(graphics);
             }
+        }
+
+        public override bool IfShapeClicked(Point point)
+        {
+            return CalculateDistanceToPoint(point) < 10;
+        }
+
+        int CalculateDistanceToPoint(Point point)
+        {
+            var x1 = Coordinates.Item1.X;
+            var y1 = Coordinates.Item1.Y;
+            var x2 = Coordinates.Item2.X;
+            var y2 = Coordinates.Item2.Y;
+            var x0 = point.X;
+            var y0 = point.Y;
+            var a = y2 - y1;
+            var b = x1 - x2;
+            var c = x2 * y1 - x1 * y2;
+            var distance = Math.Abs(a * x0 + b * y0 + c) / Math.Sqrt(a * a + b * b);
+            return (int)distance;
         }
     }
 }

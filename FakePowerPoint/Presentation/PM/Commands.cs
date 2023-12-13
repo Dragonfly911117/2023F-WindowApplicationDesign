@@ -17,8 +17,8 @@ namespace FakePowerPoint.Presentation.PM
             var command = _command.Pop();
             command.UnExecute();
             _undo.Push(command);
-            _dos[0] = _command.Count != 0;
-            _dos[1] = true;
+            Dos[0] = _command.Count != 0;
+            Dos[1] = true;
         }
 
         public void Redo()
@@ -30,8 +30,8 @@ namespace FakePowerPoint.Presentation.PM
             var command = _undo.Pop();
             command.Execute();
             _command.Push(command);
-            _dos[0] = true;
-            _dos[1] = _undo.Count != 0;
+            Dos[0] = true;
+            Dos[1] = _undo.Count != 0;
 
         }
     }

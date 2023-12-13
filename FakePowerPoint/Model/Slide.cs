@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using FakePowerPoint.Properties;
 
@@ -92,6 +93,27 @@ namespace FakePowerPoint.Model
         public void SetShapes(BindingList<Shape.Shape> value)
         {
             _shapes = value;
+        }
+
+        public int GetShapeIndex(Point normalizedPoint)
+        {
+            UnselectShapes();
+            for (var i = _shapes.Count - 1; i >= 0; i--)
+            {
+                if (!_shapes[i].IfShapeClicked(normalizedPoint))
+                    continue;
+                _shapes[i].SetSelected(true);
+                return i;
+            }
+            return -1;
+        }
+
+        public void UnselectShapes()
+        {
+            foreach (var shape in _shapes)
+            {
+                shape.SetSelected(false);
+            }
         }
     }
 }
