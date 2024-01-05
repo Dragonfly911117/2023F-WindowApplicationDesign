@@ -60,6 +60,24 @@ namespace FakePowerPoint.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CoordinatePopUp.
+        /// </summary>
+        internal static string CoordinatePopUp_InitializeComponent_CoordinatePopUp {
+            get {
+                return ResourceManager.GetString("CoordinatePopUp_InitializeComponent_CoordinatePopUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to X1:.
+        /// </summary>
+        internal static string CoordinatePopUp_InitializeUi_X1_ {
+            get {
+                return ResourceManager.GetString("CoordinatePopUp_InitializeUi_X1_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 738.
         /// </summary>
         internal static string DEFAULT_SLIDE_HEIGHT {

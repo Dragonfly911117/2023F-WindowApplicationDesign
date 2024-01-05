@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using FakePowerPoint.Model.Enums;
 using FakePowerPoint.Model.Shape.Factory;
@@ -17,6 +18,7 @@ namespace FakePowerPoint.Model
 
         public Model()
         {
+            Debug.Assert(_slides.Count == 0);
             _slides.Add(new Slide());
             _currentSlide = _slides[0];
             _currentShapes.RaiseListChangedEvents = true;

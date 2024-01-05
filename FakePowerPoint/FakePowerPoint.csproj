@@ -47,6 +47,7 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="CoordinatePopUp.cs" />
         <Compile Include="Model\Commands\AddShape.cs" />
         <Compile Include="Model\Commands\Command.cs" />
         <Compile Include="Model\Commands\MoveShape.cs" />

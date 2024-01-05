@@ -2,7 +2,10 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
+using FakePowerPoint.CoordinateDialog;
 using FakePowerPoint.Model.Enums;
 using FakePowerPoint.Properties;
 
@@ -29,10 +32,25 @@ namespace FakePowerPoint.Presentation
             _ellipseButton.Click += HandleFunctionButtonClicked;
         }
 
-        void HandleAddShapeButtonClicked(object sender, EventArgs e)
+
+        private Task ShowPopup<TPopup> (TPopup popup)
+            where TPopup : CoordinatePopUp
+        {
+            var task = new TaskCompletionSource<object>();
+            popup.Owner = this;
+            popup.Closed += (s, a) => task.SetResult(null);
+            popup.Show();
+            popup.Focus();
+            return task.Task;
+        }
+
+        async void HandleAddShapeButtonClicked(object sender, EventArgs e)
         {
             if (_shapeSelector.SelectedItem == null) return;
-            _presentationModel.AddShape((ShapeType)_shapeSelector.SelectedItem);
+            var coordinatePopUp = new CoordinatePopUp();
+            await ShowPopup(coordinatePopUp);
+            if (coordinatePopUp.Coordinates == null) return;
+            _presentationModel.AddShape((ShapeType)_shapeSelector.SelectedItem, coordinatePopUp.Coordinates);
         }
 
         void HandleRepaint(object sender, EventArgs e)

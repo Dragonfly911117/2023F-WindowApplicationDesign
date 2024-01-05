@@ -150,4 +150,10 @@
   <data name="DEFAULT_SLIDE_HEIGHT" xml:space="preserve">
     <value>738</value>
   </data>
+  <data name="CoordinatePopUp_InitializeComponent_CoordinatePopUp" xml:space="preserve">
+    <value>CoordinatePopUp</value>
+  </data>
+  <data name="CoordinatePopUp_InitializeUi_X1_" xml:space="preserve">
+    <value>X1:</value>
+  </data>
 </root>

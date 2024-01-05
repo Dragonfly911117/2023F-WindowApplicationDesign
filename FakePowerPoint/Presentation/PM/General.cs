@@ -19,9 +19,9 @@ namespace FakePowerPoint.Presentation.PM
             InitializeDo();
         }
 
-        public void AddShape(ShapeType shapeType)
+        public void AddShape(ShapeType shapeType, Tuple<Point, Point> coordinates = null)
         {
-            var command = new AddShape(_model, shapeType);
+            var command = new AddShape(_model, shapeType, coordinates);
             command.Execute();
             Dos[0] = true;
             _undo.Clear();
