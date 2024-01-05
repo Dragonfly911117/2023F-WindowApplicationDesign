@@ -18,7 +18,6 @@ namespace FakePowerPoint.Model
 
         public Model()
         {
-            Debug.Assert(_slides.Count == 0);
             _slides.Add(new Slide());
             _currentSlide = _slides[0];
             _currentShapes.RaiseListChangedEvents = true;
@@ -31,7 +30,8 @@ namespace FakePowerPoint.Model
             return new Point(_random.Next(size.Width), _random.Next(size.Height));
         }
 
-        public void AddShape(ShapeType shapeType, Tuple<Point, Point> coordinates = null, Color color = default, int index = -1)
+        public void AddShape(ShapeType shapeType, Tuple<Point, Point> coordinates = null, Color color = default,
+            int index = -1)
         {
             var size = _currentSlide.GetSize();
             coordinates ??= new Tuple<Point, Point>(GetRandomPoint(size), GetRandomPoint(size));
