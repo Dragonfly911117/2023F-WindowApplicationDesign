@@ -73,18 +73,24 @@ namespace FakePowerPoint
                 Close();
             }
 
-            private bool IsValidNumber(string text)
+            bool IsValidNumber(string text, bool isX = false)
             {
-                return int.TryParse(text, out _);
+                var temp = new int();
+                if (!int.TryParse(text, out temp)) return false;
+                if (isX)
+                {
+                    return temp >= 0 && temp <= int.Parse(Resources.DEFAULT_SLIDE_WIDTH);
+                }
+                return temp >= 0 && temp <= int.Parse(Resources.DEFAULT_SLIDE_HEIGHT);
             }
-            private bool AreTextboxesValidNumbers()
+
+            bool AreTextboxesValidNumbers()
             {
-                return IsValidNumber(_xTextBox1.Text) &&
-                       IsValidNumber(_yTextBox1.Text) &&
-                       IsValidNumber(_xTextBox2.Text) &&
-                       IsValidNumber(_yTextBox2.Text);
+                return IsValidNumber(_xTextBox1.Text) && IsValidNumber(_yTextBox1.Text) &&
+                       IsValidNumber(_xTextBox2.Text) && IsValidNumber(_yTextBox2.Text);
             }
-            private void TextBox_TextChanged(object sender, EventArgs e)
+
+            void TextBox_TextChanged(object sender, EventArgs e)
             {
                 _confirmButton.Enabled = AreTextboxesValidNumbers();
             }
